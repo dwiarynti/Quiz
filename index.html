@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="RDash">
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+
+
+    <link rel="stylesheet" type="text/css" href="/javascripts/angular-assets/styles/lib/bootstrap.min.css">
+
+    <!--library-->
+    <script src="/javascripts/angular-assets/plugins/angular/angular.min.js"></script>
+    <script src="/javascripts/angular-assets/plugins/angular/oclazyload.min.js"></script>
+    <script src="/javascripts/angular-assets/plugins/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/javascripts/angular-assets/plugins/angular/angular-resource.js"></script>
+
+    <!--plugins-->
+    <script src="/javascripts/angular-assets/plugins/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="/javascripts/angular-assets/plugins/angular-draganddrop-list/angular-drag-and-drop-lists.js"></script>
+    <script src="/javascripts/angular-assets/route.js"></script>
+    
+</head>
+<body ng-controller="mastercontroller">
+<div id="main-content" ui-view></div>
+
+    <!--service-->
+<script src="/javascripts/angular-assets/services/common.service.js"></script>
+    <script src="/javascripts/angular-assets/services/tableresource.js"></script>
+
+
+    <!--controller-->
+<script src="/javascripts/angular-assets/controllers/master.js"></script>
+<script src="/javascripts/angular-assets/controllers/indexsubject-ctrl.js"></script>
+</body>
+</html>
