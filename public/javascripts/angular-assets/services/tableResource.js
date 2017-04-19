@@ -9,7 +9,7 @@
         return $resource("/api/tables/",
                { id: '@id' },
                {
-                   init: { method: 'GET', isArray: true },
+                   init: { method: 'GET'},
 
                })
     }
