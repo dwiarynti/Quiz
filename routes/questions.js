@@ -8,7 +8,7 @@ var ObjectId = require('mongodb').ObjectID;
 
 router.get('/questions',function(req, res) {
     var id= "58f5aa02a749fb2af14c0059";
-	collection.find({_id:id}, function(err, books){
+	collection.findOne({_id:id}, function(err, books){
 		if(err) {res.json(500, err);}
 		else
         { res.json({'Obj': books});
@@ -24,12 +24,19 @@ router.post('/questions', function(req,res)
     if(err) {res.json(500,err)}
     else 
     {
-        // var responObject = {'obj':books};
-        // res.json({'resp':succes});
         res.json({success:true});
     };
   })
 })
+
+router.get('/questions/:id',function(req, res) {
+	collection.find({},{"Questions":{$elemMatch:{"_id":req.params.id}}}, function(err, books){
+		if(err) {res.json(500, err);}
+		else
+        { res.json({'Obj': books});
+        }
+	});
+});
 
 
 module.exports = router;
