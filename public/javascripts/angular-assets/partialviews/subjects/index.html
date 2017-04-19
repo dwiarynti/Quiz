@@ -1,3 +1,70 @@
-<div ng-controller="indexsubjectcontroller">
-    {{test}}
+<div ng-controller="subjectcontroller">
+
+<div class="container">
+  <br>
+  <button class="button" ng-click="btnAddClick()">Add</button>
+   <table class="table table-bordered">
+       <thead>
+           <tr>
+               <th>Subject Name</th>
+               <th>Action </th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr ng-repeat="subject in initSubject">
+               <td>{{subject.SubjectName}}</td>
+               <td> <button class="button" ng-click="btnUpdateClick(subject._id)">Edit</button></td>
+           </tr>
+       </tbody>
+   </table>  
+</div> 
+<div class="modal modal-message fade" id="modal-update">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="javascript:;" class="close" data-dismiss="modal">x</a>
+                    <h4 class="modal-title">Update Subject</h4>
+                </div>
+                <div class="modal-body">
+                       <div class="form-group">
+                        <label>Subject Name</label>
+                        <input type="text" class="form-control col-md-6" ng-model="subject.SubjectName">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
+                    <button type="button" class="btn btn-default btn-width" ng-click="UpdateClick()">
+                        <span>Update</span>
+                    </button>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-message fade" id="modal-delete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="javascript:;" class="close" data-dismiss="modal">x</a>
+                    <h4 class="modal-title">delete Subject</h4>
+                </div>
+                <div class="modal-body">
+                       <div class="form-group">
+                        <label>....</label>
+                       
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
+                    <button type="button" class="btn btn-default btn-width" ng-click="DeleteClick()">
+                        <span>Delete</span>
+                    </button>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
 </div>
