@@ -8,7 +8,7 @@
 app.config([
     '$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
-
+        
         $stateProvider
             .state('subject-index', {
                 url: '/subject-index',

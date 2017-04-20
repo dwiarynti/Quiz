@@ -24,20 +24,23 @@ subjectresource.$init({},function(data)
 
 $scope.btnAddClick = function()
 {
-    $state.go('subject-create');
+    $("#modal-add").modal('show');
 }
 
 
 $scope.AddClik = function()
 {
-   
+    
     subjectresource.SubjectName = $scope.subject.SubjectName;
     subjectresource.$add().then(function(data)
     {
       
         if(data.success)
         {
-            $state.go('subject-index');
+            $("#modal-add").modal('hide');
+            $scope.subject ="";
+            $scope.initSubject = [];
+            $scope.initProject();
         }
         else
         {
@@ -91,10 +94,13 @@ $scope.DeleteClick = function()
     $("#modal-delete").modal('hide');
     subjectresource._id = $scope.subject._id;
     subjectresource.SubjectName = $scope.subject.SubjectName;
-    subjectresource.$update().then(function(data)
+    subjectresource.$delete().then(function(data)
     {
+       if(data.success)
+       {
        $scope.initSubject = [];
        $scope.initProject();
+       }
     })
 }
 
