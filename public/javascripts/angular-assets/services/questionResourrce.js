@@ -6,11 +6,15 @@
                 ["$resource",
                  questionResource]);
     function questionResource($resource) {
-        return $resource("/api/questions/:_id",
+        return $resource("/api/questions/:action/:_id",
                { id: '@id' },
                {
                    init: { method: 'GET' },
                    add: { method: 'POST' },
+                   getbyId: {method:'GET'},
+                   update: {method:'POST',params:{action:'Update'}},
+                   delete: {method:'POST',params:{action:'Delete'}}
+
 
                })
     }
