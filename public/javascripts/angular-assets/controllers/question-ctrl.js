@@ -4,7 +4,7 @@ app.controller('questioncontroller', function ($scope, $state, questionResource)
     $scope.questions =[];
     questionresource.$init({}, function(data){
 
-        $scope.questions = data.Obj.Questions;
+        $scope.questions = data.Obj;
         console.log($scope.questions);
         console.log(data.Obj);
 
@@ -23,10 +23,14 @@ app.controller('questioncontroller', function ($scope, $state, questionResource)
     };
 
     $scope.id = "";
-    $scope.toEditpage = function(_id){
-        $state.go("question-edit");
-        $scope.id=_id;
-        console.log(_id);
+    $scope.btnUpdateClick = function(id){
+            $("#modal-update").modal('show');
+            questionresource.$get({_id:id},function(data){
+            console.log(data);
+            $scope.QuestionObj.question = data.Obj.Question;
+            console.log($scope.QuestionObj.question);
+            
+        });
     }
 
 

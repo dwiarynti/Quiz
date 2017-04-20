@@ -14,7 +14,7 @@
             <tr class="odd gradeX" ng-repeat="question in questions">
                 <td>{{question.Question}}</td>
                 <td>
-                    <a ng-click="toEditpage(question._id)">Edit</a> |
+                    <a ng-click="btnUpdateClick(question._id)">Edit</a> |
                     <a href="#/question-detail">Detail</a> |
                     <a href="#/question-create">Delete</a>
                 </td>
@@ -24,4 +24,29 @@
         </div>
     </div>
     
+    <div class="modal modal-message fade" id="modal-update">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="javascript:;" class="close" data-dismiss="modal">x</a>
+                    <h4 class="modal-title">Update Subject</h4>
+                </div>
+                <div class="modal-body">
+                       <div class="form-group">
+                        <label>Subject Name</label>
+                        <input type="text" class="form-control col-md-6" ng-model="QuestionObj.question">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
+                    <button type="button" class="btn btn-default btn-width" ng-click="UpdateClick()">
+                        <span>Update</span>
+                    </button>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>

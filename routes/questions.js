@@ -3,12 +3,12 @@ var express = require('express');
 var router = express.Router();
 var monk = require('monk');
 var db = monk('192.168.1.99:27017/Quiz_db');
-var collection = db.get('Quiz_Collection');
+var collection = db.get('Question_Collection');
 var ObjectId = require('mongodb').ObjectID;
 
 router.get('/questions',function(req, res) {
-    var id= "58f5aa02a749fb2af14c0059";
-	collection.findOne({_id:id}, function(err, books){
+    var id= ObjectId("58f5aa02a749fb2af14c0059");
+	collection.find({"Subject_id":id}, function(err, books){
 		if(err) {res.json(500, err);}
 		else
         { res.json({'Obj': books});
@@ -17,9 +17,9 @@ router.get('/questions',function(req, res) {
 });
 router.post('/questions', function(req,res)
 {
-    var id= "58f5aa02a749fb2af14c0059";
-    var obj = {"_id":new ObjectId(),"Question":req.body.Question,"Choices":[]} ;
-  collection.update({_id:id},{$push:{Questions:obj}},function(err, books)
+    var id= ObjectId("58f5aa02a749fb2af14c0059");
+    var obj = {"Question":req.body.Question,"Subject_id":id,"Choices":[], "isActive":true} ;
+  collection.insert(obj,function(err, books)
   {
     if(err) {res.json(500,err)}
     else 
@@ -29,8 +29,8 @@ router.post('/questions', function(req,res)
   })
 })
 
-router.get('/questions/:id',function(req, res) {
-	collection.find({},{"Questions":{$elemMatch:{"_id":req.params.id}}}, function(err, books){
+router.get('/questions/:_id',function(req, res) {
+	collection.findOne({"_id":req.params._id}, function(err, books){
 		if(err) {res.json(500, err);}
 		else
         { res.json({'Obj': books});

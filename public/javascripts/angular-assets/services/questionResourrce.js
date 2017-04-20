@@ -6,7 +6,7 @@
                 ["$resource",
                  questionResource]);
     function questionResource($resource) {
-        return $resource("/api/questions/",
+        return $resource("/api/questions/:_id",
                { id: '@id' },
                {
                    init: { method: 'GET' },
