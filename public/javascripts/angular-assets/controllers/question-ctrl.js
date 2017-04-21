@@ -1,10 +1,13 @@
-app.controller('questioncontroller', function ($scope, $state, questionResource) {
+app.controller('questioncontroller', function ($scope, $state, questionResource, passingdataservice) {
 
     var questionresource = new questionResource();
     $scope.questions =[];
+    $scope.subject_id =passingdataservice.addObj;
 
 $scope.init = function(){
-        questionresource.$init({}, function(data){
+
+    console.log(passingdataservice.addObj)
+        questionresource.$init({_id:$scope.subject_id}, function(data){
 
             $scope.questions = data.Obj;
             console.log($scope.questions);
@@ -18,10 +21,19 @@ $scope.init = function(){
 
 
     $scope.QuestionObj = {'_id':"",'question':""};
-    $scope.insert = function(){
+
+    $scope.btnAddClick = function(id){
         $scope.QuestionObj = {'_id':"",'question':""};
+        $("#modal-add").modal('show');
+    }
+
+    $scope.insert = function(){
+        // $scope.QuestionObj = {'_id':"",'question':""};
+        var questionresource = new questionResource();
         // questionresource._id = $scope.QuestionObj._id;
+        questionresource.Subject_id = $scope.subject_id;
         questionresource.Question = $scope.QuestionObj.question;
+        console.log(questionresource);
         questionresource.$add(function(data){
             if(data.success){
                 $("#modal-add").modal('hide');
@@ -31,9 +43,7 @@ $scope.init = function(){
         });
     };
     
-    $scope.btnAddClick = function(id){
-            $("#modal-add").modal('show');
-    }
+
 
     $scope.updatedid = "";
     $scope.btnUpdateClick = function(id){
@@ -64,6 +74,7 @@ $scope.init = function(){
         $("#modal-delete").modal('hide');
         
         questionresource._id = $scope.QuestionObj._id;
+        questionresource.Subject_id = $scope.subject_id;
         questionresource.$delete(function(data)
         {
             if(data.success)

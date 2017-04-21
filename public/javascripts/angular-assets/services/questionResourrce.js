@@ -11,7 +11,7 @@
                {
                    init: { method: 'GET' },
                    add: { method: 'POST' },
-                   getbyId: {method:'GET'},
+                   getbyId: {method:'GET', params:{action:'getby'}},
                    update: {method:'POST',params:{action:'Update'}},
                    delete: {method:'POST',params:{action:'Delete'}}
 
