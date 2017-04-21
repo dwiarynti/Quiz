@@ -4,21 +4,22 @@ var router = express.Router();
 var monk = require('monk');
 var db = monk('192.168.1.99:27017/Quiz_db');
 var Questioncollection = db.get('Question_Collection');
-var Subjectcollection = db.get('Subject_Collection');
+var Choicescollection = db.get('Choices_Collection');
 var ObjectId = require('mongodb').ObjectID;
 
-router.get('/questions/:_id',function(req, res) {
+router.get('/choices/:_id',function(req, res) {
     var id= ObjectId(req.params._id);
     
-	Questioncollection.find({"Subject_id":id, "isActive":true}, function(err, books){
+	Choicescollection.find({"Questions_id":id, "isActive":true}, function(err, books){
 		if(err) {res.json(500, err);}
 		else
         { res.json({'Obj': books});
         }
 	});
 });
-router.post('/questions', function(req,res)
+router.post('/choices', function(req,res)
 {
+    var id= ObjectId("58f5aa02a749fb2af14c0059");
     var obj = {"Question":req.body.Question,"Subject_id":ObjectId(req.body.Subject_id),"Choices":[], "isActive":true} ;
     var returnQuestion = {};
     var _id ="";
@@ -33,7 +34,7 @@ router.post('/questions', function(req,res)
         _id = questionid;
 
         //update subject
-        Subjectcollection.update({_id:ObjectId(req.body.Subject_id)},{$push:{Questions:ObjectId(_id)}},function(err, subject){
+        Subjectcollection.update({_id:ObjectId(req.body.Subject_id)},{$push:{choices:ObjectId(_id)}},function(err, subject){
             if(err) {res.json(500,err)}
             else 
             {
@@ -45,7 +46,7 @@ router.post('/questions', function(req,res)
     });
   });
 
-router.get('/questions/getby/:_id',function(req, res) {
+router.get('/choices/getby/:_id',function(req, res) {
 	Questioncollection.findOne({"_id":req.params._id}, function(err, books){
 		if(err) {res.json(500, err);}
 		else
@@ -54,7 +55,7 @@ router.get('/questions/getby/:_id',function(req, res) {
 	});
 });
 
-router.post('/questions/Update/', function(req,res)
+router.post('/choices/Update/', function(req,res)
 { 
   Questioncollection.update({'_id':req.body._id},{
     $set : { 'Question':req.body.question}
@@ -64,7 +65,7 @@ router.post('/questions/Update/', function(req,res)
   });
 });
 
-router.post('/questions/Delete/', function(req,res)
+router.post('/choices/Delete/', function(req,res)
 { 
  Questioncollection.update({'_id':req.body._id},{
     $set : { 'isActive':false}
@@ -72,7 +73,7 @@ router.post('/questions/Delete/', function(req,res)
      if(err) res.json(500,err)
      else{
        //update subject
-       Subjectcollection.update({_id:ObjectId(req.body.Subject_id)},{$pull:{Questions:ObjectId(req.body._id)}},function(err, books){
+       Subjectcollection.update({_id:ObjectId(req.body.Subject_id)},{$pull:{choices:ObjectId(req.body._id)}},function(err, books){
           if(err) {res.json(500,err)}
           else 
           {

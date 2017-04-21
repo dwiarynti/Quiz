@@ -1,8 +1,10 @@
-<div ng-controller="subjectcontroller"class="col-md-12">
+<div ng-controller="choicescontroller"class="col-md-12">
 
 <div class="container">
     <br>
-    <h4>Subject  :   <button class="btn btn-default" ng-click="btnAddClick()">Add</button></h4>
+    <h4>Question  :  {{question}}</h4>
+    <br>
+    <button class="btn btn-default" ng-click="btnAddClick()">Add</button>
     <hr>
 
 
@@ -10,18 +12,20 @@
             <table class="table table-striped table-bordered">
        <thead>
            <tr>
-               <th>Subject Name</th>
+               <th>Choices Name</th>
+               <th>Is Correct Answer</th>
                <th>Action </th>
            </tr>
        </thead>
        <tbody>
-           <tr ng-repeat="subject in initSubject">
-               <td>{{subject.SubjectName}}</td>
+           <tr ng-repeat="choice in choices">
+               <td>{{choice.ChoicesName}}</td>
+               <td>{{choice.isCorrectAnswer}}</td>
                <td> 
                
                 <button class="btn btn-default" ng-click="btnUpdateClick(subject._id)">Edit</button>
                 <button class="btn btn-default" ng-click="btnDeleteClick(subject._id)">Delete</button>
-                 <button class="btn btn-default" ng-click="btnQuestionsClick(subject._id, subject.SubjectName)">Question</button>
+                 <button class="btn btn-default" ng-click="btnQuestionsClick(subject._id)">Question</button>
                 </td>
            </tr>
        </tbody>

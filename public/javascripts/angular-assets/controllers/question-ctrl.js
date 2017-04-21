@@ -2,7 +2,8 @@ app.controller('questioncontroller', function ($scope, $state, questionResource,
 
     var questionresource = new questionResource();
     $scope.questions =[];
-    $scope.subject_id =passingdataservice.addObj;
+    $scope.subject_id =passingdataservice.addObj._id;
+    $scope.subjectName =passingdataservice.addObj.subjectName;
 
 $scope.init = function(){
 
@@ -10,8 +11,8 @@ $scope.init = function(){
         questionresource.$init({_id:$scope.subject_id}, function(data){
 
             $scope.questions = data.Obj;
-            console.log($scope.questions);
-            console.log(data.Obj);
+            // console.log($scope.questions);
+            // console.log(data.Obj);
 
         });
     }
@@ -33,7 +34,7 @@ $scope.init = function(){
         // questionresource._id = $scope.QuestionObj._id;
         questionresource.Subject_id = $scope.subject_id;
         questionresource.Question = $scope.QuestionObj.question;
-        console.log(questionresource);
+        // console.log(questionresource);
         questionresource.$add(function(data){
             if(data.success){
                 $("#modal-add").modal('hide');
@@ -85,8 +86,8 @@ $scope.init = function(){
         });
     }
 
-
-
-
-    
+    $scope.btnQuestionsClick =function(_id, question){
+        passingdataservice.addObj = {"_id":_id, "question":question};
+        $state.go('choices-index');
+    }
 });

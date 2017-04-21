@@ -101,11 +101,11 @@ $scope.DeleteClick = function()
        $scope.initSubject = [];
        $scope.initProject();
        }
-    })
+    });
 }
 
-$scope.btnQuestionsClick =function(_id){
-    passingdataservice.addObj = _id;
+$scope.btnQuestionsClick =function(_id, subjectname){
+    passingdataservice.addObj = {"_id":_id,"subjectName":subjectname};
     $state.go('question-index');
 }
 

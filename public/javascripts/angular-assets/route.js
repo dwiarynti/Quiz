@@ -50,6 +50,11 @@ app.config([
                 url: '/question-edit',
                 templateUrl: '/javascripts/angular-assets/partialviews/questions/edit.html'
             });
+        $stateProvider
+            .state('choices-index', {
+                url: '/choices-index',
+                templateUrl: '/javascripts/angular-assets/partialviews/choices/index.html'
+            });
 
 
     }
