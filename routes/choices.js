@@ -9,23 +9,14 @@ var ObjectId = require('mongodb').ObjectID;
 
 router.get('/choices/:_id',function(req, res) {
     var id= ObjectId(req.params._id);
-    // res.send("aaaa"+ a());
-
-    get(id, function(data){
-      res.send(data);
-    });
-
-    // res.send(obj);
-    // a(res, obj);
-
-	// Choicescollection.find({"Questions_id":id, "isActive":true}, function(err, books){
-	// 	if(err) {res.json(500, err);}
-	// 	else
-  //       { 
-  //         // res.json({'Obj': books});
-  //         res.send(books);
-  //       }
-	// });
+	Choicescollection.find({"Questions_id":id, "isActive":true}, function(err, books){
+		if(err) {res.json(500, err);}
+		else
+        { 
+          res.json({'Obj': books});
+          // res.send(books);
+        }
+	});
 });
 
 

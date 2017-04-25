@@ -12,6 +12,7 @@ var users = require('./routes/users');
 var subjects = require('./routes/subjects');
 var questions = require('./routes/questions');
 var quiz = require('./routes/quiz');
+var choices = require('./routes/choices');
 var app = express();
 
 
@@ -35,6 +36,7 @@ app.use('/users', users);
 app.use('/api',subjects);
 app.use('/api',questions);
 app.use('/api',quiz);
+app.use('/api',choices);
 app.get('/', function(req, res){
   res.sendfile('index.html');
 });

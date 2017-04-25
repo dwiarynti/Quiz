@@ -70,7 +70,11 @@ app.config([
                 url: '/quiz',
                 templateUrl: '/javascripts/angular-assets/partialviews/quiz/index.html'
             });
-
+        $stateProvider
+            .state('choices-index', {
+                url: '/choices-index',
+                templateUrl: '/javascripts/angular-assets/partialviews/choices/index.html'
+        });
 
     }
 ]);
