@@ -32,12 +32,13 @@ function get(id, callback){
 }
 router.post('/choices', function(req,res)
 {
-    var id= ObjectId("58f5aa02a749fb2af14c0059");
-    var obj = {"Question":req.body.Question,"Subject_id":ObjectId(req.body.Subject_id),"Choices":[], "isActive":true} ;
+    // var obj = {"Question":req.body.Question,"Subject_id":ObjectId(req.body.Subject_id),"Choices":[], "isActive":true} ;
+    var obj = req.body.choicesObj;
+    obj.Questions_id = ObjectId(obj.Questions_id);
     var returnQuestion = {};
     var _id ="";
     //insert question
-    Questioncollection.insert(obj,function(err, books)
+    Choicescollection.insert(obj,function(err, books)
     {
       if(err) {res.json(500,err)}
       else 
@@ -47,7 +48,7 @@ router.post('/choices', function(req,res)
         _id = questionid;
 
         //update subject
-        Subjectcollection.update({_id:ObjectId(req.body.Subject_id)},{$push:{choices:ObjectId(_id)}},function(err, subject){
+        Questioncollection.update({_id:ObjectId(obj.Questions_id)},{$push:{Choices:ObjectId(_id)}},function(err, subject){
             if(err) {res.json(500,err)}
             else 
             {
@@ -60,7 +61,7 @@ router.post('/choices', function(req,res)
   });
 
 router.get('/choices/getby/:_id',function(req, res) {
-	Questioncollection.findOne({"_id":req.params._id}, function(err, books){
+	Choicescollection.findOne({"_id":ObjectId(req.params._id)}, function(err, books){
 		if(err) {res.json(500, err);}
 		else
         { res.json({'Obj': books});

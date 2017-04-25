@@ -19,28 +19,24 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
                 console.log(getCorrectAnswer);
                 console.log($scope.enableCorrectAnswerChoices);
 
-                angular.forEach($scope.choices, function (choiceobj) {
-                    
-                });
             });
     }
     
     $scope.init();
 
-    $scope.choicesObj = {'_id':"",'choices':""};
+    $scope.choicesObj = {'ChoicesName':"", 'isCorrectAnswer':false, 'isActive':true, 'Questions_id':$scope.question_id};
 
     $scope.btnAddClick = function(id){
-        $scope.choicesObj = {'_id':"",'choices':""};
+        $scope.choicesObj = {'ChoicesName':"", 'isCorrectAnswer':false, 'isActive':true, 'Questions_id':$scope.question_id};
+              
         $("#modal-add").modal('show');
     }
 
     $scope.insert = function(){
-        // $scope.choicesObj = {'_id':"",'choices':""};
         var choicesresource = new choicesResource();
-        // choicesresource._id = $scope.choicesObj._id;
-        choicesresource.Subject_id = $scope.question_id;
-        choicesresource.choices = $scope.choicesObj.choices;
-        // console.log(choicesresource);
+        // choicesresource.Subject_id = $scope.question_id;
+        // choicesresource.choices = $scope.choicesObj.choices;
+        choicesresource.choicesObj = $scope.choicesObj;
         choicesresource.$add(function(data){
             if(data.success){
                 $("#modal-add").modal('hide');
@@ -57,7 +53,7 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
         $scope.choicesObj._id = id;
         $("#modal-update").modal('show');
         choicesresource.$getbyId({_id:id},function(data){
-            $scope.choicesObj.choices = data.Obj.choices;
+            $scope.choicesObj.choices = data.Obj.ChoicesName;
         });
     }
     $scope.UpdateClick = function()
@@ -67,7 +63,6 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
         choicesresource.choices = $scope.choicesObj.choices;
         choicesresource.$update(function(data)
         {
-            // $scope.initSubject = [];
             $scope.init();
         });
     }
