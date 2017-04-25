@@ -1,14 +1,27 @@
-app.controller('choicescontroller', function ($scope, $state, choicesResource, passingdataservice) {
+app.controller('choicescontroller', function ($scope, $state, $filter, choicesResource, passingdataservice) {
 
     var choicesresource = new choicesResource();
     $scope.choices =[];
     $scope.question_id =passingdataservice.addObj._id;
     $scope.question =passingdataservice.addObj.question;
+    $scope.enableCorrectAnswerChoices = true;
 
     $scope.init = function(){
         console.log(passingdataservice.addObj)
             choicesresource.$init({_id:$scope.question_id}, function(data){
+                console.log(data);
                 $scope.choices = data.Obj;
+
+                var getCorrectAnswer = $filter('filter')($scope.choices, function (choiceobj) { return choiceobj.isCorrectAnswer === true })[0];
+
+                $scope.enableCorrectAnswerChoices = getCorrectAnswer != null ? false:true;
+
+                console.log(getCorrectAnswer);
+                console.log($scope.enableCorrectAnswerChoices);
+
+                angular.forEach($scope.choices, function (choiceobj) {
+                    
+                });
             });
     }
     
