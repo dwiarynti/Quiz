@@ -33,16 +33,19 @@ router.get('/quiz',function(req, res) {
     var count = randomed.length;
     for(var i = 0; i < count; i++)
     {
-
-      var id = randomed[i]._id.toHexString();   
-      get(id,function(data)
-      {
-        randomed[i].Choice = data; 
-       
-      });
+      if(randomed[i].Choices.length != 0){
+          var id = randomed[i]._id.toHexString();   
+          get(id,function(data)
+          {
+            randomed[i].aa = []; 
+            randomed[i].aa = data; 
+          res.json({"obj": randomed});
+          });
+      }
+      
     }
   
-     res.json({"obj": randomed});
+     
 	});
 });
 
@@ -51,9 +54,9 @@ router.get('/quiz',function(req, res) {
 
 function get(QuestionId, callback){
   var obj;
-  var id = QuestionId.toHexString();
-  ChoicesCollection.find({"Questions_id":id, "isActive":true}).then(function (docs) {
-    var a = JSON.stringify(docs);
+  var id = QuestionId;
+  ChoicesCollection.find({"Questions_id":ObjectId(id), "isActive":true}).then(function (docs) {
+    var a = docs;
       obj = a;
       callback(obj);
     }); 
