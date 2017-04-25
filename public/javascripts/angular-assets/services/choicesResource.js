@@ -2,11 +2,11 @@
     "use strict";
     angular
         .module("common.services")
-        .factory("questionResource",
+        .factory("choicesResource",
                 ["$resource",
-                 questionResource]);
-    function questionResource($resource) {
-        return $resource("/api/questions/:action/:_id",
+                 choicesResource]);
+    function choicesResource($resource) {
+        return $resource("/api/choices/:action/:_id",
                { id: '@id' },
                {
                    init: { method: 'GET' },

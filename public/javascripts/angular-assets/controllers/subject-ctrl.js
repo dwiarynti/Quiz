@@ -1,4 +1,4 @@
-﻿app.controller('subjectcontroller', function ($scope,$state,subjectResource) {
+﻿app.controller('subjectcontroller', function ($scope,$state,subjectResource, passingdataservice) {
 
 var subjectresource = new subjectResource();
 $scope.initSubject = [];
@@ -101,7 +101,12 @@ $scope.DeleteClick = function()
        $scope.initSubject = [];
        $scope.initProject();
        }
-    })
+    });
+}
+
+$scope.btnQuestionsClick =function(_id, subjectname){
+    passingdataservice.addObj = {"_id":_id,"subjectName":subjectname};
+    $state.go('question-index');
 }
 
 
