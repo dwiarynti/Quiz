@@ -50,6 +50,26 @@ app.config([
                 url: '/question-edit',
                 templateUrl: '/javascripts/angular-assets/partialviews/questions/edit.html'
             });
+         $stateProvider
+            .state('user-index', {
+                url: '/user-index',
+                templateUrl: '/javascripts/angular-assets/partialviews/users/index.html'
+            });
+        $stateProvider
+            .state('login', {
+                url: '/login',
+                templateUrl: '/javascripts/angular-assets/partialviews/users/login.html'
+            });
+        $stateProvider
+            .state('register', {
+                url: '/register',
+                templateUrl: '/javascripts/angular-assets/partialviews/users/register.html'
+            });
+        $stateProvider
+            .state('quiz', {
+                url: '/quiz',
+                templateUrl: '/javascripts/angular-assets/partialviews/quiz/index.html'
+            });
 
 
     }

@@ -3,11 +3,12 @@ var express = require('express');
 var router = express.Router();
 var monk = require('monk');
 var db = monk('192.168.1.99:27017/Quiz_db');
-var collection = db.get('Quiz_Collection');
+var collection = db.get('Subject_Collection');
 
 
-router.get('/subjects/InitSubject/',function(req, res) {
+router.get('/subjects/Init/',function(req, res) {
 	collection.find({"IsActive":true}, function(err, subjects){
+   
 		if (err) res.json(500, err);
 		else res.json({"obj": subjects});
 	});

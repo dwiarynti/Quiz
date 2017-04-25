@@ -11,6 +11,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var subjects = require('./routes/subjects');
 var questions = require('./routes/questions');
+var quiz = require('./routes/quiz');
 var app = express();
 
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/users', users);
 app.use('/api',subjects);
 app.use('/api',questions);
+app.use('/api',quiz);
 app.get('/', function(req, res){
   res.sendfile('index.html');
 });
