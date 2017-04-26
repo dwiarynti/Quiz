@@ -65,6 +65,14 @@ app.config([
             .state('choices-index', {
                 url: '/choices-index',
                 templateUrl: '/javascripts/angular-assets/partialviews/choices/index.html'
-        });
+            })
+            .state('exampresult-index', {
+                    url: '/exampresult-index',
+                    templateUrl: '/javascripts/angular-assets/partialviews/exampresult/index.html'
+            })
+            .state('exampresult-detail', {
+                    url: '/exampresult-detail',
+                    templateUrl: '/javascripts/angular-assets/partialviews/exampresult/detail.html'
+            });
     }
 ]);

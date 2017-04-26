@@ -10,8 +10,9 @@ app.controller('quizindexcontroller', function ($scope, $state,$filter, subjectR
     });
 
 
-    $scope.quiz = function(subject_id){
+    $scope.quiz = function(subject_id, subjectname){
         passingdataservice.addObj.Subject_id = subject_id;
+        passingdataservice.addObj.SubjectName = subjectname;
         $state.go('quiz');
     }
 

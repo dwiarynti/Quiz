@@ -6,9 +6,10 @@ $scope.Questions = [];
 $scope.Choices = [];
 $scope.initData = [];
 $scope.subject_id =passingdataservice.addObj.Subject_id;
+$scope.subjectname =passingdataservice.addObj.SubjectName;
 $scope.Score = 0;
 $scope.userid = 123123;
-$scope.submitquizobj = {"User_id":$scope.userid, "Quiz":[] };
+$scope.submitquizobj = {"User_id":$scope.userid, "Quiz":[], "Score":0, "SubjectName": $scope.subjectname };
 
 $scope.GetChoices = function(questionid)
     {
@@ -62,7 +63,8 @@ $scope.init = function (){
 
             $scope.submitquizobj.Quiz.push({
                 "Question":question.Question,
-                "Answer": getAnswer == undefined ? "":getAnswer.ChoicesName
+                "Answer": getAnswer == undefined ? "":getAnswer.ChoicesName,
+                "CorrectAnswer": getcorrectanswer.ChoicesName
             });
             console.log($scope.submitquizobj.Quiz);
         });
@@ -70,11 +72,12 @@ $scope.init = function (){
 
         //save
         var submitquiresource  = new submitquizResource();
+        $scope.submitquizobj.Score = score * 10;        
         submitquiresource.submitquizobj = $scope.submitquizobj;
         submitquiresource.$add(function(data){
             $("#modal-score").modal('show');
-            $scope.Score = score * 10;
         });
+        console.log($scope.submitquizobj);
     }
 
     $scope.savesubmittedquiz = function(){

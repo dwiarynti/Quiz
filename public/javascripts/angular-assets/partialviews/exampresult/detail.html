@@ -1,0 +1,26 @@
+<div ng-controller="exampresultDetailcontroller">
+  <div class="container">
+    <br>
+    <br>
+    <h4>User ID  :   {{ListObj.User_id}}</h4>
+    <h4>Subject  :   {{ListObj.SubjectName}}</h4>
+    <h4>Score  :   {{ListObj.Score}}</h4>
+    <h4>Date  :   {{ListObj.Date | date:'dd-MMM-yyyy'}}</h4>
+
+    <div class="panel panel-primary" ng-repeat="obj in ListObj.Quiz">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+						{{obj.No}}). {{obj.Question}}
+					</h3>
+      </div>
+      <div class="panel-body" >
+          <label>Answer : {{obj.Answer}}   </label>
+          <label ng-if="obj.Answer != obj.CorrectAnswer">Correct Answer : {{obj.CorrectAnswer}}   </label>
+
+      </div>
+    </div>
+
+  </div>
+      
+
+</div>

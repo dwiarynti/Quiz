@@ -4,7 +4,7 @@
     <br>
     <div ng-repeat="subject in subjectobj">
       <div>
-        <button class="btn btn-default" ng-click="quiz(subject._id)">{{subject.SubjectName}}</button>
+        <button class="btn btn-default" ng-click="quiz(subject._id, subject.SubjectName)">{{subject.SubjectName}}</button>
       </div>
       <br>
     </div>
