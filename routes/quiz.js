@@ -24,33 +24,26 @@ function shuffle(array) {
         }
         return array;
 }
-router.get('/quiz',function(req, res) {
+
+router.get('/quiz/questions/',function(req, res) {
  
 	Questioncollection.find({"isActive":true}, function(err, quiz){
 		if (err) res.json(500, err);
 		else 
     var randomed = shuffle(quiz);
-    var count = randomed.length;
-    for(var i = 0; i < count; i++)
-    {
-      if(randomed[i].Choices.length != 0){
-          var id = randomed[i]._id.toHexString();   
-          get(id,function(data)
-          {
-            randomed[i].aa = []; 
-            randomed[i].aa = data; 
-          res.json({"obj": randomed});
-          });
-      }
-      
-    }
-  
-     
+     res.json({"obj": randomed});
 	});
 });
 
-
-
+router.get('/quiz/choices/:_id',function(req,res)
+{
+  ChoicesCollection.find({"Question_id": req.body._id},function(err,choices)
+  {
+    if(err) res.json(500,err);
+    else
+    res.json({success:true, "obj":choices});
+  });
+});
 
 function get(QuestionId, callback){
   var obj;
