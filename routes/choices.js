@@ -71,8 +71,8 @@ router.get('/choices/getby/:_id',function(req, res) {
 
 router.post('/choices/Update/', function(req,res)
 { 
-  Questioncollection.update({'_id':req.body._id},{
-    $set : { 'Question':req.body.question}
+  Choicescollection.update({'_id':req.body._id},{
+    $set : { 'ChoicesName':req.body.ChoicesName,'isCorrectAnswer':req.body.isCorrectAnswer}
     },function(err) {
      if(err) res.json(500,err)
     else res.json({success : true});
@@ -81,13 +81,13 @@ router.post('/choices/Update/', function(req,res)
 
 router.post('/choices/Delete/', function(req,res)
 { 
- Questioncollection.update({'_id':req.body._id},{
+ Choicescollection.update({'_id':req.body._id},{
     $set : { 'isActive':false}
     },function(err) {
      if(err) res.json(500,err)
      else{
        //update subject
-       Subjectcollection.update({_id:ObjectId(req.body.Subject_id)},{$pull:{choices:ObjectId(req.body._id)}},function(err, books){
+       Questioncollection.update({_id:ObjectId(req.body.Questions_id)},{$pull:{Choices:ObjectId(req.body._id)}},function(err, books){
           if(err) {res.json(500,err)}
           else 
           {

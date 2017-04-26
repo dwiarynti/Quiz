@@ -33,9 +33,9 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
     }
 
     $scope.insert = function(){
+        $scope.choicesObj.isCorrectAnswer = $scope.choicesObj.isCorrectAnswer == 1?true:false;
         var choicesresource = new choicesResource();
-        // choicesresource.Subject_id = $scope.question_id;
-        // choicesresource.choices = $scope.choicesObj.choices;
+        
         choicesresource.choicesObj = $scope.choicesObj;
         choicesresource.$add(function(data){
             if(data.success){
@@ -53,14 +53,16 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
         $scope.choicesObj._id = id;
         $("#modal-update").modal('show');
         choicesresource.$getbyId({_id:id},function(data){
-            $scope.choicesObj.choices = data.Obj.ChoicesName;
+            $scope.choicesObj.ChoicesName = data.Obj.ChoicesName;
+            $scope.choicesObj.isCorrectAnswer = data.Obj.isCorrectAnswer ? 1:0;
         });
     }
     $scope.UpdateClick = function()
     {
         $("#modal-update").modal('hide');
         choicesresource._id = $scope.choicesObj._id;
-        choicesresource.choices = $scope.choicesObj.choices;
+        choicesresource.ChoicesName = $scope.choicesObj.ChoicesName;
+        choicesresource.isCorrectAnswer = $scope.choicesObj.isCorrectAnswer == 1?true:false;;
         choicesresource.$update(function(data)
         {
             $scope.init();
@@ -76,7 +78,7 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
         $("#modal-delete").modal('hide');
         
         choicesresource._id = $scope.choicesObj._id;
-        choicesresource.Subject_id = $scope.question_id;
+        choicesresource.Questions_id = $scope.choicesObj.Questions_id;
         choicesresource.$delete(function(data)
         {
             if(data.success)

@@ -25,7 +25,6 @@
                
                 <button class="btn btn-default" ng-click="btnUpdateClick(choice._id)">Edit</button>
                 <button class="btn btn-default" ng-click="btnDeleteClick(choice._id)">Delete</button>
-                 <button class="btn btn-default" ng-click="btnQuestionsClick(choice._id)">Question</button>
                 </td>
            </tr>
        </tbody>
@@ -46,8 +45,8 @@
                     </div>
                     <div class="form-group" ng-if="enableCorrectAnswerChoices == true">
                         <label>Is Correct Answer :</label><br />
-                        <input type="radio" name="TransactionType" ng-model="choicesObj.isCorrectAnswer" value="1" /> True
-                        <input type="radio" name="TransactionType" ng-model="choicesObj.isCorrectAnswer" value="0"/> False
+                        <input type="radio" name="choicestype" ng-model="choicesObj.isCorrectAnswer" value="1" /> True
+                        <input type="radio" name="choicestype" ng-model="choicesObj.isCorrectAnswer" value="0"/> False
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -70,13 +69,13 @@
                 <div class="modal-body">
                        <div class="form-group">
                         <label>Subject Name</label>
-                        <input type="text" class="form-control col-md-6" ng-model="choicesObj.choices">
+                        <input type="text" class="form-control col-md-6" ng-model="choicesObj.ChoicesName">
                         
                     </div>
-                    <div class="form-group" ng-if="enableCorrectAnswerChoices == true">
+                    <div class="form-group" ng-if="enableCorrectAnswerChoices == true || choicesObj.isCorrectAnswer == true">
                         <label>Is Correct Answer :</label><br />
-                        <input type="radio" name="TransactionType" ng-model="choicesObj.isCorrectAnswer" value="1" /> True
-                        <input type="radio" name="TransactionType" ng-model="choicesObj.isCorrectAnswer" value="0"/> False
+                        <input type="radio" name="choicestype" ng-model="choicesObj.isCorrectAnswer" value="1" /> True
+                        <input type="radio" name="choicestype" ng-model="choicesObj.isCorrectAnswer" value="0"/> False
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -104,7 +103,7 @@
                 </div>
                 <div class="modal-footer">
                     <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
-                    <button type="button" class="btn btn-default btn-width" ng-click="DeleteClick()">
+                    <button type="button" class="btn btn-default btn-width" ng-click="deleteClick()">
                         <span>Ok</span>
                     </button>
                   
