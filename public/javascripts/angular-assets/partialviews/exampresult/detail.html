@@ -7,7 +7,7 @@
     <h4>Score  :   {{ListObj.Score}}</h4>
     <h4>Date  :   {{ListObj.Date | date:'dd-MMM-yyyy'}}</h4>
 
-    <div class="panel panel-primary" ng-repeat="obj in ListObj.Quiz">
+    <div class="panel "  ng-repeat="obj in ListObj.Quiz" ng-class=" obj.Answer == obj.CorrectAnswer ? 'panel-success' :'panel-danger'">
       <div class="panel-heading">
         <h3 class="panel-title">
 						{{obj.No}}). {{obj.Question}}
