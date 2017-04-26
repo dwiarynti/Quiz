@@ -13,6 +13,7 @@ var subjects = require('./routes/subjects');
 var questions = require('./routes/questions');
 var quiz = require('./routes/quiz');
 var choices = require('./routes/choices');
+var submitquiz = require('./routes/submitquiz');
 var app = express();
 
 
@@ -37,6 +38,7 @@ app.use('/api',subjects);
 app.use('/api',questions);
 app.use('/api',quiz);
 app.use('/api',choices);
+app.use('/api',submitquiz);
 app.get('/', function(req, res){
   res.sendfile('index.html');
 });

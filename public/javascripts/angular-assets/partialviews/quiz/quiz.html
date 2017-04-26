@@ -10,12 +10,41 @@
 						{{question.No}}). {{question.Question}}
 					</h3>
       </div>
-      <div class="panel-body" ng-repeat="choices in question.Choices">
-        <div class="radio">
+      <div class="panel-body" >
+        <div class="radio" ng-repeat="choices in question.Choices">
+
           <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">{{choices.ChoicesName}}
+            <input  type="radio" name="optionsRadios_{{question._id}}" id="optionsRadios1" value="{{choices._id}}" ng-model="question.Answer">{{choices.ChoicesName}}
           </label>
         </div>
       </div>
     </div>
+    <div class="col-md-12 text-right">
+        <button class="btn btn-default" ng-click="submit()">Submit</button>
+    </div>
+
+
+    <div class="modal modal-message fade" id="modal-score">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="javascript:;" class="close" data-dismiss="modal">x</a>
+                    <h4 class="modal-title">SCORE</h4>
+                </div>
+                <div class="modal-body">
+                       <div class="form-group">
+                       <h3 class="text-center"> SCORE : {{Score}}</h3>
+                    </div>
+                </div>
+                <!--<div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
+                    <button type="button" class="btn btn-default btn-width" ng-click="deleteClick()">
+                        <span>Ok</span>
+                    </button>
+                  
+                </div>-->
+            </div>
+        </div>
+    </div>
+
 </div>
