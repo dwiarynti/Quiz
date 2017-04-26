@@ -6,6 +6,8 @@ var forEach = require('async-foreach');
 var db = monk('192.168.1.99:27017/Quiz_db');
 var Questioncollection = db.get('Question_Collection');
 var ChoicesCollection = db.get('Choices_Collection');
+// var Subjectcollection = db.get('Subject_Collection');
+
 var ObjectId = require('mongodb').ObjectID;
 var DataChoice =[];
 
@@ -25,9 +27,9 @@ function shuffle(array) {
         return array;
 }
 
-router.get('/quiz/questions/',function(req, res) {
- 
-	Questioncollection.find({"isActive":true}, function(err, quiz){
+router.get('/quiz/questions/:subject_id',function(req, res) {
+ var subject_id= ObjectId(req.params.subject_id);
+	Questioncollection.find({"isActive":true, "Subject_id":subject_id}, function(err, quiz){
 		if (err) res.json(500, err);
 		else 
     var randomed = shuffle(quiz);
@@ -44,6 +46,16 @@ router.get('/quiz/choices/:_id',function(req,res)
     res.json({success:true, "obj":choices});
   });
 });
+
+// router.get('/quiz/getsubject/',function(req,res)
+// {
+//   Subjectcollection.find({},function(err,choices)
+//   {
+//     if(err) res.json(500,err);
+//     else
+//     res.json({success:true, "obj":choices});
+//   });
+// });
 
 function get(QuestionId, callback){
   var obj;

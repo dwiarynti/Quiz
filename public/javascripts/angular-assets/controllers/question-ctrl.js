@@ -11,6 +11,7 @@ $scope.init = function(){
         questionresource.$init({_id:$scope.subject_id}, function(data){
 
             $scope.questions = data.Obj;
+            console.log($scope.questions);
             // console.log($scope.questions);
             // console.log(data.Obj);
 

@@ -5,6 +5,8 @@ var monk = require('monk');
 var db = monk('192.168.1.99:27017/Quiz_db');
 var Questioncollection = db.get('Question_Collection');
 var Subjectcollection = db.get('Subject_Collection');
+var Choicescollection = db.get('Choices_Collection');
+
 var ObjectId = require('mongodb').ObjectID;
 
 router.get('/questions/:_id',function(req, res) {
@@ -86,6 +88,7 @@ router.post('/questions/Delete/', function(req,res)
     
 });
 
+	// Choicescollection.find({"Subject_id":id, "isActive":true});
 
 module.exports = router;
 

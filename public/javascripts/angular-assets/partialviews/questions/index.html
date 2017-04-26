@@ -20,7 +20,7 @@
                 <td>
                     <button class="btn btn-default" ng-click="btnUpdateClick(question._id)">Edit</button> |
                     <button class="btn btn-default" ng-click="btnDeleteClick(question._id)">Delete</button> |
-                    <button class="btn btn-default" ng-click="btnQuestionsClick(question._id, question.Question)">Choices</button>
+                    <button class="btn btn-default" ng-click="btnQuestionsClick(question._id, question.Question)">Choices ({{question.Choices.length}})</button>
                 </td>
             </tr>
         </tbody>

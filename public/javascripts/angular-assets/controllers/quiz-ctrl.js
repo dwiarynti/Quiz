@@ -1,9 +1,12 @@
-app.controller('quizcontroller', function ($scope, $state,$filter, quizResource) {
+app.controller('quizcontroller', function ($scope, $state,$filter, quizResource, passingdataservice) {
 var quizresource  = new quizResource();
 $scope.init = [];
 $scope.Questions = [];
 $scope.Choices = [];
 $scope.initData = [];
+$scope.subject_id =passingdataservice.addObj.Subject_id;
+
+
 
 $scope.GetChoices = function(questionid)
 {
@@ -12,14 +15,8 @@ $scope.GetChoices = function(questionid)
         return data.obj;
     });
 }
-quizresource.$getchoices({_id:"58f85f027f12da881796c8d2"},function(data)
-{
-     $scope.Choices = data.obj;
-    // console.log($scope.Choices);
-   
-});
 
-quizresource.$init({}, function(data)
+quizresource.$init({subject_id:$scope.subject_id }, function(data)
 {
     angular.forEach(data.obj,function(item) {
         $scope.Questions.push(item);

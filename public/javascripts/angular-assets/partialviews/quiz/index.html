@@ -1,21 +1,13 @@
-<div ng-controller="quizcontroller"class="col-md-12">
+<div ng-controller="quizindexcontroller"class="col-md-12">
     <div class="container">
     <br>
     <br>
-    
-
-    <div class="panel panel-primary" ng-repeat="question in Questions">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-						{{question.No}}). {{question.Question}}
-					</h3>
+    <div ng-repeat="subject in subjectobj">
+      <div>
+        <button class="btn btn-default" ng-click="quiz(subject._id)">{{subject.SubjectName}}</button>
       </div>
-      <div class="panel-body" ng-repeat="choices in question.Choices">
-        <div class="radio">
-          <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">{{choices.ChoicesName}}
-          </label>
-        </div>
-      </div>
+      <br>
     </div>
+    <br>
+
 </div>

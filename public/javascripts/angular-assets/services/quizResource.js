@@ -6,7 +6,7 @@
                 ["$resource",
                  quizResource]);
     function quizResource($resource) {
-        return $resource("/api/quiz/:action/:_id",
+        return $resource("/api/quiz/:action/:_id/:subject_id",
                { id: '@id' },
                {
                    init: { method: 'GET' ,params:{action:'questions'}},

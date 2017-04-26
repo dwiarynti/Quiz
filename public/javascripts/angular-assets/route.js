@@ -66,9 +66,14 @@ app.config([
                 templateUrl: '/javascripts/angular-assets/partialviews/users/register.html'
             });
         $stateProvider
+            .state('quizindex', {
+                url: '/quizindex',
+                templateUrl: '/javascripts/angular-assets/partialviews/quiz/index.html'
+            });
+                    $stateProvider
             .state('quiz', {
                 url: '/quiz',
-                templateUrl: '/javascripts/angular-assets/partialviews/quiz/index.html'
+                templateUrl: '/javascripts/angular-assets/partialviews/quiz/quiz.html'
             });
         $stateProvider
             .state('choices-index', {
