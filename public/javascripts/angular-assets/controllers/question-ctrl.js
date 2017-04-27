@@ -88,7 +88,11 @@ $scope.init = function(){
     }
 
     $scope.btnQuestionsClick =function(_id, question){
-        passingdataservice.addObj = {"_id":_id, "question":question};
+        passingdataservice.addObj = {"_id":_id, "question":question, "Subject_id":$scope.subject_id, "subjectName":$scope.subjectName};
         $state.go('choices-index');
+    }
+
+    $scope.btnBackClick =function(){
+        $state.go('subject-index');
     }
 });

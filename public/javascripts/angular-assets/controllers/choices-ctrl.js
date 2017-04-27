@@ -4,6 +4,8 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
     $scope.choices =[];
     $scope.question_id =passingdataservice.addObj._id;
     $scope.question =passingdataservice.addObj.question;
+    $scope.subject_id =passingdataservice.addObj.Subject_id;
+    $scope.subjectName =passingdataservice.addObj.subjectName;
     $scope.enableCorrectAnswerChoices = true;
 
     $scope.init = function(){
@@ -87,5 +89,10 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
                 
             }
         });
+    }
+    $scope.btnBackClick =function(){
+        passingdataservice.addObj = {"_id":$scope.subject_id,"subjectName":$scope.subjectName};
+
+        $state.go('question-index');
     }
 });
