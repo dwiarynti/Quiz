@@ -1,26 +1,39 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
 var monk = require('monk');
 var db = monk('192.168.1.99:27017/Quiz_db');
 var collection = db.get('User_Collection');
+var Account = require('../models/account');
 
-router.get('/users/Init/',function(req, res) {
-	collection.find({"IsActive":true}, function(err, subjects){
-		if (err) res.json(500, err);
-		else res.json({"obj": subjects});
-	});
+
+router.get('/users/login', function(req, res) {
+  res.render('/#/login', {user : req.user});
 });
-router.post('/users/Create/', function(req,res)
+
+router.post('/users/create/', function(req,res)
 {
-  collection.insert({
-    FullName:  req.body.FullName,
-    Username :  req.body.Username,
-    Password:   req.body.Password,
-    IsActive  : true,
-  },function(err)
-  {
-    if(err) res.json(500,err)
-    else res.json({success : true});
-  })
+  const user = {
+      username : req.body.username,
+      fullname : req.body.fullname
+  };
+  Account.register(new Account(user), req.body.password, function(err, account) {
+        if (err) {
+            return res.json({success:false})
+        }
+        passport.authenticate('local')(req, res, function () {
+            res.json({success:true});
+        });
+    });
+});
+
+router.post('/users/login/',passport.authenticate('local'), function(req,res)
+{
+    res.json({success:true});
+});
+
+router.get('/users/logout', function(req, res) {
+    req.logout();
+    res.json({success:true});
 });
 module.exports = router;

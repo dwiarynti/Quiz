@@ -4,15 +4,16 @@ var router = express.Router();
 var monk = require('monk');
 var db = monk('192.168.1.99:27017/Quiz_db');
 var collection = db.get('Subject_Collection');
+var esnsureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
-
-router.get('/subjects/Init/',function(req, res) {
+router.get('/subjects/Init/',esnsureLoggedIn('/#/login'),function(req, res) {
 	collection.find({"IsActive":true}, function(err, subjects){
    
 		if (err) res.json(500, err);
 		else res.json({"obj": subjects});
 	});
 });
+
 router.post('/subjects/Create/', function(req,res)
 {
   collection.insert({

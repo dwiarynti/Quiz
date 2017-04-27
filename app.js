@@ -5,9 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var index = require('./routes/index');
-// var index = require('/index.html');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var expresssession = require('express-session');
+var esnsureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
+var index = require('./routes/index');
 var users = require('./routes/users');
 var subjects = require('./routes/subjects');
 var questions = require('./routes/questions');
@@ -16,8 +19,6 @@ var choices = require('./routes/choices');
 var submitquiz = require('./routes/submitquiz');
 var app = express();
 
-
-//connect to monggo db
 
 
 // view engine setup
@@ -30,25 +31,33 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
-
 // app.use('/', index);
-app.use('/users', users);
+app.use('/api', users);
 app.use('/api',subjects);
 app.use('/api',questions);
 app.use('/api',quiz);
 app.use('/api',choices);
 app.use('/api',submitquiz);
 app.get('/', function(req, res){
-  res.sendfile('index.html');
+  res.sendfile('index.html',{user : req.user});
 });
-// var router = express.Router();
-// router.get('/', function(req, res, next) {
-//   // res.render('index', { title: 'Express' });
-//   // res.sendFile(path.join(__dirname,'index.html'));
-//   // res.sendfile('index.html', { root: __dirname + "." } );
-//    res.sendfile('index.html');
-// });
+
+
+//passport config
+var Account = require('./models/account.js');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+//conncet to database
+mongoose.connect('mongodb://192.168.1.99:27017/Quiz_db');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -73,6 +73,7 @@ app.config([
             .state('exampresult-detail', {
                     url: '/exampresult-detail',
                     templateUrl: '/javascripts/angular-assets/partialviews/exampresult/detail.html'
-            });
+            })
+            ;
     }
 ]);

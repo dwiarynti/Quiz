@@ -11,20 +11,33 @@ $scope.btnHaveAccountClick = function()
     $state.go('login');
 }
 
-$scope.RegisterClick = function()
+$scope.registerClick = function()
 {
   
-    userresource.Username = $scope.user.Username;
-    userresource.FullName  = $scope.user.FullName;
-    userresource.Password =  $scope.user.Password;
-    
+    userresource.username = $scope.user.Username;
+    userresource.fullname  = $scope.user.FullName;
+    userresource.password =  $scope.user.Password;   
     userresource.$add().then(function(data)
     {
         if(data.success)
         {
             $state.go("login");
-        }
-        
+        }   
     })
 }
+
+$scope.loginClick = function()
+{
+    userresource.username = $scope.user.Username;
+    userresource.password = $scope.user.Password;
+    userresource.$login().then(function(data)
+    {
+        if(data.success)
+        {
+            $state.go('quizindex');
+        }
+    })
+}
+
+
 });
