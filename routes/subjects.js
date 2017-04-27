@@ -6,13 +6,23 @@ var db = monk('192.168.1.99:27017/Quiz_db');
 var collection = db.get('Subject_Collection');
 var esnsureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
-router.get('/subjects/Init/',esnsureLoggedIn('/#/login'),function(req, res) {
+router.get('/subjects/Init/',ensureAuthenticated,function(req, res) {
 	collection.find({"IsActive":true}, function(err, subjects){
    
 		if (err) res.json(500, err);
-		else res.json({"obj": subjects});
+		else res.json({"obj": subjects, "authorize":true});
 	});
 });
+
+function ensureAuthenticated (req, res, next) {
+  var isAuthenticated  = req.isAuthenticated();
+  if (isAuthenticated) { 
+      return next();
+  }else{
+    res.json({"authorize":isAuthenticated});
+  }
+  // return
+}
 
 router.post('/subjects/Create/', function(req,res)
 {

@@ -6,6 +6,9 @@ $scope.subject ={'_id ': "",'SubjectName': ""};
 
 subjectresource.$init({},function(data)
 {
+    if(!data.authorize){
+        $state.go('login');
+    }
     angular.forEach(data.obj,function(item) {
         $scope.initSubject.push(item);
     });
