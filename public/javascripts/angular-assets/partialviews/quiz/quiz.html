@@ -4,23 +4,30 @@
     <br>
     
     <h4>Subject : {{subjectname}}</h4>
-    <div class="panel panel-primary" ng-repeat="question in Questions">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-						{{question.No}}). {{question.Question}}
-					</h3>
-      </div>
-      <div class="panel-body" >
-        <div class="radio" ng-repeat="choices in question.Choices">
-
-          <label>
-            <input  type="radio" name="optionsRadios_{{question._id}}" id="optionsRadios1" value="{{choices._id}}" ng-model="question.Answer">{{choices.ChoicesName}}
-          </label>
+    <div class="row">
+        <div class="col-md-4" ng-repeat="question in Questions">
+            <div class="panel panel-primary" >
+            <div class="panel-heading">
+                <h3 class="panel-title">{{question.No}}). {{question.Question}}</h3>
+            </div>
+            <div class="panel-body" >
+                <div class="row">
+                    <div class="col-md-3" ng-repeat="choices in question.Choices">
+                        <input  type="radio" name="optionsRadios_{{question._id}}" id="optionsRadios1" value="{{choices._id}}" ng-model="question.Answer"> {{choices.ChoicesName}}                        
+                    </div>
+                </div>
+                <!--<div class="radio" ng-repeat="choices in question.Choices">
+                <label>
+                    <input  type="radio" name="optionsRadios_{{question._id}}" id="optionsRadios1" value="{{choices._id}}" ng-model="question.Answer">{{choices.ChoicesName}}
+                </label>
+                </div>-->
+            </div>
+            </div>
         </div>
-      </div>
-    </div>
+  </div>
+
     <div class="col-md-12 text-right">
-        <button class="btn btn-default" ng-click="submit()">Submit</button>
+        <button class="btn btn-primary btn-lg" ng-click="submit()">Submit</button>
     </div>
 
 
