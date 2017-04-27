@@ -5,8 +5,14 @@ app.controller('quizindexcontroller', function ($scope, $state,$filter, subjectR
 
     subjectresource.$init({},function(data)
     {
-        $scope.subjectobj = data.obj;
-        console.log($scope.subjectobj);
+        if(!data.authorize){
+        $state.go('login');
+        }
+        else
+        {
+            $scope.subjectobj = data.obj;
+            console.log($scope.subjectobj);
+        }
     });
 
 

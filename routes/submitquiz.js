@@ -7,7 +7,16 @@ var SubmittedQuizcollection = db.get('SubmittedQuiz_Collection');
 // var Choicescollection = db.get('Choices_Collection');
 var ObjectId = require('mongodb').ObjectID;
 
-router.get('/submit',function(req, res) {
+function ensureAuthenticated (req, res, next) {
+  var isAuthenticated  = req.isAuthenticated();
+  if (isAuthenticated) { 
+      return next();
+  }else{
+    res.json({"authorize":isAuthenticated});
+  }
+}
+
+router.get('/submit',ensureAuthenticated,function(req, res) {
 	SubmittedQuizcollection.find({}, function(err, data){
    
 		if (err) res.json(500, err);
@@ -15,7 +24,7 @@ router.get('/submit',function(req, res) {
 	});
 });
 
-router.post('/submit', function(req,res)
+router.post('/submit',ensureAuthenticated, function(req,res)
 {
   req.body.submitquizobj.Date = new Date().toISOString()
   SubmittedQuizcollection.insert(req.body.submitquizobj,function(err)

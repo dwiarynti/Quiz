@@ -7,7 +7,15 @@ var Questioncollection = db.get('Question_Collection');
 var Choicescollection = db.get('Choices_Collection');
 var ObjectId = require('mongodb').ObjectID;
 
-router.get('/choices/:_id',function(req, res) {
+function ensureAuthenticated (req, res, next) {
+  var isAuthenticated  = req.isAuthenticated();
+  if (isAuthenticated) { 
+      return next();
+  }else{
+    res.json({"authorize":isAuthenticated});
+  }
+}
+router.get('/choices/:_id',ensureAuthenticated,function(req, res) {
     var id= ObjectId(req.params._id);
 	Choicescollection.find({"Questions_id":id, "isActive":true}, function(err, books){
 		if(err) {res.json(500, err);}
@@ -30,7 +38,7 @@ function get(id, callback){
     });
     // return obj;
 }
-router.post('/choices', function(req,res)
+router.post('/choices',ensureAuthenticated, function(req,res)
 {
     // var obj = {"Question":req.body.Question,"Subject_id":ObjectId(req.body.Subject_id),"Choices":[], "isActive":true} ;
     var obj = req.body.choicesObj;
@@ -60,7 +68,7 @@ router.post('/choices', function(req,res)
     });
   });
 
-router.get('/choices/getby/:_id',function(req, res) {
+router.get('/choices/getby/:_id',ensureAuthenticated,function(req, res) {
 	Choicescollection.findOne({"_id":ObjectId(req.params._id)}, function(err, books){
 		if(err) {res.json(500, err);}
 		else
@@ -69,7 +77,7 @@ router.get('/choices/getby/:_id',function(req, res) {
 	});
 });
 
-router.post('/choices/Update/', function(req,res)
+router.post('/choices/Update/',ensureAuthenticated, function(req,res)
 { 
   Choicescollection.update({'_id':req.body._id},{
     $set : { 'ChoicesName':req.body.ChoicesName,'isCorrectAnswer':req.body.isCorrectAnswer}
@@ -79,7 +87,7 @@ router.post('/choices/Update/', function(req,res)
   });
 });
 
-router.post('/choices/Delete/', function(req,res)
+router.post('/choices/Delete/', ensureAuthenticated,function(req,res)
 { 
  Choicescollection.update({'_id':req.body._id},{
     $set : { 'isActive':false}

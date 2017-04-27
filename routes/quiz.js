@@ -11,6 +11,14 @@ var ChoicesCollection = db.get('Choices_Collection');
 var ObjectId = require('mongodb').ObjectID;
 var DataChoice =[];
 
+function ensureAuthenticated (req, res, next) {
+  var isAuthenticated  = req.isAuthenticated();
+  if (isAuthenticated) { 
+      return next();
+  }else{
+    res.json({"authorize":isAuthenticated});
+  }
+}
 
 function shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
@@ -27,7 +35,7 @@ function shuffle(array) {
         return array;
 }
 
-router.get('/quiz/questions/:subject_id',function(req, res) {
+router.get('/quiz/questions/:subject_id',ensureAuthenticated,function(req, res) {
  var subject_id= ObjectId(req.params.subject_id);
 	Questioncollection.find({"isActive":true, "Subject_id":subject_id}, function(err, quiz){
 		if (err) res.json(500, err);
@@ -37,7 +45,7 @@ router.get('/quiz/questions/:subject_id',function(req, res) {
 	});
 });
 
-router.get('/quiz/choices/:_id',function(req,res)
+router.get('/quiz/choices/:_id',ensureAuthenticated,function(req,res)
 {
   ChoicesCollection.find({"Question_id": req.body._id},function(err,choices)
   {

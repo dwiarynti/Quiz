@@ -10,6 +10,11 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
 
     $scope.init = function(){
         console.log(passingdataservice.addObj)
+        if(!data.authorize){
+        $state.go('login');
+    }
+    else
+    {
             choicesresource.$init({_id:$scope.question_id}, function(data){
                 console.log(data);
                 $scope.choices = data.Obj;
@@ -22,6 +27,7 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
                 console.log($scope.enableCorrectAnswerChoices);
 
             });
+    }
     }
     
     $scope.init();
