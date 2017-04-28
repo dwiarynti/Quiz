@@ -6,11 +6,8 @@ app.controller('questioncontroller', function ($scope, $state, questionResource,
     $scope.subjectName =passingdataservice.addObj.subjectName;
 
     $scope.init = function(){
-        if(!data.authorize){
-        $state.go('login');
-    }
-    else
-    {
+       
+       
     console.log(passingdataservice.addObj)
         questionresource.$init({_id:$scope.subject_id}, function(data){
 
@@ -20,7 +17,7 @@ app.controller('questioncontroller', function ($scope, $state, questionResource,
             // console.log(data.Obj);
 
         });
-    }
+    
     }
     $scope.init();
 

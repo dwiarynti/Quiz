@@ -5,15 +5,11 @@ app.controller('exampresultIndexcontroller', function ($scope,$state,submitquizR
 
     submitquizresource.$init({},function(data)
     {
-     if(!data.authorize){
-        $state.go('login');
-    }
-    else
-    {
+   
         $scope.initobj = data.obj;
         
         console.log(data);
-    }
+    
     });
 
     $scope.btnDetailClick = function (obj){

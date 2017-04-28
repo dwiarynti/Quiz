@@ -15,7 +15,7 @@ function ensureAuthenticated (req, res, next) {
     res.json({"authorize":isAuthenticated});
   }
 }
-router.get('/choices/:_id',ensureAuthenticated,function(req, res) {
+router.get('/choices/:_id',function(req, res) {
     var id= ObjectId(req.params._id);
 	Choicescollection.find({"Questions_id":id, "isActive":true}, function(err, books){
 		if(err) {res.json(500, err);}

@@ -20,11 +20,7 @@ $scope.GetChoices = function(questionid)
     }
     
 $scope.init = function (){
-    if(!data.authorize){
-        $state.go('login');
-    }
-    else
-    {
+  
         quizresource.$init({subject_id:$scope.subject_id }, function(data)
         {
             angular.forEach(data.obj,function(item) {
@@ -54,7 +50,7 @@ $scope.init = function (){
             };
             console.log($scope.Questions);
         });
-    }
+    
 }
 
 
