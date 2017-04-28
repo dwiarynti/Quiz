@@ -10,7 +10,7 @@ $scope.subjectname =passingdataservice.addObj.SubjectName;
 $scope.Score = 0;
 $scope.userid = 123123;
 $scope.submitquizobj = {"User_id":$scope.userid, "Quiz":[], "Score":0, "SubjectName": $scope.subjectname };
-
+$scope.No = 0;
 $scope.GetChoices = function(questionid)
     {
         quizresource.$getchoices({_id:questionid},function(data)
@@ -48,14 +48,17 @@ $scope.init = function (){
                 });
                 
             };
-            console.log($scope.Questions);
+            
+            $scope.randomQuestion = $scope.Questions[Math.floor(Math.random() * $scope.Questions.length)];
+            $scope.randomQuestion.No = $scope.No+1;
+            console.log($scope.randomQuestion);
         });
     
 }
 
-
+  
     $scope.init();
-
+    
     $scope.submit = function(){
         var score=0;
         angular.forEach($scope.Questions,function(question) {

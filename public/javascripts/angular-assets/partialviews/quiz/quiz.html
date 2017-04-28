@@ -5,14 +5,14 @@
     
     <h4>Subject : {{subjectname}}</h4>
     <div class="row">
-        <div class="col-md-12" ng-repeat="question in Questions">
+        <div class="col-md-12" >
             <div class="panel panel-primary" >
             <div class="panel-heading">
-                <h3 class="panel-title">{{question.No}}). {{question.Question}}</h3>
+                <h3 class="panel-title">{{randomQuestion.No}}). {{randomQuestion.Question}}</h3>
             </div>
             <div class="panel-body" >
                 <div class="row">
-                    <div class="col-md-3" ng-repeat="choices in question.Choices">
+                    <div class="col-md-3" ng-repeat="choices in randomQuestion.Choices">
                         <input  type="radio" name="optionsRadios_{{question._id}}" id="optionsRadios1" value="{{choices._id}}" ng-model="question.Answer"> {{choices.ChoicesName}}                        
                     </div>
                 </div>
