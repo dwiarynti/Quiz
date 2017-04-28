@@ -4,13 +4,10 @@ var userresource = new userResource();
 $scope.Message =  {};
 $scope.Users = [];
 $scope.user = {'_id': "" , 'username': "" , 'fullname':"" , 'password': ""};
+$scope.errormsg="";
 $scope.btnRegisterClick = function()
 {
     $state.go('register');
-}
-$scope.btnHaveAccountClick = function()
-{
-    $state.go('login');
 }
 
 $scope.registerClick = function()
@@ -24,6 +21,9 @@ $scope.registerClick = function()
         if(data.success)
         {
             $state.go("login");
+        }
+        else{
+            $scope.errormsg = data.errormsg;
         }   
     })
 }

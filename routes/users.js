@@ -14,6 +14,11 @@ router.get('/users/login', function(req, res) {
   res.render('/#/login', {user : req.user});
 });
 
+router.get('/users/isAuthorize', ensureAuthenticated, function(req, res) {
+    res.json({"authorize":true, "username":req.session.passport.user});
+});
+
+
 router.get('/users/', function(req,res)
 {
    userCollection.find({}, function(err, user){
@@ -22,7 +27,7 @@ router.get('/users/', function(req,res)
         else
         res.json({success:true,"obj": user});
     })
-})
+});
 
 router.post('/users/create/', function(req,res)
 {
@@ -40,13 +45,26 @@ router.post('/users/create/', function(req,res)
     });
 });
 
+
+router.post('/users/login/',
+passport.authenticate('local'), function(req,res)
+{
+    res.json({success:true});
+});
+
+router.get('/users/logout', function(req, res) {
+    req.logout();
+    res.json({success:true});
+});
+router.get('/users/session', function(req, res) {
+    res.json({"obj":req.session});
+});
 router.get('/users/:_id',function(req,res)
 {
   userCollection.findOne({_id:req.params._id},function(err,user)
   {
     if(err) res.json(500,err);
     else
-    
     res.json({success:true, "obj":user});
   });
 });
@@ -81,25 +99,8 @@ router.post('/users/reset/:_id',function(req,res)
             });
         }
     ])
-})
-
-router.post('/users/login/',
-passport.authenticate('local'), function(req,res)
-{
-    res.json({success:true});
 });
 
-router.get('/users/logout', function(req, res) {
-    req.logout();
-    res.json({success:true});
-});
-router.get('/users/session', function(req, res) {
-    res.json({"obj":req.session});
-});
-
-router.get('/users/isAuthorize', ensureAuthenticated, function(req, res) {
-    res.json({"authorize":true, "username":req.session.passport.user});
-});
 
 function ensureAuthenticated (req, res, next) {
   var isAuthenticated  = req.isAuthenticated();
@@ -108,6 +109,6 @@ function ensureAuthenticated (req, res, next) {
   }else{
     res.json({"authorize":isAuthenticated});
   }
-}
+};
 
 module.exports = router;
