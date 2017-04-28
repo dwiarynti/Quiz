@@ -1,7 +1,12 @@
 ﻿app.controller('mastercontroller', function ($scope, $rootScope, userResource ,$state) {
 
     userresource = new userResource();
-    $rootScope.setting = {"username":"", "isAuthenticated":false}
+    $rootScope.setting = {"username":"", "isAuthenticated":false};
+    userresource.$isAuthorize({}, function(data){
+            $rootScope.setting.isAuthenticated = data.authorize;
+            $rootScope.setting.username = data.authorize ? data.username:"";
+            
+        });
     $scope.logoutClick = function()
     {
         userresource.$logout().then(function(data)
@@ -26,5 +31,9 @@
                 $state.go('quizindex');
             }
         })
+    }
+    $scope.btnRegisterClick = function()
+    {
+        $state.go('register');
     }
 });

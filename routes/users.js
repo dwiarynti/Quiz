@@ -32,7 +32,7 @@ router.post('/users/create/', function(req,res)
   };
   Account.register(new Account(user), req.body.password, function(err, account) {
         if (err) {
-            return res.json({success:false})
+            return res.json({success:false, "errormsg":err.message})
         }
         passport.authenticate('local')(req, res, function () {
             res.json({success:true});
@@ -93,4 +93,21 @@ router.get('/users/logout', function(req, res) {
     req.logout();
     res.json({success:true});
 });
+router.get('/users/session', function(req, res) {
+    res.json({"obj":req.session});
+});
+
+router.get('/users/isAuthorize', ensureAuthenticated, function(req, res) {
+    res.json({"authorize":true, "username":req.session.passport.user});
+});
+
+function ensureAuthenticated (req, res, next) {
+  var isAuthenticated  = req.isAuthenticated();
+  if (isAuthenticated) { 
+      return next();
+  }else{
+    res.json({"authorize":isAuthenticated});
+  }
+}
+
 module.exports = router;
