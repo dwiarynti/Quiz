@@ -4,6 +4,7 @@
     $rootScope.setting = {"username":"", "isAuthenticated":false};
     userresource.$isAuthorize({}, function(data){
             $rootScope.setting.isAuthenticated = data.authorize;
+            $rootScope.setting.username = data.authorize ? data.username:"";
             
         });
     $scope.logoutClick = function()

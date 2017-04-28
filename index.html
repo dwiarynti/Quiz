@@ -62,8 +62,9 @@
                     <li ng-if="setting.isAuthenticated == false">
                         <a><p style="cursor:pointer" ng-click="logoutClick()">Login</p></a>
                     </li>
-                    
+                    <!--<li><a href="#/quizindex">Hi {{}} !</a></li>-->
                 </ul>
+                <ul ng-if="setting.isAuthenticated == true" class="nav navbar-nav navbar-right"><li><a href="#/quizindex">Hi {{setting.username}} !</a></li></ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>

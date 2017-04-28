@@ -42,7 +42,7 @@ router.get('/users/session', function(req, res) {
 });
 
 router.get('/users/isAuthorize', ensureAuthenticated, function(req, res) {
-    res.json({"authorize":true});
+    res.json({"authorize":true, "username":req.session.passport.user});
 });
 
 function ensureAuthenticated (req, res, next) {
