@@ -1,7 +1,11 @@
 ﻿app.controller('mastercontroller', function ($scope, $rootScope, userResource ,$state) {
 
     userresource = new userResource();
-    $rootScope.setting = {"username":"", "isAuthenticated":false}
+    $rootScope.setting = {"username":"", "isAuthenticated":false};
+    userresource.$isAuthorize({}, function(data){
+            $rootScope.setting.isAuthenticated = data.authorize;
+            
+        });
     $scope.logoutClick = function()
     {
         userresource.$logout().then(function(data)

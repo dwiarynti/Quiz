@@ -15,7 +15,8 @@
                  logout:{method:'GET', params: {action: 'logout'}},
                  get: {method:'GET'},
                  update: {method:'POST',params:{action:'Update'}},
-                 delete: {method:'POST',params:{action:'Delete'}}
+                 delete: {method:'POST',params:{action:'Delete'}}, 
+                 isAuthorize: {method:'GET',params:{action:'isAuthorize'}}
                })
     }
 }());

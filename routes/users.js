@@ -37,4 +37,21 @@ router.get('/users/logout', function(req, res) {
     req.logout();
     res.json({success:true});
 });
+router.get('/users/session', function(req, res) {
+    res.json({"obj":req.session});
+});
+
+router.get('/users/isAuthorize', ensureAuthenticated, function(req, res) {
+    res.json({"authorize":true});
+});
+
+function ensureAuthenticated (req, res, next) {
+  var isAuthenticated  = req.isAuthenticated();
+  if (isAuthenticated) { 
+      return next();
+  }else{
+    res.json({"authorize":isAuthenticated});
+  }
+}
+
 module.exports = router;
