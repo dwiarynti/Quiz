@@ -5,7 +5,9 @@ app.controller('exampresultIndexcontroller', function ($scope,$state,submitquizR
 
     submitquizresource.$init({},function(data)
     {
-   
+        if(!data.authorize){
+            $state.go('login');
+        }
         $scope.initobj = data.obj;
         
         console.log(data);

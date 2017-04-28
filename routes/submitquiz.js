@@ -20,7 +20,7 @@ router.get('/submit',ensureAuthenticated,function(req, res) {
 	SubmittedQuizcollection.find({}, function(err, data){
    
 		if (err) res.json(500, err);
-		else res.json({"obj": data});
+		else res.json({"obj": data, "authorize":true});
 	});
 });
 
