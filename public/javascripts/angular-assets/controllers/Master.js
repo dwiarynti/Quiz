@@ -32,4 +32,8 @@
             }
         })
     }
+    $scope.btnRegisterClick = function()
+    {
+        $state.go('register');
+    }
 });

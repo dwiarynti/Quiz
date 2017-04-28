@@ -19,7 +19,7 @@ router.post('/users/create/', function(req,res)
   };
   Account.register(new Account(user), req.body.password, function(err, account) {
         if (err) {
-            return res.json({success:false})
+            return res.json({success:false, "errormsg":err.message})
         }
         passport.authenticate('local')(req, res, function () {
             res.json({success:true});

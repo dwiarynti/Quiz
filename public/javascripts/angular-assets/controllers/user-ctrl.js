@@ -2,10 +2,8 @@ app.controller('usercontroller', function ($scope,$state,userResource) {
 
 var userresource = new userResource();
 $scope.Message =  {};
-$scope.btnRegisterClick = function()
-{
-    $state.go('register');
-}
+$scope.errormsg =  "";
+
 $scope.btnHaveAccountClick = function()
 {
     $state.go('login');
@@ -22,7 +20,9 @@ $scope.registerClick = function()
         if(data.success)
         {
             $state.go("login");
-        }   
+        }else{
+            $scope.errormsg = data.errormsg;
+        }
     })
 }
 
