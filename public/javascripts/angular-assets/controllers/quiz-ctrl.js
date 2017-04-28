@@ -8,9 +8,10 @@ $scope.initData = [];
 $scope.subject_id =passingdataservice.addObj.Subject_id;
 $scope.subjectname =passingdataservice.addObj.SubjectName;
 $scope.Score = 0;
-$scope.userid = 123123;
-$scope.submitquizobj = {"User_id":$scope.userid, "Quiz":[], "Score":0, "SubjectName": $scope.subjectname };
+$scope.submitquizobj = {"Username":"", "Quiz":[], "Score":0, "SubjectName": $scope.subjectname };
 $scope.No = 0;
+$scope.displayedquestion = [];
+$scope.togglebutton = true;
 $scope.GetChoices = function(questionid)
     {
         quizresource.$getchoices({_id:questionid},function(data)
@@ -23,6 +24,7 @@ $scope.init = function (){
   
         quizresource.$init({subject_id:$scope.subject_id }, function(data)
         {
+            $scope.submitquizobj.Username = data.username;
             angular.forEach(data.obj,function(item) {
                 $scope.Questions.push(item);
             });
@@ -32,7 +34,7 @@ $scope.init = function (){
             for(var i = 0; i < $scope.Questions.length; i++)
             {
                 $scope.Questions[i].Choices = [];
-                $scope.Questions[i].No = i+1;
+                $scope.Questions[i].No = 0;
                 $scope.Questions[i].Answer = "";
                 quizresource.$getchoices({_id:$scope.Questions[i]._id},function(data)
                 {
@@ -48,13 +50,37 @@ $scope.init = function (){
                 });
                 
             };
-            
-            $scope.randomQuestion = $scope.Questions[Math.floor(Math.random() * $scope.Questions.length)];
-            $scope.randomQuestion.No = $scope.No+1;
-            console.log($scope.randomQuestion);
+            $scope.getsinglerandomquestion();
         });
     
 }
+    // $scope.nextquestion = function (obj){
+    //     $scope.displayedquestion.push(obj);
+    //     console.log(obj);
+    //     if ($scope.displayedquestion.length >= $scope.Questions.length) {
+    //         $scope.getsinglerandomquestion();
+    //     }
+    //     else{
+    //         $scope.getsinglerandomquestion();
+            
+    //     }
+    // }
+    $scope.getsinglerandomquestion = function (){
+        var obj = $scope.getEmptyAnswer();
+        if(obj.length == 0){
+            $scope.togglebutton = false;
+        }else{
+            $scope.randomQuestion = obj[Math.floor(Math.random() * obj.length)];
+            if($scope.randomQuestion.No == 0){
+                $scope.No = $scope.No+1;
+                $scope.randomQuestion.No = $scope.No;
+            }
+        }
+    }
+
+    $scope.getEmptyAnswer = function(){
+        return $filter('filter')($scope.Questions,function(item){return item.Answer === ""});
+    }
 
   
     $scope.init();
@@ -71,9 +97,7 @@ $scope.init = function (){
                 "Answer": getAnswer == undefined ? "":getAnswer.ChoicesName,
                 "CorrectAnswer": getcorrectanswer.ChoicesName
             });
-            console.log($scope.submitquizobj.Quiz);
         });
-        console.log($scope.submitquizobj);
 
         //save
         var submitquiresource  = new submitquizResource();

@@ -21,6 +21,7 @@ function ensureAuthenticated (req, res, next) {
 }
 
 function shuffle(array) {
+        // var currentIndex = array.length, temporaryValue, randomIndex;
         var currentIndex = array.length, temporaryValue, randomIndex;
         // While there remain elements to shuffle...
         while (0 !== currentIndex) {
@@ -42,7 +43,8 @@ router.get('/quiz/questions/:subject_id',ensureAuthenticated,function(req, res) 
 		else 
      var username = req.user.username;
     var randomed = shuffle(quiz);
-     res.json({"obj": randomed, "username":username});
+    var arr = randomed.slice(0,5)
+     res.json({"obj": arr, "username":username});
 	});
 });
 
