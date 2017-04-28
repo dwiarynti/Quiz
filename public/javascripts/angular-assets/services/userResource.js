@@ -14,8 +14,10 @@
                  login: {method:'POST',params: {action:'login'}},
                  logout:{method:'GET', params: {action: 'logout'}},
                  get: {method:'GET'},
-                 update: {method:'POST',params:{action:'Update'}},
-                 delete: {method:'POST',params:{action:'Delete'}}
+                 getbyid :{method:'GET'},
+                 reset : {method:'POST',params: {action:'reset'}},
+                 update: {method:'POST',params:{action:'update'}},
+                 delete: {method:'POST',params:{action:'delete'}}
                })
     }
 }());

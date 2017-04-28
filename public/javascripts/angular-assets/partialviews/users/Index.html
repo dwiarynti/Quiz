@@ -1,0 +1,160 @@
+<div ng-controller="usercontroller"class="col-md-12">
+
+<div class="container">
+    <br>
+    <h4>Users  :   <button class="btn btn-default" ng-click="btnAddClick()">Add</button></h4>
+    <hr>
+
+
+    <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+       <thead>
+           <tr>
+               <th>Full Name</th>
+               <th>Username </th>
+               <th>Action </th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr ng-repeat="user in Users">
+               <td>{{user.fullname}}</td>
+               <td>{{user.username}}</td>
+               <td> 
+                <button class="btn btn-default" ng-click="btnUpdateClick(user._id)">Edit</button>
+                  <button class="btn btn-default" ng-click="btnChangeClick(user._id)">Change Password</button>
+                <button class="btn btn-default" ng-click="btnDeleteClick(user._id)">Delete</button>
+                
+                </td>
+           </tr>
+       </tbody>
+   </table> 
+    </div> 
+</div> 
+<div class="modal modal-message fade" id="modal-add">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="javascript:;" class="close" data-dismiss="modal">x</a>
+                    <h4 class="modal-title">Add User</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control" placeholder="Full name" ng-model="user.fullName">
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control" placeholder="Username" ng-model="user.username">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
+                    <button type="button" class="btn btn-default btn-width" ng-click="AddClick()">
+                        <span>Add</span>
+                    </button>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="modal modal-message fade" id="modal-update">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="javascript:;" class="close" data-dismiss="modal">x</a>
+                    <h4 class="modal-title">Update Subject</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                    <div class="form-group has-feedback">
+                         <label>Fullname</label>
+                        <input type="text" class="form-control" placeholder="Full name" ng-model="user.fullName">
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                         <label>Username</label>
+                        <input type="text" class="form-control" placeholder="Username" ng-model="user.username">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                   
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
+                    <button type="button" class="btn btn-default btn-width" ng-click="UpdateClick()">
+                        <span>Update</span>
+                    </button>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="modal modal-message fade" id="modal-reset">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="javascript:;" class="close" data-dismiss="modal">x</a>
+                    <h4 class="modal-title">Change Password</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                    <div class="form-group has-feedback">
+                         <label>Fullname</label>
+                        <input disabled type="text" class="form-control" placeholder="Full name" ng-model="user.fullName">
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <label>Username</label>
+                        <input disabled type="text" class="form-control" placeholder="Username" ng-model="user.username">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                       <div class="form-group has-feedback">
+                        <label>New Password</label>
+                        <input type="password" class="form-control" placeholder="New Password" ng-model="user.password">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                   
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
+                    <button type="button" class="btn btn-default btn-width" ng-click="ChangeClick()">
+                        <span>Save</span>
+                    </button>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal modal-message fade" id="modal-delete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="javascript:;" class="close" data-dismiss="modal">x</a>
+                    <h4 class="modal-title">delete Subject</h4>
+                </div>
+                <div class="modal-body">
+                       <div class="form-group">
+                       <p>Are you sure you want to delete the subject?</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
+                    <button type="button" class="btn btn-default btn-width" ng-click="DeleteClick()">
+                        <span>Ok</span>
+                    </button>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
