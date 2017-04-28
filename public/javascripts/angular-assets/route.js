@@ -74,6 +74,10 @@ app.config([
                     url: '/exampresult-detail',
                     templateUrl: '/javascripts/angular-assets/partialviews/exampresult/detail.html'
             })
+            .state('home', {
+                    url: '/home',
+                    templateUrl: '/javascripts/angular-assets/partialviews/home.html'
+            })
             ;
     }
 ]);
