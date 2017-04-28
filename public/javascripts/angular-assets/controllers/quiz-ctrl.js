@@ -24,7 +24,6 @@ $scope.init = function (){
   
         quizresource.$init({subject_id:$scope.subject_id }, function(data)
         {
-            console.log(data.username);
             $scope.submitquizobj.Username = data.username;
             angular.forEach(data.obj,function(item) {
                 $scope.Questions.push(item);

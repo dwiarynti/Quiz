@@ -26,18 +26,4 @@ $scope.registerClick = function()
     })
 }
 
-$scope.loginClick = function()
-{
-    userresource.username = $scope.user.Username;
-    userresource.password = $scope.user.Password;
-    userresource.$login().then(function(data)
-    {
-        if(data.success)
-        {
-            $state.go('quizindex');
-        }
-    })
-}
-
-
 });
