@@ -97,6 +97,17 @@ router.post('/questions/Delete/',ensureAuthenticated, function(req,res)
     
 });
 
+router.get('/questions/getsinglerandom',function(req, res) {
+  var data = Questioncollection.find({}).skip(Math.random()*10).limit(1);
+  res.json({'Obj': data});
+	// Questioncollection.findOne({"_id":req.params._id}, function(err, books){
+	// 	if(err) {res.json(500, err);}
+	// 	else
+  //       { res.json({'Obj': books});
+  //       }
+	// });
+});
+
 	// Choicescollection.find({"Subject_id":id, "isActive":true});
 
 module.exports = router;

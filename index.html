@@ -44,20 +44,23 @@
                     <li>
                         <a href="#">Home</a>
                     </li>
-                    <li>
+                    <li ng-if="setting.isAuthenticated == true">
                         <a href="#user-index"> Users</a>
                     </li>
-                    <li>
+                    <li ng-if="setting.isAuthenticated == true">
                         <a href="#/subject-index">Subject</a>
                     </li>
-                     <li>
+                     <li ng-if="setting.isAuthenticated == true">
                         <a href="#/quizindex">Quiz</a>
                     </li>
-                    <li>
+                    <li ng-if="setting.isAuthenticated == true">
                         <a href="#/exampresult-index">Examp Result</a>
                     </li>
-                    <li>
+                    <li ng-if="setting.isAuthenticated == true">
                         <a><p style="cursor:pointer" ng-click="logoutClick()">Logout</p></a>
+                    </li>
+                    <li ng-if="setting.isAuthenticated == false">
+                        <a><p style="cursor:pointer" ng-click="logoutClick()">Login</p></a>
                     </li>
                     
                 </ul>

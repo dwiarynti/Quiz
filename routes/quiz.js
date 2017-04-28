@@ -40,8 +40,9 @@ router.get('/quiz/questions/:subject_id',ensureAuthenticated,function(req, res) 
 	Questioncollection.find({"isActive":true, "Subject_id":subject_id}, function(err, quiz){
 		if (err) res.json(500, err);
 		else 
+     var username = req.user.username;
     var randomed = shuffle(quiz);
-     res.json({"obj": randomed});
+     res.json({"obj": randomed, "username":username});
 	});
 });
 

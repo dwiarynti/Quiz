@@ -19,7 +19,6 @@ function ensureAuthenticated (req, res, next) {
 
 router.get('/subjects/Init/',ensureAuthenticated,function(req, res) {
 	collection.find({"IsActive":true}, function(err, subjects){
-   
 		if (err) res.json(500, err);
 		else res.json({"obj": subjects, "authorize":true});
 	});
