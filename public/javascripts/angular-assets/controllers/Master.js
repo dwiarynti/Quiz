@@ -29,7 +29,14 @@
                 $rootScope.setting.isAuthenticated = true;
                 $rootScope.setting.role = data.role;
                 console.log($rootScope);
+                if(data.userrole == "user")
+                {
                 $state.go('quizindex');
+                }
+                else
+                {
+                    $state.go('home')
+                }
             }
         })
     }
