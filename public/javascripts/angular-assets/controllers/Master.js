@@ -36,4 +36,9 @@
     {
         $state.go('register');
     }
+    $scope.btnHaveAccountClick = function()
+{
+    $state.go('login');
+}
+
 });

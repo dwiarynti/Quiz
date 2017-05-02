@@ -15,7 +15,7 @@ router.get('/users/login', function(req, res) {
 });
 
 router.get('/users/isAuthorize', ensureAuthenticated, function(req, res) {
-    res.json({"authorize":true, "username":req.session.passport.user});
+    res.json({"authorize":true, "username":req.session.passport.user, "obj":req.user});
 });
 
 

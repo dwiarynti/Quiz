@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var passport = require('passport');
+var passport = require('passport'), OAuthStrategy = require('passport-oauth').OAuthStrategy;;
 var LocalStrategy = require('passport-local').Strategy;
 var expresssession = require('express-session');
 var esnsureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
@@ -56,6 +56,20 @@ var Account = require('./models/account.js');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
+// passport.use('provider', new OAuthStrategy({
+//     requestTokenURL: 'https://www.provider.com/oauth/request_token',
+//     accessTokenURL: 'https://www.provider.com/oauth/access_token',
+//     userAuthorizationURL: 'https://www.provider.com/oauth/authorize',
+//     consumerKey: '123-456-789',
+//     consumerSecret: 'shhh-its-a-secret',
+//     callbackURL: 'https://www.example.com/auth/provider/callback'
+//   },
+//   function(token, tokenSecret, profile, done) {
+//     Account.findOrCreate({"username":profile.username}, function(err, user) {
+//       done(err, user);
+//     });
+//   }
+// ));
 //conncet to database
 mongoose.connect('mongodb://192.168.1.99:27017/Quiz_db');
 
