@@ -49,7 +49,7 @@ router.post('/users/create/', function(req,res)
 router.post('/users/login/',
 passport.authenticate('local'), function(req,res)
 {
-    res.json({success:true});
+    res.json({success:true, "role":req.user.role});
 });
 
 router.get('/users/logout', function(req, res) {

@@ -1,7 +1,7 @@
 ﻿app.controller('mastercontroller', function ($scope, $rootScope, userResource ,$state) {
 
     userresource = new userResource();
-    $rootScope.setting = {"username":"", "isAuthenticated":false};
+    $rootScope.setting = {"username":"", "isAuthenticated":false, "role":""};
     userresource.$isAuthorize({}, function(data){
             $rootScope.setting.isAuthenticated = data.authorize;
             $rootScope.setting.username = data.authorize ? data.username:"";
@@ -27,6 +27,7 @@
             {
                 $rootScope.setting.username = $scope.user.Username;
                 $rootScope.setting.isAuthenticated = true;
+                $rootScope.setting.role = data.role;
                 console.log($rootScope);
                 $state.go('quizindex');
             }
