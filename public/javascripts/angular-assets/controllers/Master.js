@@ -3,8 +3,9 @@
     userresource = new userResource();
     $rootScope.setting = {"username":"", "isAuthenticated":false, "role":""};
     userresource.$isAuthenticate({}, function(data){
+        console.log(data);
         if(data.authenticate){
-            $rootScope.setting.isAuthenticated = data.authorize;
+            $rootScope.setting.isAuthenticated = data.authenticate;
             $rootScope.setting.username = data.authenticate ? data.username:"";
             $rootScope.setting.role = data.authenticate? data.role:"";   
         }else{
