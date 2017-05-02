@@ -34,9 +34,16 @@ userresource.$get().then(function(data)
     {
         if(data.success)
         {
+            if(data.role == "user")
+            {
+                $state.go('login');
+            }
+            else
+            {
             angular.forEach(data.obj,function(item) {
                 $scope.Users.push(item);
             });
+            }
     
         }
     });

@@ -16,15 +16,21 @@ function ensureAuthenticated (req, res, next) {
   }
 }
 router.get('/choices/:_id',function(req, res) {
-    var id= ObjectId(req.params._id);
+  var id= ObjectId(req.params._id);
+  if(req.user.role == "admin")
+  {
 	Choicescollection.find({"Questions_id":id, "isActive":true}, function(err, books){
 		if(err) {res.json(500, err);}
 		else
         { 
-          res.json({'Obj': books});
+          res.json({'Obj': books,"authorize" : true});
           // res.send(books);
         }
 	});
+  }
+  else{
+    res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
+  }
 });
 
 
@@ -46,6 +52,8 @@ router.post('/choices',ensureAuthenticated, function(req,res)
     var returnQuestion = {};
     var _id ="";
     //insert question
+    if(req.user.role == "admin")
+    {
     Choicescollection.insert(obj,function(err, books)
     {
       if(err) {res.json(500,err)}
@@ -66,30 +74,48 @@ router.post('/choices',ensureAuthenticated, function(req,res)
         });
       };
     });
+  }
+ else{
+    res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
+  }
   });
 
 router.get('/choices/getby/:_id',ensureAuthenticated,function(req, res) {
+  if(req.user.role == "admin")
+  {
 	Choicescollection.findOne({"_id":ObjectId(req.params._id)}, function(err, books){
 		if(err) {res.json(500, err);}
 		else
         { res.json({'Obj': books});
         }
 	});
+  }
+  else{
+    res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
+  }
 });
 
 router.post('/choices/Update/',ensureAuthenticated, function(req,res)
-{ 
-  Choicescollection.update({'_id':req.body._id},{
+{
+  if(req.user.role == "admin")
+  { 
+  Choicescollection.update({'_id': ObjectId(req.body._id)},{
     $set : { 'ChoicesName':req.body.ChoicesName,'isCorrectAnswer':req.body.isCorrectAnswer}
     },function(err) {
      if(err) res.json(500,err)
     else res.json({success : true});
   });
+  }
+  else{
+    res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
+  }
 });
 
 router.post('/choices/Delete/', ensureAuthenticated,function(req,res)
 { 
- Choicescollection.update({'_id':req.body._id},{
+  if(req.user.role == "admin")
+  {
+ Choicescollection.update({'_id': ObjectId(req.body._id)},{
     $set : { 'isActive':false}
     },function(err) {
      if(err) res.json(500,err)
@@ -106,7 +132,10 @@ router.post('/choices/Delete/', ensureAuthenticated,function(req,res)
      }
     // else res.json({success : true});
   });
-    
+}
+else{
+    res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
+  }
 });
 
 

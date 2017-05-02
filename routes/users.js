@@ -21,13 +21,20 @@ router.get('/users/isAuthenticate', ensureAuthenticated, function(req, res) {
 
 router.get('/users/',ensureAuthenticated, function(req,res)
 {
+ if(req.user.role == "admin")
+ {
    userCollection.find({}, function(err, user){
         if(err)
         res.json(500,err);
         else
         res.json({success:true,"obj": user,"authorize":true});
     })
+ }
+else{
+    res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
+  }
 });
+
 
 router.post('/users/create/', function(req,res)
 {
@@ -62,16 +69,24 @@ router.get('/users/session', function(req, res) {
 });
 router.get('/users/:_id',ensureAuthenticated,function(req,res)
 {
-  userCollection.findOne({_id:req.params._id},function(err,user)
-  {
+    if(req.user.role == "admin")
+    {
+    userCollection.findOne({_id:req.params._id},function(err,user)
+    {
     if(err) res.json(500,err);
     else
     res.json({success:true, "obj":user});
-  });
+    });
+    }
+    else{
+    res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
+  }
 });
 
 router.post('/users/update/:_id', ensureAuthenticated,function(req,res)
 {
+    if(req.user.role == "admin")
+    {
     userCollection.update({_id:req.params._id},{
         $set :{'fullname': req.body.fullname,
                 'username': req.body.username}
@@ -80,7 +95,11 @@ router.post('/users/update/:_id', ensureAuthenticated,function(req,res)
     if(err) res.json(500,err);
     else
     res.json({success:true});
-    });
+});
+    }
+    else{
+    res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
+  }
 });
 
 router.post('/users/reset/:_id',ensureAuthenticated,function(req,res)

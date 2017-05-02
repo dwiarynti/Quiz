@@ -3,25 +3,51 @@
 var subjectresource = new subjectResource();
 $scope.initSubject = [];
 $scope.subject ={'_id ': "",'SubjectName': ""};
-
+$scope.errmsg ="";
 subjectresource.$init({},function(data)
 {
     if(!data.authorize){
         $state.go('login');
     }
-    angular.forEach(data.obj,function(item) {
-        $scope.initSubject.push(item);
-    });
+    else
+    {
+        if(data.role != "admin")
+        {
+           $scope.errmsg = "this user is not authorize"
+           $state.go('login');
+        }
+        else
+        {
+             angular.forEach(data.obj,function(item) {
+                $scope.initSubject.push(item);
+            });
+        }
+    }
+   
 });
 
 $scope.initProject = function()
 {
 subjectresource.$init({},function(data)
 {
-    $scope.initSubject = [];
-    angular.forEach(data.obj,function(item) {
-        $scope.initSubject.push(item);
-    });
+    if(!data.authorize)
+    {
+        $state.go('login');
+    }
+     else
+    {
+        if(data.role != "admin")
+        {
+           $scope.errmsg = "this user is not authorize"
+           $state.go('login');
+        }
+        else
+        {
+             angular.forEach(data.obj,function(item) {
+                $scope.initSubject.push(item);
+            });
+        }
+    }
 });
 }
 

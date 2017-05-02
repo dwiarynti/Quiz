@@ -20,13 +20,19 @@ function ensureAuthenticated (req, res, next) {
 
 router.get('/questions/:_id',ensureAuthenticated,function(req, res) {
     var id= ObjectId(req.params._id);
-    
-	Questioncollection.find({"Subject_id":id, "isActive":true}, function(err, books){
+  if(req.user.role == "admin")
+  {
+	Questioncollection.find({"Subject_id":id, "isActive":true}, function(err, questions){
 		if(err) {res.json(500, err);}
 		else
-        { res.json({'Obj': books});
-        }
-	});
+    { 
+      res.json({'Obj': questions ,"authorize":true ,role:req.user.role});
+    }
+	  });
+  }
+  else{
+    res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
+  }
 });
 router.post('/questions',ensureAuthenticated,function(req,res)
 {
@@ -34,6 +40,8 @@ router.post('/questions',ensureAuthenticated,function(req,res)
     var returnQuestion = {};
     var _id ="";
     //insert question
+    if(req.user.role == "admin")
+    {
     Questioncollection.insert(obj,function(err, books)
     {
       if(err) {res.json(500,err)}
@@ -54,30 +62,49 @@ router.post('/questions',ensureAuthenticated,function(req,res)
         });
       };
     });
+  }
+  else{
+    res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
+  }
   });
 
 router.get('/questions/getby/:_id',ensureAuthenticated,function(req, res) {
-	Questioncollection.findOne({"_id":req.params._id}, function(err, books){
+  if(req.user.role == "admin")
+    {
+    var id = ObjectId(req.params._id);
+	  Questioncollection.findOne({"_id":id}, function(err, books){
 		if(err) {res.json(500, err);}
 		else
         { res.json({'Obj': books});
         }
-	});
+	  });
+    }
+  else{
+    res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
+  }
 });
 
 router.post('/questions/Update/', ensureAuthenticated,function(req,res)
 { 
-  Questioncollection.update({'_id':req.body._id},{
+  if(req.user.role == "admin")
+  {
+  Questioncollection.update({'_id':ObjectId(req.body._id)},{
     $set : { 'Question':req.body.question}
     },function(err) {
      if(err) res.json(500,err)
     else res.json({success : true});
   });
+    }
+     else{
+    res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
+  }
 });
 
 router.post('/questions/Delete/',ensureAuthenticated, function(req,res)
 { 
- Questioncollection.update({'_id':req.body._id},{
+   if(req.user.role == "admin")
+    {
+ Questioncollection.update({'_id':ObjectId(req.body._id)},{
     $set : { 'isActive':false}
     },function(err) {
      if(err) res.json(500,err)
@@ -94,7 +121,10 @@ router.post('/questions/Delete/',ensureAuthenticated, function(req,res)
      }
     // else res.json({success : true});
   });
-    
+}
+ else{
+    res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
+  }
 });
 
 router.get('/questions/getsinglerandom',function(req, res) {

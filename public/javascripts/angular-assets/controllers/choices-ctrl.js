@@ -10,10 +10,24 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
 
     $scope.init = function(){
         console.log(passingdataservice.addObj)
-       
+       if($scope.question_id != null)
+       {
             choicesresource.$init({_id:$scope.question_id}, function(data){
                 console.log(data);
-                $scope.choices = data.Obj;
+                if(!data.authorize)
+                {
+                $state.go('login');
+                }
+                else
+                {
+                    if(data.role == "user")
+            {
+                $state.go('login');
+               
+            }
+            else
+            {
+                 $scope.choices = data.Obj;
 
                 var getCorrectAnswer = $filter('filter')($scope.choices, function (choiceobj) { return choiceobj.isCorrectAnswer === true })[0];
 
@@ -21,9 +35,14 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
 
                 console.log(getCorrectAnswer);
                 console.log($scope.enableCorrectAnswerChoices);
-
+            }
+                }
             });
-    
+       }
+       else
+       {
+           $state.go('question-index');
+       }
     }
     
     $scope.init();

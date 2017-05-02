@@ -1,5 +1,5 @@
 app.controller('questioncontroller', function ($scope, $state, questionResource, passingdataservice) {
-
+    $scope.subject_id = {};
     var questionresource = new questionResource();
     $scope.questions =[];
     $scope.subject_id =passingdataservice.addObj._id;
@@ -9,14 +9,32 @@ app.controller('questioncontroller', function ($scope, $state, questionResource,
        
        
     console.log(passingdataservice.addObj)
+        if($scope.subject_id != null)
+        {
         questionresource.$init({_id:$scope.subject_id}, function(data){
 
-            $scope.questions = data.Obj;
-            console.log($scope.questions);
-            // console.log($scope.questions);
-            // console.log(data.Obj);
-
+        if(!data.authorize)
+        {
+            $state.go('login');
+        }
+        else
+        {
+            if(data.role == "user")
+            {
+                $state.go('login')
+            }
+            else
+            {
+                $scope.questions = data.Obj;
+                console.log($scope.questions);
+            }
+        }          
         });
+        }
+        else
+        {
+        $state.go('subject-index')
+        }
     
     }
     $scope.init();
