@@ -14,8 +14,8 @@ router.get('/users/login', function(req, res) {
   res.render('/#/login', {user : req.user});
 });
 
-router.get('/users/isAuthorize', ensureAuthenticated, function(req, res) {
-    res.json({"authorize":true, "username":req.session.passport.user, "obj":req.user});
+router.get('/users/isAuthenticate', ensureAuthenticated, function(req, res) {
+    res.json({"authenticate":true, "username":req.session.passport.user, "role":req.user.role});
 });
 
 

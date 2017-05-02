@@ -18,7 +18,7 @@
                  reset : {method:'POST',params: {action:'reset'}},
                  update: {method:'POST',params:{action:'update'}},
                  delete: {method:'POST',params:{action:'delete'}},
-                 isAuthorize: {method:'GET',params:{action:'isAuthorize'}}
+                 isAuthenticate: {method:'GET',params:{action:'isAuthenticate'}}
                })
     }
 }());

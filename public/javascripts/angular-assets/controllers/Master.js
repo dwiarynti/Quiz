@@ -2,9 +2,15 @@
 
     userresource = new userResource();
     $rootScope.setting = {"username":"", "isAuthenticated":false, "role":""};
-    userresource.$isAuthorize({}, function(data){
+    userresource.$isAuthenticate({}, function(data){
+        if(data.authenticate){
             $rootScope.setting.isAuthenticated = data.authorize;
-            $rootScope.setting.username = data.authorize ? data.username:"";
+            $rootScope.setting.username = data.authenticate ? data.username:"";
+            $rootScope.setting.role = data.authenticate? data.role:"";   
+        }else{
+            $state.go('login');
+        }
+                     
             
         });
     $scope.logoutClick = function()
@@ -31,7 +37,7 @@
                 console.log($rootScope);
                 if(data.role == "user")
                 {
-                $state.go('quizindex');
+                    $state.go('quizindex');
                 }
                 else
                 {

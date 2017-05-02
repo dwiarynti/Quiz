@@ -41,19 +41,19 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
+                    <li ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
                         <a href="#home">Home</a>
                     </li>
                     <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
                         <a href="#user-index"> Users</a>
                     </li>
-                    <li ng-if="setting.isAuthenticated == true">
+                    <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
                         <a href="#/subject-index">Subject</a>
                     </li>
-                     <li ng-if="setting.isAuthenticated == true">
+                     <li ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
                         <a href="#/quizindex">Quiz</a>
                     </li>
-                    <li ng-if="setting.isAuthenticated == true">
+                    <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
                         <a href="#/exampresult-index">Examp Result</a>
                     </li>
                     <li ng-if="setting.isAuthenticated == false">
