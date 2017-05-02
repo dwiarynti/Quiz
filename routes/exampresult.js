@@ -13,12 +13,13 @@ function ensureAuthenticated (req, res, next) {
     res.json({"authorize":isAuthenticated});
   }
 }
-router.get('/exampresult',function(req, res) {
+router.get('/exampresult/:_username',function(req, res) {
 	SubmittedQuizcollection.find({}, function(err, data){
    
 		if (err) res.json(500, err);
 		else res.json({"obj": data});
 	});
+  
 });
 router.post('/subjects/Create/', function(req,res)
 {

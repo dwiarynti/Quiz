@@ -53,7 +53,7 @@
                      <li ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
                         <a href="#/quizindex">Quiz</a>
                     </li>
-                    <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
+                    <li ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
                         <a href="#/exampresult-index">Examp Result</a>
                     </li>
                     <li ng-if="setting.isAuthenticated == false">

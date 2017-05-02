@@ -16,8 +16,9 @@ function ensureAuthenticated (req, res, next) {
   }
 }
 
-router.get('/submit',ensureAuthenticated,function(req, res) {
-	SubmittedQuizcollection.find({}, function(err, data){
+router.post('/submit/init',function(req, res) {
+  var paramobj = req.body._username != "" ? {"Username":req.body._username}:{};
+	SubmittedQuizcollection.find(paramobj, function(err, data){
    
 		if (err) res.json(500, err);
 		else res.json({"obj": data, "authorize":true});

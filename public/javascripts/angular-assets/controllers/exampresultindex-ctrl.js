@@ -1,9 +1,12 @@
-app.controller('exampresultIndexcontroller', function ($scope,$state,submitquizResource, passingdataservice) {
+app.controller('exampresultIndexcontroller', function ($scope,$state, $rootScope,submitquizResource, passingdataservice) {
     
     var submitquizresource = new submitquizResource();
     $scope.initobj = [];
 
-    submitquizresource.$init({},function(data)
+// questionresource.$add(function(data){
+    if($rootScope.setting.role)
+    submitquizresource._username = $rootScope.setting.role == "admin"?"":$rootScope.setting.username;
+    submitquizresource.$init(function(data)
     {
         if(!data.authorize){
             $state.go('login');

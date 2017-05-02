@@ -9,7 +9,7 @@
         return $resource("/api/submit/:action/:_id",
                { _id: '@_id' },
                {
-                 init: { method: 'GET'},
+                 init: { method: 'POST',params:{action:'init'}},
                  add: {method:'POST'},
                  get: {method:'GET'},
                  update: {method:'POST',params:{action:'Update'}},
