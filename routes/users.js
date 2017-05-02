@@ -33,7 +33,8 @@ router.post('/users/create/', function(req,res)
 {
   const user = {
       username : req.body.username,
-      fullname : req.body.fullname
+      fullname : req.body.fullname,
+      role     : req.body.role
   };
   Account.register(new Account(user), req.body.password, function(err, account) {
         if (err) {

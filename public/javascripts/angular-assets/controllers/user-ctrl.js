@@ -15,7 +15,8 @@ $scope.registerClick = function()
   
     userresource.username = $scope.user.Username;
     userresource.fullname  = $scope.user.FullName;
-    userresource.password =  $scope.user.Password;   
+    userresource.password =  $scope.user.Password; 
+    userresource.role = "user";  
     userresource.$add().then(function(data)
     {
         if(data.success)

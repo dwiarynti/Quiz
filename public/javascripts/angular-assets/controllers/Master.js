@@ -29,7 +29,7 @@
                 $rootScope.setting.isAuthenticated = true;
                 $rootScope.setting.role = data.role;
                 console.log($rootScope);
-                if(data.userrole == "user")
+                if(data.role == "user")
                 {
                 $state.go('quizindex');
                 }
