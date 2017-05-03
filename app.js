@@ -71,7 +71,7 @@ passport.deserializeUser(Account.deserializeUser());
 //   }
 // ));
 //conncet to database
-mongoose.connect('mongodb://userGL3/5HV7bkAwUgg18Qe@mongodb/Quiz_db');
+mongoose.connect('mongodb://userGL3:5HV7bkAwUgg18Qe@mongodb/Quiz_db');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
