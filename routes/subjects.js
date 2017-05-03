@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var monk = require('monk');
 //var db = monk('192.168.1.99:27017/Quiz_db');
-var db = monk('mongodb://userGL3:5HV7bkAwUgg18Qe@mongodb/Quiz_db')
+var db = monk('mongodb://userGL3:5HHV7bkAwUgg18Qe@mongodb/Quiz_db')
 var collection = db.get('Subject_Collection');
 var esnsureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 var passport = require('passport'), OAuthStrategy = require('passport-oauth').OAuthStrategy;;

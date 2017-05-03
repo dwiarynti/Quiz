@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var monk = require('monk');
 //var db = monk('192.168.1.99:27017/Quiz_db');
-var db = monk('mongodb://userGL3:5HV7bkAwUgg18Qe@mongodb/Quiz_db');
+var db = monk('mongodb://userGL3:5HHV7bkAwUgg18Qe@mongodb/Quiz_db');
 var SubmittedQuizcollection = db.get('SubmittedQuiz_Collection');
 
 function ensureAuthenticated (req, res, next) {
