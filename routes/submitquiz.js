@@ -2,12 +2,11 @@
 var express = require('express');
 var router = express.Router();
 var monk = require('monk');
-<<<<<<< HEAD
+
 //var db = monk('192.168.1.99:27017/Quiz_db');
-var db = monk('mongodb://userGL3:5HHV7bkAwUgg18Qe@mongodb/Quiz_db')
-=======
+
 var db = monk('192.168.1.99:27017/Quiz_db');
->>>>>>> parent of fa91c35... update connection
+
 var SubmittedQuizcollection = db.get('SubmittedQuiz_Collection');
 // var Choicescollection = db.get('Choices_Collection');
 var ObjectId = require('mongodb').ObjectID;
