@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
     // "start": "node app.js"
   },
+  
   "dependencies": {
     "async": "^2.3.0",
     "async-foreach": "^0.1.3",
