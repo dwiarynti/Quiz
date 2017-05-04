@@ -24,7 +24,7 @@
  
     <div class="col-md-12 text-right" >
         <button class="btn btn-primary btn-lg" ng-click="getsinglerandomquestion()" ng-disabled="!togglebutton">Next</button>
-        <button class="btn btn-primary btn-lg" ng-click="submit()" ng-disabled="togglebutton">Submit</button>
+        <button class="btn btn-primary btn-lg" ng-click="submit()" ng-disabled="togglebutton || Questions.length == 0">Submit</button>
     </div>
 
 
