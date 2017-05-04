@@ -25,7 +25,12 @@ router.post('/submit/init',function(req, res) {
 	SubmittedQuizcollection.find(paramobj, function(err, data){
    
 		if (err) res.json(500, err);
-		else res.json({"obj": data, "authorize":true});
+		else{ 
+      data.sort(function(a,b){
+        return new Date(b.Date) - new Date(a.Date);
+      });
+      res.json({"obj": data, "authorize":true});      
+    };
 	});
 });
 
