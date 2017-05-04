@@ -44,7 +44,7 @@ app.config([
             })
             .state('user-index', {
                 url: '/user-index',
-                templateUrl: '/javascripts/angular-assets/partialviews/users/index.html'
+                templateUrl: '/javascripts/angular-assets/partialviews/users/Index.html'
             })
             .state('login', {
                 url: '/login',
