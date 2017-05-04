@@ -5,7 +5,7 @@ var monk = require('monk');
 
 //var db = monk('192.168.1.99:27017/Quiz_db');
 
-var db = monk('192.168.1.99:27017/Quiz_db');
+var db = monk('localhost:27017/Quiz_db');
 
 var SubmittedQuizcollection = db.get('SubmittedQuiz_Collection');
 
