@@ -8,6 +8,8 @@ var db = monk('192.168.1.99:27017/Quiz_db');
 // var db = monk('localhost:27017/Quiz_db');
 
 var SubmittedQuizcollection = db.get('SubmittedQuiz_Collection');
+var userCollection = db.get('accounts');
+
 // var Choicescollection = db.get('Choices_Collection');
 var ObjectId = require('mongodb').ObjectID;
 
@@ -20,8 +22,9 @@ function ensureAuthenticated (req, res, next) {
   }
 }
 
+//get examp result
 router.post('/submit/init',function(req, res) {
-  var paramobj = req.body._username != "" ? {"Username":req.body._username}:{};
+  var paramobj = req.body._userid != "" ? {"UserId":ObjectId(req.body._userid)}:{};
 	SubmittedQuizcollection.find(paramobj, function(err, data){
    
 		if (err) res.json(500, err);
@@ -36,7 +39,10 @@ router.post('/submit/init',function(req, res) {
 
 router.post('/submit',ensureAuthenticated, function(req,res)
 {
-  req.body.submitquizobj.Date = new Date().toISOString()
+  req.body.submitquizobj.Date = new Date().toISOString();
+  // var userid = ObjectId(req.body.submitquizobj.UserId);
+  req.body.submitquizobj.UserId = ObjectId(req.body.submitquizobj.UserId);
+  console.log(req.body.submitquizobj);
   SubmittedQuizcollection.insert(req.body.submitquizobj,function(err)
   {
     if(err) res.json(500,err)

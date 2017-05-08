@@ -12,13 +12,16 @@ var userCollection = db.get('accounts');
 var bcrypt = require('bcrypt-nodejs');
 var async = require('async');
 var crypto = require('crypto');
+var ObjectId = require('mongodb').ObjectID;
+
 
 router.get('/users/login', function(req, res) {
   res.render('/#/login', {user : req.user});
 });
 
 router.get('/users/isAuthenticate', ensureAuthenticated, function(req, res) {
-    res.json({"authenticate":true, "username":req.session.passport.user, "role":req.user.role});
+    console.log(req.session.passport);
+    res.json({"authenticate":true, "username":req.session.passport.user, "role":req.user.role, "user_id":req.user._id});
 });
 
 
@@ -60,7 +63,7 @@ router.post('/users/create/', function(req,res)
 router.post('/users/login/',
 passport.authenticate('local'), function(req,res)
 {
-    res.json({success:true, "role":req.user.role});
+    res.json({success:true, "role":req.user.role, "user_id":req.user._id});
 });
 
 router.get('/users/logout', function(req, res) {
@@ -139,6 +142,16 @@ router.post('/users/reset/:_id',ensureAuthenticated,function(req,res)
             });
         }
     ])
+});
+
+router.get('/users/getusername/:_id',ensureAuthenticated,function(req,res)
+{
+    userCollection.findOne({_id:ObjectId(req.params._id)},function(err,user)
+    {
+        if(err) res.json(500,err);
+        else
+            res.json({success:true, "authorize":true, "user_id":req.params._id, "username":user.username});
+    });
 });
 
 

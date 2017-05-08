@@ -8,7 +8,7 @@ $scope.initData = [];
 $scope.subject_id =passingdataservice.addObj.Subject_id;
 $scope.subjectname =passingdataservice.addObj.SubjectName;
 $scope.Score = 0;
-$scope.submitquizobj = {"Username":"", "Quiz":[], "Score":0, "SubjectName": $scope.subjectname };
+$scope.submitquizobj = {"UserId":0, "Quiz":[], "Score":0, "SubjectName": $scope.subjectname };
 $scope.No = 0;
 $scope.displayedquestion = [];
 $scope.togglebutton = true;
@@ -24,7 +24,9 @@ $scope.init = function (){
   
         quizresource.$init({subject_id:$scope.subject_id }, function(data)
         {
-            $scope.submitquizobj.Username = data.username;
+            console.log(data);
+            // $scope.submitquizobj.Username = data.username;
+            $scope.submitquizobj.UserId = data.userid;
             angular.forEach(data.obj,function(item) {
                 $scope.Questions.push(item);
             });
@@ -113,10 +115,5 @@ $scope.init = function (){
         
         return result;
     }
-
-
-    
-
-
 
 });

@@ -18,7 +18,8 @@
                  reset : {method:'POST',params: {action:'reset'}},
                  update: {method:'POST',params:{action:'update'}},
                  delete: {method:'POST',params:{action:'delete'}},
-                 isAuthenticate: {method:'GET',params:{action:'isAuthenticate'}}
+                 isAuthenticate: {method:'GET',params:{action:'isAuthenticate'}},
+                 getusernamebyuserid: {method:'GET',params:{action:'getusername'}}
                })
     }
 }());
