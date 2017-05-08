@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html ng-app="RDash">
 <head>
-    <title></title>
+   
     <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Quiz </title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link rel="stylesheet" href="bower_components/AdminLTE/bootstrap/css/bootstrap.min.css">
+     <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="bower_components/AdminLTE/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect.
+    -->
+  <link rel="stylesheet" href="bower_components/AdminLTE/dist/css/skins/skin-black.min.css">
 
 
     <link rel="stylesheet" type="text/css" href="/javascripts/angular-assets/styles/lib/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/AdminLTE.css">
+   
     <!--library-->
     <script src="/javascripts/angular-assets/plugins/angular/angular.min.js"></script>
     <script src="/javascripts/angular-assets/plugins/angular/ocLazyLoad.min.js"></script>
@@ -22,66 +38,134 @@
     
 </head>
 
-<body ng-controller="mastercontroller">
-    <div id="content-wrapper">
-        <div class="page-content">
-            <div id="header-wrapper" class="row header">
-                <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
-                        <a href="#home">Home</a>
-                    </li>
-                    <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
-                        <a href="#user-index"> Users</a>
-                    </li>
-                    <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
-                        <a href="#/subject-index">Subject</a>
-                    </li>
-                     <li ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
-                        <a href="#/quizindex">Quiz</a>
-                    </li>
-                    <li ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
-                        <a href="#/exampresult-index">Examp Result</a>
-                    </li>
-                    <li ng-if="setting.isAuthenticated == false">
-                        <a href="#/login">Login</a>
-                    </li>
-                    <!--<li><a href="#/quizindex">Hi {{}} !</a></li>-->
-                </ul>
-                <ul ng-if="setting.isAuthenticated == true" class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi {{setting.username}} !</a>
-                        <ul class="dropdown-menu">
-                        <li>
-                            <a><p style="cursor:pointer" ng-click="logoutClick()">Logout</p></a>
-                        </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
+<body class="hold-transition skin-black  sidebar-mini" ng-controller="mastercontroller">
+
+<div class="wrapper"  ng-if="setting.isAuthenticated==true" >
+    <!-- Header -->
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>Q-</b>UIZ</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Q</b>UIZ</span>
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+         
+          <!-- /.messages-menu -->
+ 
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu" ng-if="setting.isAuthenticated == true">
+            <!-- Menu Toggle Button -->
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="hidden-xs">Hi {{setting.username}} !</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- The user image in the menu -->
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat" ng-click="logoutClick()">Sign out</a>
+                </div>
+                
+              </li>
+            </ul>
+          </li>
+           <li class="dropdown user user-menu" ng-if="setting.isAuthenticated == false">
+                <a href="#login" class="dropdown-toggle" data-toggle="dropdown"> Sign In 
+           </li>
+          <!-- Control Sidebar Toggle Button -->
+          
+        </ul>
+      </div>
     </nav>
- </div>
-    <!-- Page Content -->
-<br>
-<br>
-<div id="main-content" ui-view></div>
+  </header>
+
+    <!-- Sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu">
+        <li class="header">HEADER</li>
+        <!-- Optionally, you can add icons to the links -->
+         <li  ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
+            <a href="#home"><i class="fa fa-home"></i> <span>Home</span></a>
+        </li>
+        <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
+             <a href="#user-index"><i class="fa fa-users"></i> <span>Users</span></a>
+        </li>
+        <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
+             <a href="#subject-index"><i class="fa fa-book"></i> <span>Subject</span></a>
+        </li>
+         <li ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
+            <a href="#/quizindex"><i class="fa fa-edit"></i> <span>Quiz</span></a>
+         </li>
+         <li ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
+            <a href="#/exampresult-index"><i class="fa  fa-list-alt"></i> <span>Examp Result</span></a>
+         </li>
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      
+    </section>
+
+    <!-- Main content -->
+    <section class="content" ui-view>
+      <!-- Your Page Content Here -->
+         <!--@yield('conteknt')-->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+   <footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+     
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2017 <a href="#"></a>.</strong> All rights reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+      
+  </aside>
+  <div class="control-sidebar-bg"></div>
 </div>
+
+
+<div ng-if="setting.isAuthenticated== false">
+ <section class="content" ui-view>   
+ </section>
 </div>
+
+
+
+
     <!--service-->
 <script src="/javascripts/angular-assets/services/common.service.js"></script>
 <script src="/javascripts/angular-assets/services/tableResource.js"></script>
@@ -105,5 +189,8 @@
 <script src="/javascripts/angular-assets/controllers/exampresultindex-ctrl.js"></script>
 <script src="/javascripts/angular-assets/controllers/exampresultdetail-ctrl.js"></script>
 
+
+<!-- AdminLTE App -->
+<script src="bower_components/AdminLTE/dist/js/app.min.js"></script>
 </body>
 </html>
