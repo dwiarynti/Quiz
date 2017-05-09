@@ -73,7 +73,9 @@ passport.deserializeUser(Account.deserializeUser());
 //conncet to database
 
 // mongoose.connect('mongodb://61.94.163.236:27017/Quiz_db');
-mongoose.connect('mongodb://192.168.1.99:27017/Quiz_db');
+// mongoose.connect('mongodb://192.168.1.99:27017/Quiz_db');
+mongoose.connect('mongodb://escuser:esc123@ds133331.mlab.com:33331/quiz_db');
+
 // mongoose.connect('mongodb://localhost:27017/Quiz_db');
 
 
