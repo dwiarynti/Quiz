@@ -13,7 +13,7 @@
              <div class="box-body">
               <div ng-repeat="subject in subjectobj">
               <div>
-              <button  class="btn btn-flat btn-lg btn-block btn-flat" ng-click="quiz(subject._id, subject.SubjectName)">{{subject.SubjectName}}</button>
+              <button ng-if="subject.Questions.length > 0"  class="btn btn-flat btn-lg btn-block btn-flat" ng-click="quiz(subject._id, subject.SubjectName)">{{subject.SubjectName}}</button>
               <br>
               </div>
               </div>

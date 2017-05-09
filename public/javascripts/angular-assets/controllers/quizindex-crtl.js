@@ -5,6 +5,7 @@ app.controller('quizindexcontroller', function ($scope, $state,$filter, subjectR
 
     subjectresource.$init({},function(data)
     {
+        console.log( data.obj);
         if(!data.authorize){
         $state.go('login');
         }
