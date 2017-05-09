@@ -40,7 +40,8 @@
 
 <body class="hold-transition skin-black-light  sidebar-mini" ng-controller="mastercontroller">
 
-<div class="wrapper"  ng-if="setting.isAuthenticated==true" >
+<div ng-show="setting.isAuthenticated">
+<div class="wrapper">
     <!-- Header -->
   <header class="main-header">
 
@@ -157,13 +158,13 @@
   </aside>
   <div class="control-sidebar-bg"></div>
 </div>
+</div>
 
 
-<div ng-if="setting.isAuthenticated== false || setting.isAuthenticated == null">
+<div ng-show="!(setting.isAuthenticated)">
  <section class="content" ui-view>   
  </section>
 </div>
-
 
 
 
