@@ -42,7 +42,21 @@ router.get('/questions/:_id',ensureAuthenticated,function(req, res) {
 });
 router.post('/questions',ensureAuthenticated,function(req,res)
 {
-    var obj = {"Question":req.body.Question,"Subject_id":ObjectId(req.body.Subject_id),"Choices":[], "isActive":true} ;
+  
+    //question obj
+    req.body.questionobj._id = ObjectId();
+    req.body.questionobj.Subject_id = ObjectId(req.body.questionobj.Subject_id);
+
+    //choices obj
+    for(var i = 0; i < req.body.choicesobj.length; i++){
+      var choicesobj = req.body.choicesobj[i];
+      choicesobj._id = ObjectId();
+      choicesobj.Questions_id = req.body.questionobj._id;
+      req.body.questionobj.Choices.push(choicesobj._id);
+    }
+    // req.body.choicesobj
+
+    var obj = req.body.questionobj;
     var returnQuestion = {};
     var _id ="";
     //insert question
@@ -58,12 +72,34 @@ router.post('/questions',ensureAuthenticated,function(req,res)
         _id = questionid;
 
         //update subject
-        Subjectcollection.update({_id:ObjectId(req.body.Subject_id)},{$push:{Questions:ObjectId(_id)}},function(err, subject){
+        Subjectcollection.update({_id:ObjectId(req.body.questionobj.Subject_id)},{$push:{Questions:req.body.questionobj.Subject_id}},function(err, subject){
             if(err) {res.json(500,err)}
             else 
             {
               // returnQuestion = books;
-                res.json({success:true});
+              if(req.body.choicesobj.length != 0){
+                for(var j = 0; j < req.body.choicesobj.length; j++){
+                var choicesobj = req.body.choicesobj[j];
+                  
+                  Choicescollection.insert(choicesobj,function(err, choices)
+                  {
+                    // choicesobj
+                    // var no = j;
+                    if(j == req.body.choicesobj.length)
+                      {
+                        res.json({success:true});  
+                        // break;                                      
+                      }
+                      
+                  });
+                  
+                }
+              }else{
+                res.json({success:true});  
+              }
+
+              
+
             };
         });
       };

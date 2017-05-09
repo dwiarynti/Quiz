@@ -5,36 +5,54 @@
             <div class="col-xs-12">
             <div class="box">
                 <div class="box-header with-border">
-                <h3 class="box-title">
+                <!--<h3 class="box-title">
                     <h4>Subject  :   {{subjectName}}</h4>
-                </h3>
+                </h3>-->
+                <h3 class="box-title">Subject  :   {{subjectName}}</h3>
                 </div>
                 <div class="box-body">
                     <button ng-click="btnAddClick()" type="button" class="btn btn-flat" data-widget=""><i class="glyphicon glyphicon-plus"></i> Add Question</button>
-
-                    <br>
-                    <br>
+                    <br><br>
                 <div class="table-responsive">
                 <table id="data-table" datatable="ng" dt-options="dtOptions" width="100%" class="table table-striped table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th style="width: 11%;">Question</th>
+                        <th style="width: 11%;">Question <i class="glyphicon glyphicon-plus" ng-click="btnAddClick()"></i></th>
                         <th style="width: 11%;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="odd gradeX" ng-repeat="question in questions">
-                        <td>{{question.Question}}</td>
-                        <td>
+                        <td ng-if="question._id != 0">{{question.Question}}</td>
+                        <td ng-if="question._id == 0">
+                            <input type="text" placeholder="Question" class="form-control col-md-6" ng-model="question.Question">
+                            <div class="col-md-12" style="padding:1%" ng-repeat="choiceobj in question.choicesobj">
+                                <div class="form-group col-md-6">
+                                    <input type="text" placeholder="Choice Name" class="form-control" ng-model="choiceobj.ChoicesName"/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Is Correct Answer :</label>
+                                    <input type="radio" name="choicestype_{{choiceobj._id}}" ng-model="choicesobj.isCorrectAnswer" value="1" /> True
+                                    <input type="radio" name="choicestype_{{choiceobj._id}}" ng-model="choicesobj.isCorrectAnswer" value="0"/> False
+                                </div>
+                            </div>
+                        </td>
+                        
+                        <td ng-if="question._id != 0">
                             <button class="btn btn-default" ng-click="btnUpdateClick(question._id)">Edit</button> |
                             <button class="btn btn-default" ng-click="btnDeleteClick(question._id)">Delete</button> |
                             <button class="btn btn-default" ng-click="btnQuestionsClick(question._id, question.Question)">Choices ({{question.Choices.length}})</button>
                         </td>
+                        <td ng-if="question._id == 0">
+                            <button class="btn btn-default" ng-click="addchoices(question)">Add Choice</button> | 
+                            <button class="btn btn-default" ng-click="insert(question)">Save</button> |
+                            <button class="btn btn-default" ng-click="">Cancel</button>
+                        </td>
                     </tr>
                 </tbody>
-            </table>
-            <div class="col-md-12"><button class="btn btn-danger" ng-click="btnBackClick()">Back to Subject Page</button></div>   
+            </table>  
         </div>
+        <button class="btn btn-danger" ng-click="btnBackClick()">Back to Subject Page</button>
         </div>
         </div>
         </div>

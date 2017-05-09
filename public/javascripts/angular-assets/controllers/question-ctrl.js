@@ -6,34 +6,34 @@ app.controller('questioncontroller', function ($scope, $state, questionResource,
     $scope.subjectName =passingdataservice.addObj.subjectName;
 
     $scope.init = function(){
-       
-       
-    console.log(passingdataservice.addObj)
         if($scope.subject_id != null)
         {
-        questionresource.$init({_id:$scope.subject_id}, function(data){
+            questionresource.$init({_id:$scope.subject_id}, function(data){
 
-        if(!data.authorize)
-        {
-            $state.go('login');
+                if(!data.authorize)
+                {
+                    $state.go('login');
+                }
+                else
+                {
+                    if(data.role == "user")
+                    {
+                        $state.go('login')
+                    }
+                    else
+                    {
+                        angular.forEach(data.Obj,function(obj) {
+                            obj.choicesobj = [];
+                        });
+                        $scope.questions = data.Obj;
+                        console.log($scope.questions);
+                    }
+                }          
+            });
         }
         else
         {
-            if(data.role == "user")
-            {
-                $state.go('login')
-            }
-            else
-            {
-                $scope.questions = data.Obj;
-                console.log($scope.questions);
-            }
-        }          
-        });
-        }
-        else
-        {
-        $state.go('subject-index')
+            $state.go('subject-index')
         }
     
     }
@@ -44,21 +44,32 @@ app.controller('questioncontroller', function ($scope, $state, questionResource,
 
     $scope.QuestionObj = {'_id':"",'question':""};
 
-    $scope.btnAddClick = function(id){
-        $scope.QuestionObj = {'_id':"",'question':""};
-        $("#modal-add").modal('show');
+    $scope.btnAddClick = function(){
+        console.log($scope.questions);
+        $scope.questions.push({
+            "_id":0,
+            "Question":"",
+            "Subject_id":$scope.subject_id,
+            "Choices":[],
+            "choicesobj" : [], 
+            "isActive":true
+        });
     }
 
-    $scope.insert = function(){
-        // $scope.QuestionObj = {'_id':"",'question':""};
+    $scope.insert = function(obj){
         var questionresource = new questionResource();
-        // questionresource._id = $scope.QuestionObj._id;
-        questionresource.Subject_id = $scope.subject_id;
-        questionresource.Question = $scope.QuestionObj.question;
-        // console.log(questionresource);
+        questionresource.questionobj = {
+            "_id":0,
+            "Question":obj.Question,
+            "Subject_id":obj.Subject_id,
+            "Choices":obj.Choices,
+            "isActive":obj.isActive
+        };
+        questionresource.choicesobj = obj.choicesobj;
         questionresource.$add(function(data){
+            console.log(data);
             if(data.success){
-                $("#modal-add").modal('hide');
+                // $("#modal-add").modal('hide');
                 $scope.init();
 
             }
@@ -82,7 +93,6 @@ app.controller('questioncontroller', function ($scope, $state, questionResource,
         questionresource.question = $scope.QuestionObj.question;
         questionresource.$update(function(data)
         {
-            // $scope.initSubject = [];
             $scope.init();
         });
     }
@@ -114,5 +124,11 @@ app.controller('questioncontroller', function ($scope, $state, questionResource,
 
     $scope.btnBackClick =function(){
         $state.go('subject-index');
+    }
+
+    $scope.addchoices = function(obj){
+        // obj.choiceobj = [];
+        obj.choicesobj.push({"_id":obj.choicesobj.length + 1,'ChoicesName':"", 'isCorrectAnswer':false, 'isActive':true, 'Questions_id':obj._id});
+
     }
 });
