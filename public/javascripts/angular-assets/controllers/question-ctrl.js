@@ -24,6 +24,7 @@ app.controller('questioncontroller', function ($scope, $state, questionResource,
                     {
                         angular.forEach(data.Obj,function(obj) {
                             obj.choicesobj = [];
+                            obj.editmode = false;          
                         });
                         $scope.questions = data.Obj;
                         console.log($scope.questions);
@@ -52,8 +53,13 @@ app.controller('questioncontroller', function ($scope, $state, questionResource,
             "Subject_id":$scope.subject_id,
             "Choices":[],
             "choicesobj" : [], 
-            "isActive":true
+            "isActive":true,
+            "editmode" : false,
         });
+    }
+
+    $scope.turnoffaddmode = function(index){
+        $scope.questions.splice(index,1);
     }
 
     $scope.insert = function(obj){
@@ -65,6 +71,7 @@ app.controller('questioncontroller', function ($scope, $state, questionResource,
             "Choices":obj.Choices,
             "isActive":obj.isActive
         };
+        console.log(obj.choicesobj);
         questionresource.choicesobj = obj.choicesobj;
         questionresource.$add(function(data){
             console.log(data);
@@ -79,18 +86,24 @@ app.controller('questioncontroller', function ($scope, $state, questionResource,
 
 
     $scope.updatedid = "";
-    $scope.btnUpdateClick = function(id){
-        $scope.QuestionObj._id = id;
-        $("#modal-update").modal('show');
-        questionresource.$getbyId({_id:id},function(data){
-            $scope.QuestionObj.question = data.Obj.Question;
-        });
+    $scope.btnUpdateClick = function(obj){
+        obj.editmode = true;
+        // $scope.QuestionObj._id = id;
+        // $("#modal-update").modal('show');
+        // questionresource.$getbyId({_id:id},function(data){
+        //     $scope.QuestionObj.question = data.Obj.Question;
+        // });
     }
-    $scope.UpdateClick = function()
+
+    $scope.turnoffeditmode = function(obj){
+        obj.editmode = false;    
+    }
+
+    $scope.UpdateClick = function(obj)
     {
-        $("#modal-update").modal('hide');
-        questionresource._id = $scope.QuestionObj._id;
-        questionresource.question = $scope.QuestionObj.question;
+        // $("#modal-update").modal('hide');
+        questionresource._id = obj._id;
+        questionresource.question = obj.Question;
         questionresource.$update(function(data)
         {
             $scope.init();

@@ -25,14 +25,17 @@
                    <input type="text" placeholder="Subject Name" class="form-control col-md-6" ng-model="subject.SubjectName">
                </td>
                <td ng-if="subject._id != 0">
+                   <!--viewmode-->
                     <button ng-if="subject.editmode == false" class="btn btn-default" ng-click="btnUpdateClick(subject)">Edit</button>
                     <button ng-if="subject.editmode == false" class="btn btn-default" ng-click="btnDeleteClick(subject._id)">Delete</button>
                     <button ng-if="subject.editmode == false" class="btn btn-default" ng-click="btnQuestionsClick(subject._id, subject.SubjectName)">Question ({{subject.Questions.length}})</button>
                     
+                    <!--editmode-->
                     <button ng-if="subject.editmode == true" type="button" class="btn btn-default btn-width" ng-click="UpdateClick(subject)">Save</button>
                     <button ng-if="subject.editmode == true" type="button" class="btn btn-default btn-width" ng-click="turnoffeditmode(subject)">Cancel</button>
                     
                 </td>
+                <!--addmode-->
                 <td ng-if="subject._id == 0">
                     <button type="button" class="btn btn-default btn-width" ng-click="AddClik(subject)">Save</button>
                     <button type="button" class="btn btn-default btn-width" ng-click="turnoffaddmode($index)">Cancel</button>
