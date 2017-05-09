@@ -24,17 +24,17 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="choice in choices">
-                                        <td ng-if="choice._id != 0 && choice.editmode == false">{{choice.ChoicesName}}</td>
-                                        <td ng-if="choice._id == 0  && choice.editmode == false || choice._id != 0 && choice.editmode == true">
+                                        <td ng-if="choice.editmode == false && choice.temp_id==false">{{choice.ChoicesName}}</td>
+                                        <td ng-if="choice.temp_id == true && choice.editmode == false || choice.temp_id == false && choice.editmode == true">
                                             <input type="text" placeholder="Choices" class="form-control col-md-6" ng-model="choice.ChoicesName">
                                         </td>
 
-                                        <td ng-if="choice._id != 0 && choice.editmode == false">{{choice.isCorrectAnswer}}</td>
-                                        <td ng-if="choice._id == 0 && choice.editmode == false || choice._id != 0 && choice.editmode == true">
-                                            <input type="radio" name="choicestype" ng-model="choice.isCorrectAnswer" data-ng-value="true" /> True
-                                            <input type="radio" name="choicestype" ng-model="choice.isCorrectAnswer" data-ng-value="false"/> False
+                                        <td ng-if="choice.editmode == false && choice.temp_id==false">{{choice.isCorrectAnswer}}</td>
+                                        <td ng-if="choice.temp_id == true && choice.editmode == false || choice.temp_id == false && choice.editmode == true">
+                                            <input type="radio" name="choicestype_{{choice._id}}" ng-model="choice.isCorrectAnswer" data-ng-value="true" /> True
+                                            <input type="radio" name="choicestype_{{choice._id}}" ng-model="choice.isCorrectAnswer" data-ng-value="false"/> False
                                         </td>
-                                        <td ng-if="choice._id != 0">
+                                        <td ng-if="choice.temp_id == false">
                                             <!--viewmode-->
                                             <button ng-if="choice.editmode == false" class="btn btn-default" ng-click="btnUpdateClick(choice)">Edit</button>
                                             <button ng-if="choice.editmode == false" class="btn btn-default" ng-click="btnDeleteClick(choice._id)">Delete</button>
@@ -44,7 +44,7 @@
                                             <button ng-if="choice.editmode == true" type="button" class="btn btn-default btn-width" ng-click="turnoffeditmode(choice)">Cancel</button>
                                         </td>
                                         <!--addmode-->
-                                        <td ng-if="choice._id == 0">
+                                        <td ng-if="choice.temp_id == true">
                                             <button class="btn btn-default" ng-click="insert(choice)">Save</button>
                                             <button class="btn btn-default" ng-click="turnoffaddmode($index)">Cancel</button>
                                         </td>

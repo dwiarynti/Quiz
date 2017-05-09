@@ -28,7 +28,9 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
             else
             {
                 angular.forEach(data.Obj,function(item) {
-                    item.editmode = false;            
+                    item.editmode = false;   
+                    item.temp_id=false;
+                             
                 });
                  $scope.choices = data.Obj;
                 
@@ -55,11 +57,12 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
 
     $scope.btnAddClick = function(id){
         $scope.choices.push({
-            '_id':0,
+            '_id':$scope.choices.length + 1,
             'ChoicesName':"", 
             'isCorrectAnswer':false, 
             'isActive':true, 
-            'editmode' : false,     
+            'editmode' : false,
+            'temp_id':true,     
             'Questions_id':$scope.question_id});
               
         // $("#modal-add").modal('show');
