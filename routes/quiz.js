@@ -47,7 +47,7 @@ router.get('/quiz/questions/:subject_id',ensureAuthenticated,function(req, res) 
     console.log(req.user);
      var username = req.user.username;
     var randomed = shuffle(quiz);
-    var arr = randomed.slice(0,5)
+    var arr = randomed;
      res.json({"obj": arr, "username":username, "userid":req.user._id});
 	});
 });

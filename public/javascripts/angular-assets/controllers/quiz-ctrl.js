@@ -98,9 +98,24 @@ $scope.init = function (){
     $scope.submit = function(){
         var score=0;
         angular.forEach($scope.Questions,function(question) {
-            var getcorrectanswer = $filter('filter')(question.Choices, function (choiceobj) { return choiceobj.isCorrectAnswer === true })[0];
+
+            //get list correct answer
+            var getlistcorrectanswer = $filter('filter')(question.Choices, function (choiceobj) { return choiceobj.isCorrectAnswer === true });
+
+            //get choice
             var getAnswer = $filter('filter')(question.Choices, function (choiceobj) { return choiceobj._id === question.Answer })[0];
-            score = question.Answer == getcorrectanswer._id ?  score + 1 : score;
+
+            //
+            var getcorrectanswer = {};
+            if(getlistcorrectanswer.length > 1){
+                getcorrectanswer = $filter('filter')(getlistcorrectanswer, function (obj) { return obj._id === question.Answer })[0];
+                score = question.Answer == getcorrectanswer._id ?  score + 1 : score;                
+            }else{
+                getcorrectanswer = getlistcorrectanswer[0];
+                score = question.Answer == getcorrectanswer._id ?  score + 1 : score;
+            }
+            console.log(getcorrectanswer);
+            
 
             $scope.submitquizobj.Quiz.push({
                 "Question":question.Question,
