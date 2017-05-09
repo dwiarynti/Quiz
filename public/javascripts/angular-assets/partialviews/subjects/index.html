@@ -20,12 +20,23 @@
             </thead>
             <tbody>
            <tr ng-repeat="subject in initSubject">
-               <td>{{subject.SubjectName}}</td>
-               <td> 
-               
-                <button class="btn btn-default" ng-click="btnUpdateClick(subject._id)">Edit</button>
-                <button class="btn btn-default" ng-click="btnDeleteClick(subject._id)">Delete</button>
-                 <button class="btn btn-default" ng-click="btnQuestionsClick(subject._id, subject.SubjectName)">Question ({{subject.Questions.length}})</button>
+               <td ng-if="subject._id != 0 && subject.editmode == false">{{subject.SubjectName}}</td>
+               <td ng-if="subject._id == 0  && subject.editmode == false || subject._id != 0 && subject.editmode == true">
+                   <input type="text" placeholder="Subject Name" class="form-control col-md-6" ng-model="subject.SubjectName">
+               </td>
+               <td ng-if="subject._id != 0">
+                    <button ng-if="subject.editmode == false" class="btn btn-default" ng-click="btnUpdateClick(subject)">Edit</button>
+                    <button ng-if="subject.editmode == false" class="btn btn-default" ng-click="btnDeleteClick(subject._id)">Delete</button>
+                    <button ng-if="subject.editmode == false" class="btn btn-default" ng-click="btnQuestionsClick(subject._id, subject.SubjectName)">Question ({{subject.Questions.length}})</button>
+                    
+                    <button ng-if="subject.editmode == true" type="button" class="btn btn-default btn-width" ng-click="UpdateClick(subject)">Save</button>
+                    <button ng-if="subject.editmode == true" type="button" class="btn btn-default btn-width" ng-click="turnoffeditmode(subject)">Cancel</button>
+                    
+                </td>
+                <td ng-if="subject._id == 0">
+                    <button type="button" class="btn btn-default btn-width" ng-click="AddClik(subject)">Save</button>
+                    <button type="button" class="btn btn-default btn-width" ng-click="turnoffaddmode($index)">Cancel</button>
+                    <!--<button type="button" class="btn btn-default btn-width" ng-click="AddClik()">Cancel</button>-->
                 </td>
            </tr>
        </tbody>

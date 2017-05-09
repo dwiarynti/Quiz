@@ -19,6 +19,7 @@ subjectresource.$init({},function(data)
         else
         {
              angular.forEach(data.obj,function(item) {
+                 item.editmode = false;                 
                 $scope.initSubject.push(item);
             });
         }
@@ -44,6 +45,7 @@ subjectresource.$init({},function(data)
         else
         {
              angular.forEach(data.obj,function(item) {
+                 item.editmode = false;
                 $scope.initSubject.push(item);
             });
         }
@@ -53,14 +55,20 @@ subjectresource.$init({},function(data)
 
 $scope.btnAddClick = function()
 {
-    $("#modal-add").modal('show');
+    // $("#modal-add").modal('show');
+    $scope.initSubject.push({
+        "_id":0,
+        "SubjectName": "",
+        "IsActive" : true,
+        "editmode" : false,
+        "Questions" : []});
 }
 
 
-$scope.AddClik = function()
+$scope.AddClik = function(obj)
 {
     
-    subjectresource.SubjectName = $scope.subject.SubjectName;
+    subjectresource.SubjectName = obj.SubjectName;
     subjectresource.$add().then(function(data)
     {
       
@@ -78,25 +86,24 @@ $scope.AddClik = function()
     });
 }
 
-$scope.btnUpdateClick = function(id)
-{
-    $("#modal-update").modal('show');
-  
-    subjectresource.$get({_id:id}).then(function(data)
-    {
-       
-        $scope.subject._id = data.obj._id;
-        $scope.subject.SubjectName = data.obj.SubjectName;
-    
-      
-    });
+$scope.turnoffaddmode = function(index){
+    $scope.initSubject.splice(index,1);
 }
 
-$scope.UpdateClick = function()
+$scope.btnUpdateClick = function(obj)
 {
-    $("#modal-update").modal('hide');
-    subjectresource._id = $scope.subject._id;
-    subjectresource.SubjectName = $scope.subject.SubjectName;
+    obj.editmode = true;
+}
+
+$scope.turnoffeditmode = function(obj){
+    obj.editmode = false;    
+}
+
+$scope.UpdateClick = function(obj)
+{
+    // $("#modal-update").modal('hide');
+    subjectresource._id = obj._id;
+    subjectresource.SubjectName = obj.SubjectName;
     subjectresource.$update().then(function(data)
     {
        $scope.initSubject = [];
