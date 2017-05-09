@@ -23,6 +23,8 @@ $scope.GetChoices = function(questionid)
     
 $scope.init = function (){
   
+  if($scope.subject_id != null)
+  {
         quizresource.$init({subject_id:$scope.subject_id }, function(data)
         {
             console.log(data);
@@ -55,6 +57,11 @@ $scope.init = function (){
             };
             $scope.getsinglerandomquestion();
         });
+  }
+  else
+  {
+      $state.go('quizindex');
+  }
     
 }
     // $scope.nextquestion = function (obj){
