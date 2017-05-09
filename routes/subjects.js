@@ -29,6 +29,9 @@ router.get('/subjects/Init/', ensureAuthenticated,function(req, res) {
     res.json({"errmsg":"this user is not authorize", "role":req.user.role, "authorize":false});
   }
 });
+
+
+
 router.post('/subjects/Create/',ensureAuthenticated, function(req,res)
 {
   if(req.user.role=="admin"){

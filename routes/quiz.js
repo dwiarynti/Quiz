@@ -41,7 +41,7 @@ function shuffle(array) {
 
 router.get('/quiz/questions/:subject_id',ensureAuthenticated,function(req, res) {
  var subject_id= ObjectId(req.params.subject_id);
-	Questioncollection.find({"isActive":true, "Subject_id":subject_id}, function(err, quiz){
+	Questioncollection.find({"isActive":true, "Subject_id":subject_id, $where: "this.Choices.length > 0"}, function(err, quiz){
 		if (err) res.json(500, err);
 		else 
     console.log(req.user);
