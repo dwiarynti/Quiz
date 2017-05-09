@@ -27,14 +27,18 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
             }
             else
             {
+                angular.forEach(data.Obj,function(item) {
+                    item.editmode = false;            
+                });
                  $scope.choices = data.Obj;
+                
 
                 var getCorrectAnswer = $filter('filter')($scope.choices, function (choiceobj) { return choiceobj.isCorrectAnswer === true })[0];
 
                 $scope.enableCorrectAnswerChoices = getCorrectAnswer != null ? false:true;
 
-                console.log(getCorrectAnswer);
-                console.log($scope.enableCorrectAnswerChoices);
+                // console.log(getCorrectAnswer);
+                // console.log($scope.enableCorrectAnswerChoices);
             }
                 }
             });
@@ -50,19 +54,29 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
     $scope.choicesObj = {'ChoicesName':"", 'isCorrectAnswer':false, 'isActive':true, 'Questions_id':$scope.question_id};
 
     $scope.btnAddClick = function(id){
-        $scope.choicesObj = {'ChoicesName':"", 'isCorrectAnswer':false, 'isActive':true, 'Questions_id':$scope.question_id};
+        $scope.choices.push({
+            '_id':0,
+            'ChoicesName':"", 
+            'isCorrectAnswer':false, 
+            'isActive':true, 
+            'editmode' : false,     
+            'Questions_id':$scope.question_id});
               
-        $("#modal-add").modal('show');
+        // $("#modal-add").modal('show');
     }
 
-    $scope.insert = function(){
-        $scope.choicesObj.isCorrectAnswer = $scope.choicesObj.isCorrectAnswer == 1?true:false;
+    $scope.turnoffaddmode = function(index){
+        $scope.choices.splice(index,1);
+    }
+
+    $scope.insert = function(obj){
+        // $scope.choicesObj.isCorrectAnswer = $scope.choicesObj.isCorrectAnswer == 1?true:false;
         var choicesresource = new choicesResource();
         
-        choicesresource.choicesObj = $scope.choicesObj;
+        choicesresource.choicesObj = obj;
         choicesresource.$add(function(data){
             if(data.success){
-                $("#modal-add").modal('hide');
+                // $("#modal-add").modal('hide');
                 $scope.init();
 
             }
@@ -72,20 +86,26 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
 
 
     $scope.updatedid = "";
-    $scope.btnUpdateClick = function(id){
-        $scope.choicesObj._id = id;
-        $("#modal-update").modal('show');
-        choicesresource.$getbyId({_id:id},function(data){
-            $scope.choicesObj.ChoicesName = data.Obj.ChoicesName;
-            $scope.choicesObj.isCorrectAnswer = data.Obj.isCorrectAnswer ? 1:0;
-        });
+    $scope.btnUpdateClick = function(obj){
+        obj.editmode = true;
+        // $scope.choicesObj._id = id;
+        // $("#modal-update").modal('show');
+        // choicesresource.$getbyId({_id:id},function(data){
+        //     $scope.choicesObj.ChoicesName = data.Obj.ChoicesName;
+        //     $scope.choicesObj.isCorrectAnswer = data.Obj.isCorrectAnswer ? 1:0;
+        // });
     }
-    $scope.UpdateClick = function()
+
+    $scope.turnoffeditmode = function(obj){
+        obj.editmode = false;    
+    }
+
+    $scope.UpdateClick = function(obj)
     {
-        $("#modal-update").modal('hide');
-        choicesresource._id = $scope.choicesObj._id;
-        choicesresource.ChoicesName = $scope.choicesObj.ChoicesName;
-        choicesresource.isCorrectAnswer = $scope.choicesObj.isCorrectAnswer == 1?true:false;;
+        // $("#modal-update").modal('hide');
+        choicesresource._id = obj._id;
+        choicesresource.ChoicesName = obj.ChoicesName;
+        choicesresource.isCorrectAnswer = obj.isCorrectAnswer;
         choicesresource.$update(function(data)
         {
             $scope.init();

@@ -54,6 +54,7 @@ router.post('/choices',ensureAuthenticated, function(req,res)
 {
     // var obj = {"Question":req.body.Question,"Subject_id":ObjectId(req.body.Subject_id),"Choices":[], "isActive":true} ;
     var obj = req.body.choicesObj;
+    obj._id = ObjectId();
     obj.Questions_id = ObjectId(obj.Questions_id);
     var returnQuestion = {};
     var _id ="";
