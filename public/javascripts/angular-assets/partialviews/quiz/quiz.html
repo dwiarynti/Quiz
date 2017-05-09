@@ -1,34 +1,64 @@
 <div ng-controller="quizcontroller"class="col-md-12">
-    <div class="container">
-    <br>
-    <br>
-    
-    <h4>Subject : {{subjectname}}</h4>
-    <div class="row">
-        <div class="col-md-12" >
-            <div class="panel panel-primary" >
-            <div class="panel-heading">
-                <h3 class="panel-title">{{randomQuestion.No}}). {{randomQuestion.Question}}</h3>
+
+    <section class="content">
+        <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">
+                {{subjectname}}
+              </h3>
             </div>
-            <div class="panel-body" >
+
+            <div class="box-body">
                 <div class="row">
-                    <div class="col-md-3" ng-repeat="choices in randomQuestion.Choices">
-                        <input  type="radio" name="optionsRadios_{{question._id}}" id="optionsRadios1" value="{{choices._id}}" ng-model="randomQuestion.Answer"> {{choices.ChoicesName}}                        
-                    </div>
+                     <div class="col-md-3">
+                          <div class="panel-default btn-flat" style="background:#f8f6ef">
+                              <div class="panel-heading">
+                                <h5 class="panel-title text-center">{{randomQuestion.No}} / {{TotalQuestion}}</h5>
+                              </div>
+
+                               <div class="panel-body text-center">                        
+                                    <strong>QUESTIONS</strong>
+                               </div>
+                          </div>
+                     </div>
+
+                       <div class="col-md-9">
+                           <div class="panel-default btn-flat" style="background:#f8f6ef">
+                                <div class="panel-body">  
+                                    <h1 class="panel-title text-left">{{randomQuestion.Question}} ?</h1>
+                                    <br>  
+                                    <br>                                      
+                                </div>
+                           </div>
+                      </div>
+                </div>
+
+                <br>
+                <div class="row">
+                     <div class="col-md-6" ng-repeat="choices in randomQuestion.Choices">
+                          <div class="panel-default btn-flat" style="background:#f8f6ef">
+                              <div class="panel-heading">
+                                <h3> <input  type="radio" name="optionsRadios_{{question._id}}" id="optionsRadios1" value="{{choices._id}}" ng-model="randomQuestion.Answer"> {{choices.ChoicesName}} </h3>
+                              </div>
+
+                               <div class="panel-body text-center">                        
+                                   
+                               </div>
+                          </div>
+                          <br>
+                     </div>
+
+                       
+                </div>
+
+                <div class="col-md-12 text-right" >
+                <button class="btn btn-primary btn-lg" ng-click="getsinglerandomquestion()" ng-disabled="!togglebutton">Next</button>
+                <button class="btn btn-primary btn-lg" ng-click="submit()" ng-disabled="togglebutton || Questions.length == 0">Submit</button>
                 </div>
             </div>
-            </div>
         </div>
-  </div>
-
- 
-    <div class="col-md-12 text-right" >
-        <button class="btn btn-primary btn-lg" ng-click="getsinglerandomquestion()" ng-disabled="!togglebutton">Next</button>
-        <button class="btn btn-primary btn-lg" ng-click="submit()" ng-disabled="togglebutton || Questions.length == 0">Submit</button>
-    </div>
-
-
-    <div class="modal modal-message fade" id="modal-score">
+    </section>
+<div class="modal modal-message fade" id="modal-score">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -50,5 +80,17 @@
             </div>
         </div>
     </div>
-
+    
 </div>
+<style>
+    .status .panel-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 72px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 45px;
+    padding-top: 20px;
+    letter-spacing: -0.8px;
+
+}
+</style>

@@ -11,6 +11,7 @@ app.controller('quizindexcontroller', function ($scope, $state,$filter, subjectR
         else
         {
             $scope.subjectobj = data.obj;
+           
         }
     });
 

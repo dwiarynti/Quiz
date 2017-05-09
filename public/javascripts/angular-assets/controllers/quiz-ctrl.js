@@ -12,6 +12,7 @@ $scope.submitquizobj = {"UserId":0, "Quiz":[], "Score":0, "SubjectName": $scope.
 $scope.No = 0;
 $scope.displayedquestion = [];
 $scope.togglebutton = true;
+$scope.TotalQuestion = 0;
 $scope.GetChoices = function(questionid)
     {
         quizresource.$getchoices({_id:questionid},function(data)
@@ -30,7 +31,7 @@ $scope.init = function (){
             angular.forEach(data.obj,function(item) {
                 $scope.Questions.push(item);
             });
-
+            $scope.TotalQuestion = $scope.Questions.length;
             var Choices = [];
 
             for(var i = 0; i < $scope.Questions.length; i++)

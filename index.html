@@ -18,7 +18,7 @@
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect.
     -->
-  <link rel="stylesheet" href="bower_components/AdminLTE/dist/css/skins/skin-black.min.css">
+  <link rel="stylesheet" href="bower_components/AdminLTE/dist/css/skins/skin-black-light.min.css">
 
 
     <link rel="stylesheet" type="text/css" href="/javascripts/angular-assets/styles/lib/bootstrap.min.css">
@@ -38,7 +38,7 @@
     
 </head>
 
-<body class="hold-transition skin-black  sidebar-mini" ng-controller="mastercontroller">
+<body class="hold-transition skin-black-light  sidebar-mini" ng-controller="mastercontroller">
 
 <div class="wrapper"  ng-if="setting.isAuthenticated==true" >
     <!-- Header -->
@@ -109,6 +109,7 @@
         <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
              <a href="#subject-index"><i class="fa fa-book"></i> <span>Subject</span></a>
         </li>
+      
          <li ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
             <a href="#/quizindex"><i class="fa fa-edit"></i> <span>Quiz</span></a>
          </li>
@@ -158,7 +159,7 @@
 </div>
 
 
-<div ng-if="setting.isAuthenticated== false">
+<div ng-if="setting.isAuthenticated== false || setting.isAuthenticated == null">
  <section class="content" ui-view>   
  </section>
 </div>
