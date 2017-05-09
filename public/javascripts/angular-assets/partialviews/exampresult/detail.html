@@ -1,5 +1,57 @@
 <div ng-controller="exampresultDetailcontroller">
-  <div class="container">
+
+      <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                  <div class="box-header with-border">
+                    <!--<div class="box-title">-->
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <h4>Username  :   {{ListObj.Username}}</h4>
+                      </div>
+                      <div class="col-xs-3">
+                        <h4>Subject  :   {{ListObj.SubjectName}}</h4>
+                      </div>
+                      <div class="col-xs-3">
+                        <h4>Score  :   {{ListObj.Score}}</h4>
+                      </div>
+                       <div class="col-xs-3">
+                        <h4>Date  :   {{ListObj.Date | date:'dd-MMM-yyyy'}}</h4>
+                      </div>
+                    </div>
+                    <!--</div>-->
+
+
+
+                    <!--<h3 class="box-title">
+                      <h4>Username  :   {{ListObj.Username}}</h4>
+                      <h4>Subject  :   {{ListObj.SubjectName}}</h4>
+                      <h4>Score  :   {{ListObj.Score}}</h4>
+                      <h4>Date  :   {{ListObj.Date | date:'dd-MMM-yyyy'}}</h4>
+                    </h3>-->
+
+                  </div>
+                  <div class="box-body">
+                    <div class="panel"  ng-repeat="obj in ListObj.Quiz" ng-class=" obj.Answer == obj.CorrectAnswer ? 'panel-success' :'panel-danger'">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">
+                          {{obj.No}}). {{obj.Question}}
+                        </h3>
+                    </div>
+                    <div class="panel-body" >
+                        <label>Answer : {{obj.Answer}}   </label>
+                        <label ng-if="obj.Answer != obj.CorrectAnswer">Correct Answer : {{obj.CorrectAnswer}}   </label>
+
+                    </div>
+                  </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </section>
+
+  <!--<div class="container">
     <br>
     <br>
     <h4>Username  :   {{ListObj.Username}}</h4>
@@ -20,7 +72,7 @@
       </div>
     </div>
 
-  </div>
+  </div>-->
       
 
 </div>
