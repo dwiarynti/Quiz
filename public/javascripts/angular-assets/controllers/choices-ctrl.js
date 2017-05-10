@@ -1,4 +1,4 @@
-app.controller('choicescontroller', function ($scope, $state, $filter, choicesResource, passingdataservice) {
+app.controller('choicescontroller', function ($scope, $rootScope, $state, $filter, choicesResource, passingdataservice) {
 
     var choicesresource = new choicesResource();
     $scope.choices =[];
@@ -7,13 +7,13 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
     $scope.subject_id =passingdataservice.addObj.Subject_id;
     $scope.subjectName =passingdataservice.addObj.subjectName;
     $scope.enableCorrectAnswerChoices = true;
+    // $scope.openchoices = false;
+
 
     $scope.init = function(){
-        console.log(passingdataservice.addObj)
        if($scope.question_id != null)
        {
             choicesresource.$init({_id:$scope.question_id}, function(data){
-                console.log(data);
                 if(!data.authorize)
                 {
                 $state.go('login');
@@ -50,7 +50,18 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
            $state.go('question-index');
        }
     }
-    
+    $scope.$watch(function () {
+        return passingdataservice.addObj;
+    }, function () {
+        console.log(passingdataservice.addObj);
+        // $scope.openchoices = passingdataservice.addObj.openchoices;                
+        $scope.question_id =passingdataservice.addObj._id;
+        $scope.question =passingdataservice.addObj.question;
+        $scope.subject_id =passingdataservice.addObj.Subject_id;
+        $scope.subjectName =passingdataservice.addObj.subjectName;
+        $scope.init();
+        
+    });
     $scope.init();
 
     $scope.choicesObj = {'ChoicesName':"", 'isCorrectAnswer':false, 'isActive':true, 'Questions_id':$scope.question_id};
@@ -116,12 +127,12 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
     }
     
     $scope.btnDeleteClick = function(_id){
-        $("#modal-delete").modal('show');
+        $("#modal-deletechoice").modal('show');
         $scope.choicesObj._id=_id;
     }    
 
     $scope.deleteClick = function(){
-        $("#modal-delete").modal('hide');
+        $("#modal-deletechoice").modal('hide');
         
         choicesresource._id = $scope.choicesObj._id;
         choicesresource.Questions_id = $scope.choicesObj.Questions_id;
@@ -138,5 +149,9 @@ app.controller('choicescontroller', function ($scope, $state, $filter, choicesRe
         passingdataservice.addObj = {"_id":$scope.subject_id,"subjectName":$scope.subjectName};
 
         $state.go('question-index');
+    }
+
+    $scope.closechoicespage = function(){
+        $rootScope.openchoices = false;
     }
 });

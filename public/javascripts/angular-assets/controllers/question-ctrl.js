@@ -1,9 +1,10 @@
-app.controller('questioncontroller', function ($scope, $state, questionResource, passingdataservice) {
+app.controller('questioncontroller', function ($scope, $rootScope, $state, questionResource, passingdataservice) {
     $scope.subject_id = {};
     var questionresource = new questionResource();
     $scope.questions =[];
     $scope.subject_id =passingdataservice.addObj._id;
     $scope.subjectName =passingdataservice.addObj.subjectName;
+    $rootScope.openchoices = false;
 
     $scope.init = function(){
         if($scope.subject_id != null)
@@ -131,8 +132,10 @@ app.controller('questioncontroller', function ($scope, $state, questionResource,
     }
 
     $scope.btnQuestionsClick =function(_id, question){
-        passingdataservice.addObj = {"_id":_id, "question":question, "Subject_id":$scope.subject_id, "subjectName":$scope.subjectName};
-        $state.go('choices-index');
+        $rootScope.openchoices = true;
+        passingdataservice.addObj = {"_id":_id, "question":question, "Subject_id":$scope.subject_id, "subjectName":$scope.subjectName, "openchoices":true};
+        
+        // $state.go('choices-index');
     }
 
     $scope.btnBackClick =function(){

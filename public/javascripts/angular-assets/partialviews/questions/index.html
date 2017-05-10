@@ -1,142 +1,181 @@
-<div ng-controller="questioncontroller">
-
-    <section class="content">
-        <div class="row">
-            <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header with-border">
-                <!--<h3 class="box-title">
-                    <h4>Subject  :   {{subjectName}}</h4>
-                </h3>-->
-                <h3 class="box-title">Subject  :   {{subjectName}}</h3>
-                </div>
-                <div class="box-body">
-                    <button ng-click="btnAddClick()" type="button" class="btn btn-flat" data-widget=""><i class="glyphicon glyphicon-plus"></i> Add Question</button>
-                    <br><br>
-                <div class="table-responsive">
-                <table id="data-table" datatable="ng" dt-options="dtOptions" width="100%" class="table table-striped table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th style="width: 11%;">Question</th>
-                        <th style="width: 11%;">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="odd gradeX" ng-repeat="question in questions">
-                        <td ng-if="question._id != 0 && question.editmode == false">{{question.Question}}</td>
-                        <td ng-if="question._id == 0 && question.editmode == false || question._id != 0 && question.editmode == true">
-                            <input type="text" placeholder="Question" class="form-control col-md-6" ng-model="question.Question">
-                            <div ng-if="question.editmode == false" class="col-md-12" style="padding:1%" ng-repeat="choiceobj in question.choicesobj">
-                                <div class="form-group col-md-6">
-                                    <input type="text" placeholder="Choice Name" class="form-control" ng-model="choiceobj.ChoicesName"/>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Is Correct Answer :</label>
-                                    <input type="radio" name="choicestype_{{choiceobj._id}}" ng-model="choiceobj.isCorrectAnswer" data-ng-value="true" /> True
-                                    <input type="radio" name="choicestype_{{choiceobj._id}}" ng-model="choiceobj.isCorrectAnswer" data-ng-value="false"/> False
-                                </div>
+<div class="row">
+<div class="col-md-12">
+        <!--question section-->
+        <div ng-controller="questioncontroller">
+            <section ng-class="openchoices == true ? 'content col-xs-6' : 'content col-xs-12'">
+                <!--<div class="row">-->
+                    <div>
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Subject  :   {{subjectName}}</h3>
                             </div>
-                        </td>
-                        
-                        <td ng-if="question._id != 0">
-                            <!--viewmode-->
-                            <button ng-if="question.editmode == false" class="btn btn-default" ng-click="btnUpdateClick(question)">Edit</button>
-                            <button ng-if="question.editmode == false" class="btn btn-default" ng-click="btnDeleteClick(question._id)">Delete</button>
-                            <button ng-if="question.editmode == false" class="btn btn-default" ng-click="btnQuestionsClick(question._id, question.Question)">Choices ({{question.Choices.length}})</button>
-                            <!--editmode-->
-                            <button ng-if="question.editmode == true" type="button" class="btn btn-default btn-width" ng-click="UpdateClick(question)">Save</button>
-                            <button ng-if="question.editmode == true" type="button" class="btn btn-default btn-width" ng-click="turnoffeditmode(question)">Cancel</button>
-                        </td>
-                        <!--addmode-->
-                        <td ng-if="question._id == 0">
-                            <button class="btn btn-default" ng-click="addchoices(question)">Add Choice</button> 
-                            <button class="btn btn-default" ng-click="insert(question)">Save</button>
-                            <button class="btn btn-default" ng-click="turnoffaddmode($index)">Cancel</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>  
-        </div>
-        <button class="btn btn-danger" ng-click="btnBackClick()">Back to Subject Page</button>
-        </div>
-        </div>
-        </div>
-        </div>
-        </section>
-    
-
-    <div class="modal modal-message fade" id="modal-add">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <a href="javascript:;" class="close" data-dismiss="modal">x</a>
-                        <h4 class="modal-title">Add Question</h4>
+                            <div class="box-body">
+                                <button ng-click="btnAddClick()" type="button" class="btn btn-flat" data-widget=""><i class="glyphicon glyphicon-plus"></i> Add Question</button>
+                                <br><br>
+                                <div class="table-responsive">
+                                    <table id="data-table" datatable="ng" dt-options="dtOptions" width="100%" class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 11%;">Question</th>
+                                                <th style="width: 11%;">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="odd gradeX" ng-repeat="question in questions">
+                                                <td ng-if="question._id != 0 && question.editmode == false">{{question.Question}}</td>
+                                                <td ng-if="question._id == 0 && question.editmode == false || question._id != 0 && question.editmode == true">
+                                                    <input type="text" placeholder="Question" class="form-control col-md-6" ng-model="question.Question">
+                                                    <div ng-if="question.editmode == false" class="col-md-12" style="padding:1%" ng-repeat="choiceobj in question.choicesobj">
+                                                        <div class="form-group col-md-6">
+                                                            <input type="text" placeholder="Choice Name" class="form-control" ng-model="choiceobj.ChoicesName"/>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label>Is Correct Answer :</label>
+                                                            <input type="radio" name="choicestype_{{choiceobj._id}}" ng-model="choiceobj.isCorrectAnswer" data-ng-value="true" /> True
+                                                            <input type="radio" name="choicestype_{{choiceobj._id}}" ng-model="choiceobj.isCorrectAnswer" data-ng-value="false"/> False
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                
+                                                <td ng-if="question._id != 0">
+                                                    <!--viewmode-->
+                                                    <button ng-if="question.editmode == false" class="btn btn-default" ng-click="btnUpdateClick(question)">Edit</button>
+                                                    <button ng-if="question.editmode == false" class="btn btn-default" ng-click="btnDeleteClick(question._id)">Delete</button>
+                                                    <button ng-if="question.editmode == false" class="btn btn-default" ng-click="btnQuestionsClick(question._id, question.Question)">Choices ({{question.Choices.length}})</button>
+                                                    <!--editmode-->
+                                                    <button ng-if="question.editmode == true" type="button" class="btn btn-default btn-width" ng-click="UpdateClick(question)">Save</button>
+                                                    <button ng-if="question.editmode == true" type="button" class="btn btn-default btn-width" ng-click="turnoffeditmode(question)">Cancel</button>
+                                                </td>
+                                                <!--addmode-->
+                                                <td ng-if="question._id == 0">
+                                                    <button class="btn btn-default" ng-click="addchoices(question)">Add Choice</button> 
+                                                    <button class="btn btn-default" ng-click="insert(question)">Save</button>
+                                                    <button class="btn btn-default" ng-click="turnoffaddmode($index)">Cancel</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>  
+                                </div>
+                                <button class="btn btn-danger" ng-click="btnBackClick()">Back to Subject Page</button>
+                            </div>
+                         </div>
                     </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Question</label>
-                            <input type="text" class="form-control col-md-6" ng-model="QuestionObj.question">
+                <!--</div>-->
+                </section>
+            <div class="modal modal-message fade" id="modal-delete">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <a href="javascript:;" class="close" data-dismiss="modal">x</a>
+                            <h4 class="modal-title">Delete Question</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                            <p>Are you sure you want to delete this question?</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
+                            <button type="button" class="btn btn-default btn-width" ng-click="deleteClick()">
+                                <span>Ok</span>
+                            </button>
+                        
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
-                        <button type="button" class="btn btn-default btn-width" ng-click="insert()">
-                            <span>Add</span>
-                        </button>
-                    
-                    </div>
-                </div>
-            </div>
-    </div>
-    <div class="modal modal-message fade" id="modal-update">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <a href="javascript:;" class="close" data-dismiss="modal">x</a>
-                    <h4 class="modal-title">Update Subject</h4>
-                </div>
-                <div class="modal-body">
-                       <div class="form-group">
-                        <label>Subject Name</label>
-                        <input type="text" class="form-control col-md-6" ng-model="QuestionObj.question">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
-                    <button type="button" class="btn btn-default btn-width" ng-click="UpdateClick()">
-                        <span>Update</span>
-                    </button>
-                  
                 </div>
             </div>
         </div>
-    </div>
+        <!--end of question section-->
 
-    <div class="modal modal-message fade" id="modal-delete">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <a href="javascript:;" class="close" data-dismiss="modal">x</a>
-                    <h4 class="modal-title">delete Subject</h4>
-                </div>
-                <div class="modal-body">
-                       <div class="form-group">
-                       <p>Are you sure you want to delete this question?</p>
+        <!--choices section-->
+        <div ng-controller="choicescontroller">
+            <section class="content col-xs-6" ng-if="openchoices == true">
+                <!--<div class="row">-->
+                    <div >
+                        <div class="box">
+                            <div class="box-header with-border ">
+                                <a href="javascript:;" class="close">
+                                    <button ng-click="closechoicespage()"  type="button" class="btn btn-danger btn-circle text-right" data-widget=""><i class="glyphicon glyphicon-remove"></i></button>                                
+                                </a>
+                                <h3 class="box-title">Question  :  {{question}}</h3>
+
+                            </div>
+                                <div class="box-body">
+                                    <button ng-click="btnAddClick()" type="button" class="btn btn-flat" data-widget=""><i class="glyphicon glyphicon-plus"></i> Add Choices</button>
+                                    <br><br>
+                                    <table class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Choices Name</th>
+                                                    <th>Is Correct Answer</th>
+                                                    <th>Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="choice in choices">
+                                                    <td ng-if="choice.editmode == false && choice.temp_id==false">{{choice.ChoicesName}}</td>
+                                                    <td ng-if="choice.temp_id == true && choice.editmode == false || choice.temp_id == false && choice.editmode == true">
+                                                        <input type="text" placeholder="Choices" class="form-control col-md-6" ng-model="choice.ChoicesName">
+                                                    </td>
+
+                                                    <td ng-if="choice.editmode == false && choice.temp_id==false">{{choice.isCorrectAnswer}}</td>
+                                                    <td ng-if="choice.temp_id == true && choice.editmode == false || choice.temp_id == false && choice.editmode == true">
+                                                        <input type="radio" name="choicestype_{{choice._id}}" ng-model="choice.isCorrectAnswer" data-ng-value="true" /> True
+                                                        <input type="radio" name="choicestype_{{choice._id}}" ng-model="choice.isCorrectAnswer" data-ng-value="false"/> False
+                                                    </td>
+                                                    <td ng-if="choice.temp_id == false">
+                                                        <!--viewmode-->
+                                                        <button ng-if="choice.editmode == false" class="btn btn-default" ng-click="btnUpdateClick(choice)">Edit</button>
+                                                        <button ng-if="choice.editmode == false" class="btn btn-default" ng-click="btnDeleteClick(choice._id)">Delete</button>
+
+                                                        <!--editmode-->
+                                                        <button ng-if="choice.editmode == true" type="button" class="btn btn-default btn-width" ng-click="UpdateClick(choice)">Save</button>
+                                                        <button ng-if="choice.editmode == true" type="button" class="btn btn-default btn-width" ng-click="turnoffeditmode(choice)">Cancel</button>
+                                                    </td>
+                                                    <!--addmode-->
+                                                    <td ng-if="choice.temp_id == true">
+                                                        <button class="btn btn-default" ng-click="insert(choice)">Save</button>
+                                                        <button class="btn btn-default" ng-click="turnoffaddmode($index)">Cancel</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                    <!--</div>-->
+            </section>
+                <div class="modal modal-message fade" id="modal-deletechoice">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <a href="javascript:;" class="close" data-dismiss="modal">x</a>
+                                <h4 class="modal-title">Delete Choices</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                <p>Are you sure you want to delete this choices?</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
+                                <button type="button" class="btn btn-default btn-width" ng-click="deleteClick()">
+                                    <span>Ok</span>
+                                </button>
+                            
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
-                    <button type="button" class="btn btn-default btn-width" ng-click="deleteClick()">
-                        <span>Ok</span>
-                    </button>
-                  
-                </div>
-            </div>
         </div>
-    </div>
+        <!--end of choices section-->
 
-
-    </div>
-    
 
 </div>
+</div>
+
+
+
+<!--<div >-->
+    
+                    <!--</div>-->
