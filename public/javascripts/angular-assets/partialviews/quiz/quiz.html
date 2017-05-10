@@ -9,59 +9,43 @@
             </div>
 
             <div class="box-body">
+           <div class="questionsBox">
+           <div class="questions">
+             {{randomQuestion.No}}).  {{randomQuestion.Question}} 
+           </div>
+           <ul class="answerList list-group" ng-repeat="choices in randomQuestion.Choices">
+                <li  class="list-group-item">
+                    <label>
+                        <input  type="radio" name="optionsRadios_{{question._id}}" id="optionsRadios1" value="{{choices._id}}" ng-model="randomQuestion.Answer"> {{choices.ChoicesName}}
+                    </label>
+                </li>
+           </ul>
+           <div class="questionsRow">
                 <div class="row">
                      <div class="col-md-3">
-                          <div class="panel-default btn-flat" style="background:#f8f6ef">
-                              <div class="panel-heading">
-                                <h5 class="panel-title text-center">{{randomQuestion.No}} / {{TotalQuestion}}</h5>
-                              </div>
-
-                               <div class="panel-body text-center">                        
-                                    <strong>QUESTIONS</strong>
-                               </div>
-                          </div>
+                        <button class="btn btn-primary btn-flat">
+                            {{randomQuestion.No}} of {{TotalQuestion}}
+                        </button>
                      </div>
 
-                       <div class="col-md-9">
-                           <div class="panel-default btn-flat" style="background:#f8f6ef">
-                                <div class="panel-heading">
-                                <h4> {{randomQuestion.Question}} ?</h4>
-                                <br>
-                                
-                                </div>
-
-                           </div>
-                      </div>
+                     <div class="col0md-9 text-right">
+                        <button class="btn btn-primary btn-lg" ng-click="getsinglerandomquestion()" ng-disabled="!togglebutton">Next</button>
+                        <button class="btn btn-primary btn-lg" ng-click="submit()" ng-disabled="togglebutton || Questions.length == 0">Submit</button>
+                     </div>
                 </div>
-
-                <br>
-                <div class="row">
-                     <div class="col-md-6" ng-repeat="choices in randomQuestion.Choices">
-                          <div class="panel-default btn-flat" style="background:#f8f6ef">
-                              <div class="panel-heading">
-                                <h3> <input  type="radio" name="optionsRadios_{{question._id}}" id="optionsRadios1" value="{{choices._id}}" ng-model="randomQuestion.Answer"> {{choices.ChoicesName}} </h3>
-                              </div>
-
-                               <div class="panel-body text-center">                        
-                                   
-                               </div>
-                          </div>
-                          <br>
-                     </div>     
-                </div>
-
-                <div class="col-md-12 text-right" >
-                <button class="btn btn-primary btn-lg" ng-click="getsinglerandomquestion()" ng-disabled="!togglebutton">Next</button>
-                <button class="btn btn-primary btn-lg" ng-click="submit()" ng-disabled="togglebutton || Questions.length == 0">Submit</button>
-                </div>
+               
+           </div>
             </div>
         </div>
+
+
+       
     </section>
-<div class="modal modal-message fade" id="modal-score">
+    <div class="modal modal-message fade" id="modal-score">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <a href="javascript:;" class="close" data-dismiss="modal">x</a>
+          
                     <h4 class="modal-title">Result</h4>
                 </div>
                 <div class="modal-body">
@@ -69,13 +53,13 @@
                        <h3 class="text-center"> SCORE : {{submitquizobj.Score}}</h3>
                     </div>
                 </div>
-                <!--<div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
-                    <button type="button" class="btn btn-default btn-width" ng-click="deleteClick()">
-                        <span>Ok</span>
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-default btn-width" ng-click="CloseResult()">
+                        <span>OK</span>
                     </button>
                   
-                </div>-->
+                </div>
             </div>
         </div>
     </div>
@@ -91,5 +75,33 @@
     padding-top: 20px;
     letter-spacing: -0.8px;
 
+    }
+    .questionsBox {
+    display: block;
+    border: solid 1px #e3e3e3;
+    padding: 10px 20px 0px;
+    box-shadow: inset 0 0 30px rgba(000,000,000,0.1), inset 0 0 4px rgba(255,255,255,1);
+    border-radius: 3px;
+    margin: 0 10px;
 }
+
+.questions {
+    background: #007fbe;
+    color: #FFF;
+    font-size: 22px;
+    padding: 8px 30px;
+    font-weight: 300;
+    margin: 0 -30px 10px;
+    position: relative;
+}
+.answerList {
+    margin-bottom: 15px;
+}
+.questionsRow {
+    background: #dee3e6;
+    margin: 0 -20px;
+    padding: 10px 20px;
+    border-radius: 0 0 3px 3px;
+}
+
 </style>

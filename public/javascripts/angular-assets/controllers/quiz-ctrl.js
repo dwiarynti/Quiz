@@ -141,5 +141,10 @@ $scope.init = function (){
         
         return result;
     }
+    $scope.CloseResult = function()
+    {
+         $("#modal-score").modal('hide');
+         $state.go("exampresult-index");
+    }
 
 });
