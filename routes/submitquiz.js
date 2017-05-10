@@ -31,7 +31,25 @@ router.post('/submit/init',function(req, res) {
       data.sort(function(a,b){
         return new Date(b.Date) - new Date(a.Date);
       });
-      res.json({"obj": data, "authorize":true});      
+      // res.json({"obj": data, "authorize":true}); 
+      var submitedquizobj = [];
+      for(var i = 0; i < data.length; i++){
+        var obj = data[i];
+            userCollection.findOne({_id:ObjectId(obj.UserId)},function(err,user)
+            {
+                obj.Username = user.username;
+                submitedquizobj.push(obj);
+                if(submitedquizobj.length == data.length){
+                  res.json({"obj": submitedquizobj, "authorize":true}); 
+                }
+            });
+
+      }
+
+
+
+
+
     };
 	});
 });

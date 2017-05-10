@@ -15,24 +15,24 @@ app.controller('exampresultIndexcontroller', function ($scope,$state, $filter, $
             $state.go('login');
         }else{
             $scope.initobj = data.obj;
-            angular.forEach($scope.initobj, function (item) {
-                item.Username = "";
-                if($rootScope.setting.role == "user"){
-                    item.Username = $rootScope.setting.username
-                }else{
-                    userresource.$getusernamebyuserid({_id:item.UserId},function(data){
-                        // $scope.user.push({"_id":data.user_id, "username":data.username});
-                        item.Username=data.username;
+            // angular.forEach($scope.initobj, function (item) {
+            //     item.Username = "";
+            //     if($rootScope.setting.role == "user"){
+            //         item.Username = $rootScope.setting.username
+            //     }else{
+            //         userresource.$getusernamebyuserid({_id:item.UserId},function(data){
+            //             // $scope.user.push({"_id":data.user_id, "username":data.username});
+            //             item.Username=data.username;
 
-                        // angular.forEach($scope.initobj, function (item) {
+            //             // angular.forEach($scope.initobj, function (item) {
 
-                        // });
+            //             // });
 
 
 
-                    });
-                }
-            });
+            //         });
+            //     }
+            // });
                   
         }
     });
