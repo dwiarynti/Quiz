@@ -110,9 +110,12 @@ $scope.init = function (){
             if(getlistcorrectanswer.length > 1){
                 getcorrectanswer = $filter('filter')(getlistcorrectanswer, function (obj) { return obj._id === question.Answer })[0];
                 score = question.Answer == getcorrectanswer._id ?  score + 1 : score;                
-            }else{
+            }else if(getlistcorrectanswer.length == 1){
                 getcorrectanswer = getlistcorrectanswer[0];
                 score = question.Answer == getcorrectanswer._id ?  score + 1 : score;
+            }
+            else{
+                score = score;
             }
             console.log(getcorrectanswer);
             
