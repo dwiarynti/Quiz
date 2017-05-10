@@ -52,9 +52,10 @@ router.post('/users/create/', function(req,res)
         if (err) {
             return res.json({success:false, "errormsg":err.message})
         }
-        passport.authenticate('local')(req, res, function () {
+        else
+        {
             res.json({success:true});
-        });
+        }
     });
 });
 
