@@ -109,7 +109,12 @@ $scope.init = function (){
             var getcorrectanswer = {};
             if(getlistcorrectanswer.length > 1){
                 getcorrectanswer = $filter('filter')(getlistcorrectanswer, function (obj) { return obj._id === question.Answer })[0];
-                score = question.Answer == getcorrectanswer._id ?  score + 1 : score;                
+                if(getcorrectanswer != null){
+                    score = question.Answer == getcorrectanswer._id ?  score + 1 : score;
+                }else{
+                    score = score;
+                }
+                                
             }else if(getlistcorrectanswer.length == 1){
                 getcorrectanswer = getlistcorrectanswer[0];
                 score = question.Answer == getcorrectanswer._id ?  score + 1 : score;
@@ -123,7 +128,7 @@ $scope.init = function (){
             $scope.submitquizobj.Quiz.push({
                 "Question":question.Question,
                 "Answer": getAnswer == undefined ? "":getAnswer.ChoicesName,
-                "CorrectAnswer": getcorrectanswer.ChoicesName
+                "CorrectAnswer": getcorrectanswer != null ? getcorrectanswer.ChoicesName : ""
             });
         });
 
