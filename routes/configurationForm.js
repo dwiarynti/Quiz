@@ -9,7 +9,7 @@ var ObjectId = require('mongodb').ObjectID;
 
 
 router.get('/configurationform/',function(req, res) {
-	ConfigurationFromcollection.find({}, function(err, obj){
+	ConfigurationFromcollection.findOne({}, function(err, obj){
 		if(err) {res.json(500, err);}
 		else
         { 
