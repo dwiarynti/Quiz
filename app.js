@@ -17,6 +17,7 @@ var questions = require('./routes/questions');
 var quiz = require('./routes/quiz');
 var choices = require('./routes/choices');
 var submitquiz = require('./routes/submitquiz');
+var configurationForm = require('./routes/configurationForm');
 var app = express();
 
 
@@ -46,6 +47,7 @@ app.use('/api',questions);
 app.use('/api',quiz);
 app.use('/api',choices);
 app.use('/api',submitquiz);
+app.use('/api',configurationForm);
 app.get('/', function(req, res){
   res.sendfile('index.html',{user : req.user});
 });
@@ -73,8 +75,8 @@ passport.deserializeUser(Account.deserializeUser());
 //conncet to database
 
 // mongoose.connect('mongodb://61.94.163.236:27017/Quiz_db');
-// mongoose.connect('mongodb://192.168.1.99:27017/Quiz_db');
-mongoose.connect('mongodb://escuser:esc123@ds133331.mlab.com:33331/quiz_db');
+mongoose.connect('mongodb://192.168.1.99:27017/Quiz_db');
+// mongoose.connect('mongodb://escuser:esc123@ds133331.mlab.com:33331/quiz_db');
 
 // mongoose.connect('mongodb://localhost:27017/Quiz_db');
 

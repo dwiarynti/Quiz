@@ -1,0 +1,16 @@
+(function () {
+    "use strict";
+    angular
+        .module("common.services")
+        .factory("configurationformResource",
+                ["$resource",
+                 configurationformResource]);
+    function configurationformResource($resource) {
+        return $resource("/api/configurationform/:action/:_id",
+               { id: '@id' },
+               {
+                   init: { method: 'GET' },
+
+               })
+    }
+}());
