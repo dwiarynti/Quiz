@@ -7,11 +7,9 @@ app.controller('profilecontroller', function ($scope, $rootScope, $state, $filte
     $scope.userFields = [];
     $scope.initform = function(){
         profileresource.$initform({}, function(data){
-            console.log(data.Obj);
             angular.forEach(data.Obj,function(item) {
                 $scope.userFields.push({"key":item.key, "type": item.type, "templateOptions":item.templateOptions});
-            })
-            // $scope.userFields = data.Obj;
+            });
         });
     }
     $scope.initform();
