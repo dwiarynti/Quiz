@@ -1,21 +1,41 @@
-﻿app.controller('mastercontroller', function ($scope, $rootScope, userResource ,$state) {
-
-    userresource = new userResource();
-    $rootScope.setting = {"username":"", "user_id":0, "isAuthenticated":false, "role":""};
+﻿app.controller('mastercontroller', function ($scope, $filter, $rootScope, userResource ,$state, widgetResource) {
+    $scope.widgetlist = [];
+    var userresource = new userResource();
+    var widgetresource = new widgetResource();    
+    $rootScope.setting = {"username":"", "user_id":0, "isAuthenticated":false, "role":"", "widgetlist":$scope.widgetlist};
+    
+    $scope.getwidgetlist = function (){
+        widgetresource.$init({}, function(data){
+            $scope.widgetlist = data.Obj;   
+            $rootScope.setting.widgetlist = $scope.widgetlist;
+        });
+    }
+    
     userresource.$isAuthenticate({}, function(data){
         if(data.authenticate){
            
             $rootScope.setting.isAuthenticated = data.authenticate;
             $rootScope.setting.username = data.username;
             $rootScope.setting.user_id = data.user_id;
-            $rootScope.setting.role = data.role;   
-             console.log($rootScope.setting);
+            $rootScope.setting.role = data.role;  
         }else{
             $state.go('login');
         }
-                     
-            
-        });
+    });
+
+    $scope.getwidgetlist();    
+
+    $scope.showWidget = function(widgetname){
+        var result = false;
+        if($rootScope.setting.isAuthenticated && $scope.widgetlist.length != 0){
+            result = $filter('filter')($scope.widgetlist,function(item){
+                return item.WidgetName === widgetname
+            })[0].IsActive;
+        }
+        return result;
+    }
+
+
     $scope.logoutClick = function()
     {
         userresource.$logout().then(function(data)

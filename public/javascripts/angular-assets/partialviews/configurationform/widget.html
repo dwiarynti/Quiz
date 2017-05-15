@@ -1,0 +1,40 @@
+<div ng-controller="widgetcontroller">
+        <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">
+                Widget Form
+              </h3>
+              
+            </div>
+             <div class="box-body">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Widget</th>
+                            <th>Is Active</th>
+                            <th>Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="obj in widgetlist">
+                            <td>{{obj.WidgetName}}</td>
+
+                            <td ng-if="!obj.editmode">{{obj.IsActive}}</td>
+                            <td ng-if="obj.editmode">
+                                <input type="radio" name="IsWidgetActive" ng-model="obj.IsActive" data-ng-value="true" /> True
+                                <input type="radio" name="IsWidgetActive" ng-model="obj.IsActive" data-ng-value="false"/> False
+                            </td>
+
+                            <td ng-if="!obj.editmode">
+                                <button class="btn btn-default" ng-click="btnUpdateClick(obj)">Edit</button>
+                            </td>
+                            <td ng-if="obj.editmode">
+                                <button class="btn btn-default" ng-click="UpdateClick(obj)">Save</button>
+                                <button class="btn btn-default" ng-click="turnoffeditmode(obj)">Cancel</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+             </div>
+        </div>
+</div>

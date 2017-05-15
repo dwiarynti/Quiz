@@ -38,6 +38,16 @@ app.controller('profilecontroller', function ($scope, $rootScope, $state, $filte
                 placeholder: 'Enter your first name',
                 required: true
             }
+    },
+        {
+          key: 'first_name1',
+            type: 'input',
+            templateOptions: {
+                type: 'text',
+                label: 'First Name',
+                placeholder: 'Enter your first name',
+                required: true
+            }
     }
   ];
 

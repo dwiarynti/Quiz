@@ -28,22 +28,24 @@ $scope.AddClick = function(obj)
   
    angular.forEach(obj, function(item)
    {
+       if(item._id == 0)
+       {
        data = {};
        data.formname = "Profile";
        data.key = item.key;
        data.type = item.type;
        data.templateOptions = item.templateOptions;
        listObj.push(data);
+       }
    });
     //console.log(listObj);
     configurationformresource.data = listObj;
-    console.log(configurationformresource.data);
-    configurationformresource.$add().then(function(data)
+    //console.log(configurationformresource.data);
+    configurationformresource.$add().then(function(item)
     {
-        if(data.success)
-        {
+        console.log("i",item);
         $scope.init();
-        }
+        
 
     });
   
