@@ -1,55 +1,22 @@
-app.controller('profilecontroller', function ($scope, $rootScope, $state, $filter, configurationformResource, userprofileResource) {
+app.controller('profilecontroller', function ($scope, $rootScope, $state, $filter, configurationformResource, userprofileResource, profileResource) {
     var configurationformresource = new configurationformResource();
     var userprofileresource = new userprofileResource();
+    var profileresource = new profileResource();
     $scope.userprofileobj = {};
     $scope.user = {};
-    $scope.userFields = [
-    // {
-    //   key: 'email',
-    //   type: 'input',
-    //   templateOptions: {
-    //     type: 'email',
-    //     label: 'Email address',
-    //     placeholder: 'Enter email'
-    //   }
-    // },
-    // {
-    //   key: 'password',
-    //   type: 'input',
-    //   templateOptions: {
-    //     type: 'password',
-    //     label: 'Password',
-    //     placeholder: 'Password'
-    //   }
-    // },
-    // {
-    //   key: 'checked',
-    //   type: 'checkbox',
-    //   templateOptions: {
-    //     label: 'Check me out'
-    //   }
-    // }
-    {
-          key: 'first_name',
-            type: 'input',
-            templateOptions: {
-                type: 'text',
-                label: 'First Name',
-                placeholder: 'Enter your first name',
-                required: true
-            }
-    },
-        {
-          key: 'first_name1',
-            type: 'input',
-            templateOptions: {
-                type: 'text',
-                label: 'First Name',
-                placeholder: 'Enter your first name',
-                required: true
-            }
+    $scope.userFields = [];
+    $scope.initform = function(){
+        profileresource.$initform({}, function(data){
+            console.log(data.Obj);
+            angular.forEach(data.Obj,function(item) {
+                $scope.userFields.push({"key":item.key, "type": item.type, "templateOptions":item.templateOptions});
+            })
+            // $scope.userFields = data.Obj;
+        });
     }
-  ];
+    $scope.initform();
+
+    
 
     // $scope.
 
