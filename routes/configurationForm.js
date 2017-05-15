@@ -25,7 +25,7 @@ router.post('/configurationform/create', function(req,res)
 		var obj = req.body.data[i];
 		ConfigurationFromcollection.insert(obj, function(err,data)
 		{
-		if(data.length == req.body.data.length)
+		if(i == req.body.data.length)
 		{
 			res.json({success:true})
 		}
@@ -33,14 +33,34 @@ router.post('/configurationform/create', function(req,res)
 	}
 });
 
+
 router.get('/configurationform/init', function(req,res)
 {
 		ConfigurationFromcollection.find({"formname":"Profile"}, function(err, obj){
 		if(err) {res.json(500, err);}
 		else
         { 
-          res.json({'Obj': obj,'success': true});
+          res.json({'Obj': obj, success: true});
         }
 	});
-})
+});
+router.post('/configurationform/Update/:_id', function(req,res)
+{
+	var id = ObjectId(req.params._id);
+	ConfigurationFromcollection.update({'_id':id},{
+	$set :{
+		'formname': req.body.data.formname,
+		'key': req.body.data.key,
+		'type': req.body.data.type,
+		'templateOptions.type' : req.body.data.type,
+		'templateOptions.label' : req.body.data.label,
+		'templateOptions.placeholder' : req.body.data.placeholder,
+
+	} ,function(err)
+	{
+	  if(err) res.json(500,err)
+      else res.json({success : true});
+	}
+	});
+});
 module.exports = router;
