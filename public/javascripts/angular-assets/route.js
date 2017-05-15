@@ -3,7 +3,8 @@
     "ui.router",
     "oc.lazyLoad",
     "common.services", 
-    "dndLists"]);
+    "dndLists",
+    "formly", "formlyBootstrap"]);
 
 app.config([
     '$stateProvider', '$urlRouterProvider',
@@ -78,9 +79,16 @@ app.config([
                     url: '/home',
                     templateUrl: '/javascripts/angular-assets/partialviews/home.html'
             })
+<<<<<<< HEAD
             .state('profile-setting', {
                     url: '/profile-setting',
                     templateUrl: '/javascripts/angular-assets/partialviews/profile/profile-setting.html'
+=======
+            //Fase 02
+            .state('profile-index', {
+                    url: '/profile-index',
+                    templateUrl: '/javascripts/angular-assets/partialviews/profile.html'
+>>>>>>> origin/master
             })
             ;
     }
