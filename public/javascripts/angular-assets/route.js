@@ -4,7 +4,9 @@
     "oc.lazyLoad",
     "common.services", 
     "dndLists",
-    "formly", "formlyBootstrap"]);
+    "formly",
+    "formlyBootstrap",
+    "ds.clock"]);
 
 app.config([
     '$stateProvider', '$urlRouterProvider',
@@ -83,6 +85,10 @@ app.config([
             .state('profile-index', {
                     url: '/profile-index',
                     templateUrl: '/javascripts/angular-assets/partialviews/profile.html'
+            })
+            .state('widget', {
+                    url: '/widget',
+                    templateUrl: '/javascripts/angular-assets/partialviews/configurationform/widget.html'
             })
             ;
     }

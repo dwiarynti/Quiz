@@ -22,6 +22,9 @@
 
 
     <link rel="stylesheet" type="text/css" href="/javascripts/angular-assets/styles/lib/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/javascripts/angular-assets/plugins/angular-ui-clock/dist/angular-clock.css">
+    <!--<link href="//fonts.googleapis.com/css?family=Syncopate:400,700" rel="stylesheet" type="text/css">-->
    
     <!--library-->
     <script src="/javascripts/angular-assets/plugins/api-check/dist/api-check.min.js"></script>
@@ -31,6 +34,7 @@
     <script src="/javascripts/angular-assets/plugins/angular/angular-resource.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/javascripts/angular-assets/plugins/angular-ui-clock/dist/angular-clock.js"></script>
 
 
     <script src="/javascripts/angular-assets/plugins/angular-formly/dist/formly.min.js"></script>
@@ -64,6 +68,7 @@
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
@@ -106,25 +111,30 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar Menu -->
-      <ul class="sidebar-menu">
-        <li class="header">HEADER</li>
+      <ul class="sidebar-menu" ng-if="setting.isAuthenticated == true">
+        <!--<li class="header">HEADER</li>-->
+        <li class="header" ng-if="showWidget('Clock')"><ds-widget-clock show-digital theme="blue-light" digital-format="'hh:mm:ss a'" ></ds-widget-clock></li>
         <!-- Optionally, you can add icons to the links -->
-         <li  ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
+         <li  ng-if="setting.role=='admin' || setting.role=='user'">
             <a href="#home"><i class="fa fa-home"></i> <span>Home</span></a>
         </li>
-        <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
+        <li ng-if="setting.role=='admin'">
              <a href="#user-index"><i class="fa fa-users"></i> <span>Users</span></a>
         </li>
-        <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
+        <li ng-if="setting.role=='admin'">
              <a href="#subject-index"><i class="fa fa-book"></i> <span>Subject</span></a>
         </li>
+        <li ng-if="setting.role=='admin'">
+             <a href="#widget"><i class="fa fa-users"></i> <span>Widget</span></a>
+        </li>
       
-         <li ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
+         <li ng-if="setting.role=='admin' || setting.role=='user'">
             <a href="#/quizindex"><i class="fa fa-edit"></i> <span>Quiz</span></a>
          </li>
-         <li ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
+         <li ng-if="setting.role=='admin' || setting.role=='user'">
             <a href="#/exampresult-index"><i class="fa  fa-list-alt"></i> <span>Examp Result</span></a>
          </li>
+         
 
       </ul>
       <!-- /.sidebar-menu -->
@@ -189,6 +199,7 @@
 <script src="/javascripts/angular-assets/services/submitquizResource.js"></script>
 <script src="/javascripts/angular-assets/services/configurationformsResource.js"></script>
 <script src="/javascripts/angular-assets/services/userprofileResource.js"></script>
+<script src="/javascripts/angular-assets/services/widgetResource.js"></script>
 
 
     <!--controller-->
@@ -203,6 +214,7 @@
 <script src="/javascripts/angular-assets/controllers/exampresultdetail-ctrl.js"></script>
 <script src="/javascripts/angular-assets/controllers/configurationform-ctrl.js"></script>
 <script src="/javascripts/angular-assets/controllers/profile-ctrl.js"></script>
+<script src="/javascripts/angular-assets/controllers/widget-crtl.js"></script>
 
 
 <!-- AdminLTE App -->
