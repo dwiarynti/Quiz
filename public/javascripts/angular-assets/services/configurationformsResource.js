@@ -9,8 +9,8 @@
         return $resource("/api/configurationform/:action/:_id",
                { id: '@id' },
                {
-                   init: { method: 'GET' },
-
+                   init: { method: 'GET' , params:{action:'init'} },
+                   add : {method: 'POST' , params:{action:'create'}}
                })
     }
 }());
