@@ -104,6 +104,18 @@
          <li  ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
             <a href="#home"><i class="fa fa-home"></i> <span>Home</span></a>
         </li>
+         <li class="treeview" ng-if="setting.isAuthenticated == true && setting.role=='admin'">
+          <a href="#"><i class="fa fa-gear"></i> <span>Configuration</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#profile-setting">Profile Form</a></li>
+          
+          </ul>
+        </li>
+     
         <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
              <a href="#user-index"><i class="fa fa-users"></i> <span>Users</span></a>
         </li>
@@ -180,6 +192,7 @@
 <script src="/javascripts/angular-assets/services/submitquizResource.js"></script>
 
 
+
     <!--controller-->
 <script src="/javascripts/angular-assets/controllers/Master.js"></script>
 <script src="/javascripts/angular-assets/controllers/subject-ctrl.js"></script>
@@ -190,6 +203,7 @@
 <script src="/javascripts/angular-assets/controllers/quizindex-crtl.js"></script>
 <script src="/javascripts/angular-assets/controllers/exampresultindex-ctrl.js"></script>
 <script src="/javascripts/angular-assets/controllers/exampresultdetail-ctrl.js"></script>
+<script src="/javascripts/angular-assets/controllers/profile-ctrl.js"></script>
 
 
 <!-- AdminLTE App -->

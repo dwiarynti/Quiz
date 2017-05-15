@@ -78,6 +78,10 @@ app.config([
                     url: '/home',
                     templateUrl: '/javascripts/angular-assets/partialviews/home.html'
             })
+            .state('profile-setting', {
+                    url: '/profile-setting',
+                    templateUrl: '/javascripts/angular-assets/partialviews/profile/profile-setting.html'
+            })
             ;
     }
 ]);
