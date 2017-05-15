@@ -56,7 +56,6 @@ app.get('/', function(req, res){
   res.sendfile('index.html',{user : req.user});
 });
 
-
 //passport config
 var Account = require('./models/account.js');
 passport.use(new LocalStrategy(Account.authenticate()));
