@@ -13,6 +13,7 @@
                <button ng-click="btnAddClick()" type="button" class="btn btn-flat" data-widget=""><i class="glyphicon glyphicon-plus"></i> Add Field</button>
                
                <br>
+               <br>
               <div class="table-responsive">
               <table class="table table-striped table-bordered">
               <thead>
@@ -22,27 +23,92 @@
                 <th>Label </th>
                 <th>Placeholder</th>
                 <th>Type</th>
+                <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                    <tr ng-repeat="profile in profilefield">
-                        <td ng-if="profile._id != 0">
+                        <td ng-if="profile._id != 0 && profile.editmode == false">
                            {{profile.key}}
-                        </td>
-                        <td ng-if="profile._id != 0">
+                        </td>  
+                        <td ng-if="profile._id != 0 && profile.editmode == false">
                            {{profile.type}}
                         </td>
-                        <td ng-if="profile._id != 0">
+                        <td ng-if="profile._id != 0 && profile.editmode == false">
                            {{profile.templateOptions.label}}
                         </td>
-                        <td ng-if="profile._id != 0">
+                        <td ng-if="profile._id != 0 && profile.editmode == false">
                            {{profile.templateOptions.placeholder}}
                         </td>
-                        <td ng-if="profile._id != 0">
+                        <td ng-if="profile._id != 0 && profile.editmode == false">
                            {{profile.templateOptions.type}}
                         </td>
 
+                        <td ng-if="profile._id == 0  && profile.editmode == false || profile._id != 0 && profile.editmode == true">
+                           <input type="text" placeholder="Key" class="form-control col-md-6" ng-model="profile.key">
+                        </td>
+                        <td ng-if="profile._id == 0  && profile.editmode == false || profile._id != 0 && profile.editmode == true">
+                          <select class="form-control" style="padding-left:0px; padding-right:0px; height: 26px;" ng-model="profile.type">
+                                <option value="">Please Select</option>
+                                <option value="input">
+                                      Input
+                                </option>
+                                <option value="textarea">
+                                      Textarea
+                                </option>
+                                <option value="select">
+                                      Select
+                                </option>
+                             </select>
+                        </td>
+                        <td ng-if="profile._id == 0  && profile.editmode == false || profile._id != 0 && profile.editmode == true">
+                            <input type="text" placeholder="Label" class="form-control col-md-6" ng-model="profile.templateOptions.label">
+                        </td>
+                        <td ng-if="profile._id == 0  && profile.editmode == false || profile._id != 0 && profile.editmode == true">
+                            <input type="text" placeholder="Placeholder" class="form-control col-md-6" ng-model="profile.templateOptions.placeholder">
+                        </td>
+                        <td ng-if="profile._id == 0  && profile.editmode == false || profile._id != 0 && profile.editmode == true">
+                          <select class="form-control" style="padding-left:0px; padding-right:0px; height: 26px;" ng-model="profile.templateOptions.type">
+                                <option value="">Please Select</option>
+                                <option value="text">
+                                      Text
+                                </option>
+                                <option value="email">
+                                      Email
+                                </option>
+                                <option value="date">
+                                      Date 
+                                </option>
+                                 <option value="password">
+                                      Password 
+                                </option> 
+                                <option value="file">
+                                      File 
+                                </option>
+                                 <option value="radio">
+                                      Radio 
+                                </option>
+                                <option value="checkbox">
+                                      Checkbox 
+                                </option> 
+                             </select>
+                        </td>
 
+
+
+
+
+
+                        <td ng-if="profile._id !=0">
+                         <button ng-if="profile.editmode == false" class="btn btn-default" ng-click="btnUpdateClick(profile)">Edit</button>
+                         <button ng-if="profile.editmode == false" class="btn btn-default" ng-click="btnDeleteClick(profile._id)">Delete</button>
+
+
+                        <button ng-if="profile.editmode == true" type="button" class="btn btn-default btn-width" ng-click="UpdateClick(profile)">Save</button>
+                        <button ng-if="profile.editmode == true" type="button" class="btn btn-default btn-width" ng-click="turnoffeditmode(profile)">Cancel</button>
+                        </td>
+
+                        
 
                         <td ng-if="profile._id == 0">
                             <input type="text" placeholder="Key" class="form-control col-md-6" ng-model="profile.key">
