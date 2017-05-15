@@ -81,10 +81,15 @@ app.config([
                     url: '/home',
                     templateUrl: '/javascripts/angular-assets/partialviews/home.html'
             })
-            //Fase 02
+
+            .state('profile-setting', {
+                    url: '/profile-setting',
+                    templateUrl: '/javascripts/angular-assets/partialviews/profile/profile-setting.html'
+            })
             .state('profile-index', {
                     url: '/profile-index',
                     templateUrl: '/javascripts/angular-assets/partialviews/profile.html'
+
             })
             .state('widget', {
                     url: '/widget',

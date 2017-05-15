@@ -79,4 +79,5 @@ app.controller('profilecontroller', function ($scope, $rootScope, $state, $filte
         $scope.submit = function(obj){
             console.log(obj);
         }
+
 });
