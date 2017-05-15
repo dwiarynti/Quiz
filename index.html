@@ -24,12 +24,17 @@
     <link rel="stylesheet" type="text/css" href="/javascripts/angular-assets/styles/lib/bootstrap.min.css">
    
     <!--library-->
+    <script src="/javascripts/angular-assets/plugins/api-check/dist/api-check.min.js"></script>
     <script src="/javascripts/angular-assets/plugins/angular/angular.min.js"></script>
     <script src="/javascripts/angular-assets/plugins/angular/ocLazyLoad.min.js"></script>
     <script src="/javascripts/angular-assets/plugins/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/javascripts/angular-assets/plugins/angular/angular-resource.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <script src="/javascripts/angular-assets/plugins/angular-formly/dist/formly.min.js"></script>
+    <script src="/javascripts/angular-assets/plugins/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.min.js"></script>
 
     <!--plugins-->
     <script src="/javascripts/angular-assets/plugins/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
@@ -79,6 +84,9 @@
                 <div class="pull-left">
                   <a href="#" class="btn btn-default btn-flat" ng-click="logoutClick()">Sign out</a>
                 </div>
+                <div class="pull-right">
+                  <a href="#/profile-index" class="btn btn-default btn-flat"><span>configuration form</span></a>
+                </div>
                 
               </li>
             </ul>
@@ -104,18 +112,6 @@
          <li  ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
             <a href="#home"><i class="fa fa-home"></i> <span>Home</span></a>
         </li>
-         <li class="treeview" ng-if="setting.isAuthenticated == true && setting.role=='admin'">
-          <a href="#"><i class="fa fa-gear"></i> <span>Configuration</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#profile-setting">Profile Form</a></li>
-          
-          </ul>
-        </li>
-     
         <li ng-if="setting.isAuthenticated == true && setting.role=='admin'">
              <a href="#user-index"><i class="fa fa-users"></i> <span>Users</span></a>
         </li>
@@ -129,6 +125,7 @@
          <li ng-if="setting.isAuthenticated == true && setting.role=='admin' || setting.role=='user'">
             <a href="#/exampresult-index"><i class="fa  fa-list-alt"></i> <span>Examp Result</span></a>
          </li>
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -190,7 +187,8 @@
 <script src="/javascripts/angular-assets/services/passingdata.service.js"></script>
 <script src="/javascripts/angular-assets/services/choicesResource.js"></script>
 <script src="/javascripts/angular-assets/services/submitquizResource.js"></script>
-
+<script src="/javascripts/angular-assets/services/configurationformsResource.js"></script>
+<script src="/javascripts/angular-assets/services/userprofileResource.js"></script>
 
 
     <!--controller-->
@@ -203,6 +201,7 @@
 <script src="/javascripts/angular-assets/controllers/quizindex-crtl.js"></script>
 <script src="/javascripts/angular-assets/controllers/exampresultindex-ctrl.js"></script>
 <script src="/javascripts/angular-assets/controllers/exampresultdetail-ctrl.js"></script>
+<script src="/javascripts/angular-assets/controllers/configurationform-ctrl.js"></script>
 <script src="/javascripts/angular-assets/controllers/profile-ctrl.js"></script>
 
 

@@ -18,6 +18,7 @@ var quiz = require('./routes/quiz');
 var choices = require('./routes/choices');
 var submitquiz = require('./routes/submitquiz');
 var configurationForm = require('./routes/configurationForm');
+var userprofile = require('./routes/userprofile');
 var app = express();
 
 
@@ -48,6 +49,7 @@ app.use('/api',quiz);
 app.use('/api',choices);
 app.use('/api',submitquiz);
 app.use('/api',configurationForm);
+app.use('/api',userprofile);
 app.get('/', function(req, res){
   res.sendfile('index.html',{user : req.user});
 });

@@ -1,40 +1,3 @@
-<<<<<<< HEAD
-app.controller('profilecontroller', function ($scope,$state,subjectResource, passingdataservice) {
-
-$scope.profilefield = [];
-$scope.fieldType = {};
-$scope.btnAddClick = function()
-{
-    $scope.profilefield.push({
-        "_id":0,
-        "key" : "",
-        "type": "",
-        "templateOptions": {
-            "type" : "",
-            "label" : "",
-            "placeholder":"",
-        }
-    })
-}
-
-$scope.AddClick = function(obj)
-{
-   
-    var addobj = {};
-    var listobj = [];
-    //console.log(obj);
-    addobj.formname ="Profile";
-    angular.forEach(obj,function(item) {
-    addobj.key = item.key;
-    addobj.type =item.type;
-    
-   
-
-});
-    listobj.push(obj);
-    console.log(listobj);
-}
-=======
 app.controller('profilecontroller', function ($scope, $rootScope, $state, $filter, configurationformResource, userprofileResource) {
     var configurationformresource = new configurationformResource();
     var userprofileresource = new userprofileResource();
@@ -106,5 +69,5 @@ app.controller('profilecontroller', function ($scope, $rootScope, $state, $filte
         $scope.submit = function(obj){
             console.log(obj);
         }
->>>>>>> origin/master
+
 });
