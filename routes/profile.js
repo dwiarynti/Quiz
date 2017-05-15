@@ -8,7 +8,7 @@ var ObjectId = require('mongodb').ObjectID;
 
 
 router.get('/profile/initform',function(req, res) {
-    Profilecollection.find({"formname":"Profile"}, function(err, obj){
+    Profilecollection.find({"formname":"Profile", "IsActive": true}, function(err, obj){
 		if(err) {res.json(500, err);}
 		else
         { 
