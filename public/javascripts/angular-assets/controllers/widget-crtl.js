@@ -17,13 +17,13 @@ app.controller('widgetcontroller', function ($scope, $rootScope, $state, $filter
     $scope.UpdateClick = function(obj)
     {
         widgetresource._id = obj._id;
-        widgetresource.IsActive = obj.IsActive;
+        widgetresource.isActive = obj.isActive;
         widgetresource.$update(function(data)
         {
             obj.editmode = false;
             if(data.success){
                 angular.forEach($rootScope.setting.widgetlist,function(item) {
-                    item.IsActive = item.WidgetName == obj.WidgetName ? obj.IsActive: item.IsActive;                
+                    item.isActive = item.WidgetName == obj.WidgetName ? obj.isActive: item.isActive;                
                 });
             }
 

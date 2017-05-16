@@ -30,7 +30,7 @@
         if($rootScope.setting.isAuthenticated && $scope.widgetlist.length != 0){
             result = $filter('filter')($scope.widgetlist,function(item){
                 return item.WidgetName === widgetname
-            })[0].IsActive;
+            })[0].isActive;
         }
         return result;
     }

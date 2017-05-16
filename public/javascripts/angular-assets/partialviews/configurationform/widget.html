@@ -19,10 +19,10 @@
                         <tr ng-repeat="obj in widgetlist">
                             <td>{{obj.WidgetName}}</td>
 
-                            <td ng-if="!obj.editmode">{{obj.IsActive}}</td>
+                            <td ng-if="!obj.editmode">{{obj.isActive}}</td>
                             <td ng-if="obj.editmode">
-                                <input type="radio" name="IsWidgetActive" ng-model="obj.IsActive" data-ng-value="true" /> True
-                                <input type="radio" name="IsWidgetActive" ng-model="obj.IsActive" data-ng-value="false"/> False
+                                <input type="radio" name="IsWidgetActive" ng-model="obj.isActive" data-ng-value="true" /> True
+                                <input type="radio" name="IsWidgetActive" ng-model="obj.isActive" data-ng-value="false"/> False
                             </td>
 
                             <td ng-if="!obj.editmode">
