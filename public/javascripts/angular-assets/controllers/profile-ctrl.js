@@ -2,47 +2,34 @@ app.controller('profilecontroller', function ($scope, $rootScope, $state, $filte
     var configurationformresource = new configurationformResource();
     var userprofileresource = new userprofileResource();
     var profileresource = new profileResource();
+    
     $scope.userprofileobj = {};
-    $scope.user = {};
+    $scope.user = {"_userid":$rootScope.setting.user_id, "_id":0};
     $scope.userFields = [];
     $scope.initform = function(){
         profileresource.$initform({}, function(data){
             angular.forEach(data.Obj,function(item) {
-                $scope.userFields.push({"key":item.key, "type": item.type, "templateOptions":item.templateOptions});
+                // item.templateOptions.value = "test";
+                var fieldname = item.key;
+            
+                $scope.userFields.push({"key":item.key, "type": item.type,"templateOptions":item.templateOptions});
             });
+        });
+        userprofileresource.$init({"_userid":$rootScope.setting.user_id},function(data){
+            if(data.Obj != null){
+                $scope.user = data.Obj;
+            }
         });
     }
     $scope.initform();
 
-    
+    $scope.submit = function(obj){
+        console.log(obj);        
+        userprofileresource.userprofileobj=obj;
+        userprofileresource.$save(function(data){
+            console.log(data);
 
-    // $scope.
-
-        configurationformresource.$init(function(data){
-
-            angular.forEach(data.Obj.formelements,function(item) {
-                item.value = "";
-            })
-
-            $scope.userprofileobj = data.Obj;
         });
-
-        $scope.save = function(){
-            var obj = {"_userid":$rootScope.setting.user_id, "data":[]};
-            angular.forEach($scope.userprofileobj.formelements,function(item) {
-                obj.data.push({"_fieldid": item._id, "value":item.value});
-            });
-            console.log(obj);
-
-            userprofileresource.userprofileobj = obj;
-            userprofileresource.$save(function(data){
-                console.log(data);
-            });
-
-        }
-
-        $scope.submit = function(obj){
-            console.log(obj);
-        }
+    }
 
 });
