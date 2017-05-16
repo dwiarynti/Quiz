@@ -36,7 +36,7 @@ router.post('/configurationform/create', function(req,res)
 
 router.get('/configurationform/init', function(req,res)
 {
-		ConfigurationFromcollection.find({"formname":"Profile","IsActive" : true}, function(err, obj){
+		ConfigurationFromcollection.find({"formname":"Profile","isActive" : true}, function(err, obj){
 		if(err) {res.json(500, err);}
 		else
         { 
@@ -77,7 +77,7 @@ router.post('/configurationform/delete/:_id', function(req,res)
 	var id = ObjectId(req.params._id);
 	ConfigurationFromcollection.update({_id :id},{
 		$set :{
-			'IsActive': false,
+			'isActive': false,
 		}},function(err)
 		{
 		if(err) res.json(500,err)

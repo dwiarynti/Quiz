@@ -19,7 +19,7 @@ router.get('/widget',function(req, res) {
 
 router.post('/widget/update', function(req,res)
 {
-  Widgetcollection.update({"_id":req.body._id},{$set:{ 'IsActive':req.body.IsActive}}, function(err, obj){
+  Widgetcollection.update({"_id":req.body._id},{$set:{ 'isActive':req.body.isActive}}, function(err, obj){
 		if(err) {res.json(500, err);}
 		else
         { 
