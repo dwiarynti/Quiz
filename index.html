@@ -121,6 +121,17 @@
         <li ng-if="setting.role=='admin'">
              <a href="#user-index"><i class="fa fa-users"></i> <span>Users</span></a>
         </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>Configuration</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#profile-setting">Profile Form</a></li>
+           
+          </ul>
+        </li>
         <li ng-if="setting.role=='admin'">
              <a href="#subject-index"><i class="fa fa-book"></i> <span>Subject</span></a>
         </li>

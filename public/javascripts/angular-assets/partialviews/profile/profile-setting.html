@@ -44,10 +44,10 @@
                            {{profile.templateOptions.type}}
                         </td>
 
-                        <td ng-if="profile._id == 0  && profile.editmode == false || profile._id != 0 && profile.editmode == true">
+                        <td ng-if="profile._id != 0 && profile.editmode == true">
                            <input type="text" placeholder="Key" class="form-control col-md-6" ng-model="profile.key">
                         </td>
-                        <td ng-if="profile._id == 0  && profile.editmode == false || profile._id != 0 && profile.editmode == true">
+                        <td ng-if="profile._id != 0 && profile.editmode == true">
                           <select class="form-control" style="padding-left:0px; padding-right:0px; height: 26px;" ng-model="profile.type">
                                 <option value="">Please Select</option>
                                 <option value="input">
@@ -61,13 +61,13 @@
                                 </option>
                              </select>
                         </td>
-                        <td ng-if="profile._id == 0  && profile.editmode == false || profile._id != 0 && profile.editmode == true">
+                        <td ng-if="profile._id != 0 && profile.editmode == true">
                             <input type="text" placeholder="Label" class="form-control col-md-6" ng-model="profile.templateOptions.label">
                         </td>
-                        <td ng-if="profile._id == 0  && profile.editmode == false || profile._id != 0 && profile.editmode == true">
+                        <td ng-if="profile._id != 0 && profile.editmode == true">
                             <input type="text" placeholder="Placeholder" class="form-control col-md-6" ng-model="profile.templateOptions.placeholder">
                         </td>
-                        <td ng-if="profile._id == 0  && profile.editmode == false || profile._id != 0 && profile.editmode == true">
+                        <td ng-if="profile._id != 0 && profile.editmode == true">
                           <select class="form-control" style="padding-left:0px; padding-right:0px; height: 26px;" ng-model="profile.templateOptions.type">
                                 <option value="">Please Select</option>
                                 <option value="text">
@@ -109,7 +109,6 @@
                         </td>
 
                         
-
                         <td ng-if="profile._id == 0">
                             <input type="text" placeholder="Key" class="form-control col-md-6" ng-model="profile.key">
                         </td>
@@ -162,9 +161,10 @@
                              </select>
                         </td>
                         
+                        
                    </tr>
                    <tr>
-                       <td colspan="5">
+                       <td colspan="6">
                              <button  ng-show="showbtn" type="button" class="btn btn-default btn-width" ng-click="AddClick(profilefield)">Save</button>
                         </td>
                    </tr>
@@ -176,6 +176,27 @@
         </div>
     </div>
 <!--</section>-->
-
+<div class="modal modal-message fade" id="modal-delete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="javascript:;" class="close" data-dismiss="modal">x</a>
+                    <h4 class="modal-title">Delete Field</h4>
+                </div>
+                <div class="modal-body">
+                       <div class="form-group">
+                       <p>Are you sure you want to delete the field?</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-default btn-width btn-margin" data-dismiss="modal">Cancel</a>
+                    <button type="button" class="btn btn-default btn-width" ng-click="DeleteClick(datafield._id)">
+                        <span>Ok</span>
+                    </button>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

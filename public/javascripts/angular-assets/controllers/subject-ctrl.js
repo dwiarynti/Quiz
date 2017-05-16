@@ -128,9 +128,9 @@ $scope.btnDeleteClick = function(id)
 $scope.DeleteClick = function()
 {
     $("#modal-delete").modal('hide');
-    subjectresource._id = $scope.subject._id;
-    subjectresource.SubjectName = $scope.subject.SubjectName;
-    subjectresource.$delete().then(function(data)
+    //subjectresource._id = $scope.subject._id;
+  
+    subjectresource.$delete({_id: $scope.subject._id}).then(function(data)
     {
        if(data.success)
        {

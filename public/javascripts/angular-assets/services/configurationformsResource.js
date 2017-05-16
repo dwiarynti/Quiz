@@ -11,7 +11,9 @@
                {
                    init: { method: 'GET' , params:{action:'init'} },
                    add : {method: 'POST' , params:{action:'create'}},
-                   update : {method:'POST', params:{action: 'Update'}}
+                   update : {method:'POST', params:{action: 'update'}},
+                   get: {method:'GET'},
+                   delete :{method:'POST', params:{action:'delete'}}
                })
     }
 }());

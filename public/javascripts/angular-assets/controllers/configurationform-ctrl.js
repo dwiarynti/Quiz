@@ -4,6 +4,7 @@ var configurationformresource = new configurationformResource();
 
 $scope.profilefield = [];
 $scope.fieldType = {};
+$scope.datafield = {};
 $scope.showbtn = false;
 
 $scope.btnAddClick = function()
@@ -35,6 +36,7 @@ $scope.AddClick = function(obj)
        data.formname = "Profile";
        data.key = item.key;
        data.type = item.type;
+       data.IsActive = true;
        data.templateOptions = item.templateOptions;
        listObj.push(data);
        }
@@ -54,6 +56,7 @@ $scope.AddClick = function(obj)
 
 $scope.init = function()
 {
+     $scope.profilefield = [];
     configurationformresource.$init().then(function(data)
     {
        
@@ -74,15 +77,14 @@ $scope.btnUpdateClick = function(obj)
 $scope.UpdateClick = function(obj)
 {
      console.log(obj);
-     configurationformresource._id =obj._id;
+   
      configurationformresource.type = obj.type;
      configurationformresource.key = obj.key;
      configurationformresource.templateOptions = obj.templateOptions;
     
-     configurationformresource.$update().then(function(data)
+     configurationformresource.$update({_id: obj._id}).then(function(data)
      {
         
-         $scope.profilefield = [];
          $scope.init();
      })
 }
@@ -91,4 +93,31 @@ $scope.turnoffeditmode = function(obj){
     obj.editmode = false;    
 }
 
-})
+$scope.btnDeleteClick = function(id)
+{
+    $("#modal-delete").modal('show');
+  
+    configurationformresource.$get({_id:id}).then(function(data)
+    {
+        $scope.datafield = {};
+        $scope.datafield._id = data.obj._id;
+      
+    });
+}
+
+$scope.DeleteClick = function(id)
+{
+    $("#modal-delete").modal('hide');
+    //subjectresource._id = $scope.subject._id;
+  
+    configurationformresource.$delete({_id: id}).then(function(data)
+    {
+       if(data.success)
+       {
+         $scope.init();
+       }
+    });
+}
+
+
+});

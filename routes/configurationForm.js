@@ -36,7 +36,7 @@ router.post('/configurationform/create', function(req,res)
 
 router.get('/configurationform/init', function(req,res)
 {
-		ConfigurationFromcollection.find({"formname":"Profile"}, function(err, obj){
+		ConfigurationFromcollection.find({"formname":"Profile","IsActive" : true}, function(err, obj){
 		if(err) {res.json(500, err);}
 		else
         { 
@@ -44,23 +44,46 @@ router.get('/configurationform/init', function(req,res)
         }
 	});
 });
-router.post('/configurationform/Update/:_id', function(req,res)
+router.post('/configurationform/update/:_id', function(req,res)
 {
 	var id = ObjectId(req.params._id);
-	ConfigurationFromcollection.update({'_id':id},{
-	$set :{
-		'formname': req.body.data.formname,
-		'key': req.body.data.key,
-		'type': req.body.data.type,
-		'templateOptions.type' : req.body.data.type,
-		'templateOptions.label' : req.body.data.label,
-		'templateOptions.placeholder' : req.body.data.placeholder,
+	ConfigurationFromcollection.update({_id :id},{
+		$set :{
+			'key': req.body.key,
+			'type': req.body.type,
+			'templateOptions' : req.body.templateOptions
+		}},function(err)
+		{
+		if(err) res.json(500,err)
+      	else res.json({success : true});
+		});
+});
 
-	} ,function(err)
-	{
-	  if(err) res.json(500,err)
-      else res.json({success : true});
-	}
+
+router.get('/configurationform/:_id',function(req,res)
+{
+    var id = ObjectId(req.params._id);
+    
+    ConfigurationFromcollection.findOne({_id:id},function(err,data)
+    {
+    if(err) res.json(500,err);
+    else
+    res.json({success:true, "obj":data});
 	});
 });
+
+router.post('/configurationform/delete/:_id', function(req,res)
+{
+	var id = ObjectId(req.params._id);
+	ConfigurationFromcollection.update({_id :id},{
+		$set :{
+			'IsActive': false,
+		}},function(err)
+		{
+		if(err) res.json(500,err)
+      	else res.json({success : true});
+		});
+});
+    
+
 module.exports = router;
