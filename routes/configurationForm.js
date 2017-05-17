@@ -77,7 +77,7 @@ router.post('/configurationform/delete/:_id', function(req,res)
 	var id = ObjectId(req.params._id);
 	ConfigurationFromcollection.update({_id :id},{
 		$set :{
-			'isActive': false,
+			'IsActive': false,
 		}},function(err)
 		{
 		if(err) res.json(500,err)
