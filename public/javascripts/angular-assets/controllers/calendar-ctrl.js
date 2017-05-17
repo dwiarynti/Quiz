@@ -1,4 +1,4 @@
-app.controller('calendarcontroller', function ($scope) {
+app.controller('calendarcontroller', function ($scope, $rootScope,$filter) {
   
     $calendar = $('[ui-calendar]');
     
@@ -64,5 +64,15 @@ app.controller('calendarcontroller', function ($scope) {
     }];
 
     $scope.eventSources = [$scope.events];
+
+    $scope.showWidget = function(widgetname){
+        var result = false;
+        if($rootScope.setting.isAuthenticated && $rootScope.setting.widgetlist.length != 0){
+            result = $filter('filter')($rootScope.setting.widgetlist,function(item){
+                return item.WidgetName === widgetname
+            })[0].isActive;
+        }
+        return result;
+    }
 
 });

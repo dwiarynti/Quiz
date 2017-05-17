@@ -12,7 +12,7 @@
   <div class="box-body">
     <h1>Hello!</h1>
 <br>
-     <div class="col-md-6">
+     <div class="col-md-6" ng-if="showWidget('Calendar')">
   <div class="pull-left">
     <md-button class="md-raised" ng-click="changeView('month')">month</md-button>
     <md-button class="md-raised" ng-click="changeView('basicWeek')">week</md-button>
