@@ -25,10 +25,16 @@
 
     $scope.getwidgetlist();    
 
+    // $scope.$watch(function () {
+    //     return $rootScope.setting.widgetlist;
+    // }, function () {
+
+    // });
+
     $scope.showWidget = function(widgetname){
         var result = false;
-        if($rootScope.setting.isAuthenticated && $scope.widgetlist.length != 0){
-            result = $filter('filter')($scope.widgetlist,function(item){
+        if($rootScope.setting.isAuthenticated && $rootScope.setting.widgetlist.length != 0){
+            result = $filter('filter')($rootScope.setting.widgetlist,function(item){
                 return item.WidgetName === widgetname
             })[0].isActive;
         }
