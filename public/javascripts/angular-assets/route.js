@@ -6,7 +6,9 @@
     "dndLists",
     "formly",
     "formlyBootstrap",
-    "ds.clock"]);
+    "ds.clock",
+    "ngMaterial",
+    "ui.calendar"]);
 
 app.config([
     '$stateProvider', '$urlRouterProvider',
