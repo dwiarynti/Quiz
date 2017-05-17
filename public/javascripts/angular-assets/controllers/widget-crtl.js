@@ -1,16 +1,17 @@
 app.controller('widgetcontroller', function ($scope, $rootScope, $state, $filter, widgetResource) {
     var widgetresource = new widgetResource();
-    $scope.widgetlist=[];
     $scope.init = function(){
         angular.forEach($rootScope.setting.widgetlist,function(item) {
             item.editmode = false;
+            console.log(item.isActive);
+            item.isActive = Boolean(item.isActive);
         });
-        $scope.widgetlist = $rootScope.setting.widgetlist;
     }
     $scope.init();
 
     $scope.btnUpdateClick = function(obj)
     {
+        console.log(obj.isActive);
         obj.editmode = true;
     }
 

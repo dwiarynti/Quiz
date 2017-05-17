@@ -6,8 +6,12 @@
     
     $scope.getwidgetlist = function (){
         widgetresource.$init({}, function(data){
+            angular.forEach($rootScope.setting.widgetlist,function(item) {
+                item.isActive = Boolean(item.isActive);
+            });
             $scope.widgetlist = data.Obj;   
             $rootScope.setting.widgetlist = $scope.widgetlist;
+            
         });
     }
     
