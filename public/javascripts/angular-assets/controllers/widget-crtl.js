@@ -18,15 +18,12 @@ app.controller('widgetcontroller', function ($scope, $rootScope, $state, $filter
     {
         widgetresource._id = obj._id;
         widgetresource.isActive = obj.isActive;
+        console.log(obj.isActive);
         widgetresource.$update(function(data)
         {
-            obj.editmode = false;
             if(data.success){
-                angular.forEach($rootScope.setting.widgetlist,function(item) {
-                    item.isActive = item.WidgetName == obj.WidgetName ? obj.isActive: item.isActive;                
-                });
+                obj.editmode = false;
             }
-
         });
     }
     $scope.turnoffeditmode = function(obj){

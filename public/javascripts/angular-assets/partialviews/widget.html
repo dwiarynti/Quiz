@@ -16,13 +16,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="obj in widgetlist">
+                        <tr ng-repeat="obj in setting.widgetlist">
                             <td>{{obj.WidgetName}}</td>
 
                             <td ng-if="!obj.editmode">{{obj.isActive}}</td>
                             <td ng-if="obj.editmode">
-                                <input type="radio" name="IsWidgetActive" ng-model="obj.isActive" data-ng-value="true" /> True
-                                <input type="radio" name="IsWidgetActive" ng-model="obj.isActive" data-ng-value="false"/> False
+                                <input type="radio" name="IsWidgetActive" ng-model="obj.isActive" ng-value="true" /> True
+                                <input type="radio" name="IsWidgetActive" ng-model="obj.isActive" ng-value="false"/> False
                             </td>
 
                             <td ng-if="!obj.editmode">
