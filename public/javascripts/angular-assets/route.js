@@ -95,7 +95,7 @@ app.config([
             })
             .state('widget', {
                     url: '/widget',
-                    templateUrl: '/javascripts/angular-assets/partialviews/configurationform/widget.html'
+                    templateUrl: '/javascripts/angular-assets/partialviews/widget.html'
             })
             ;
     }
