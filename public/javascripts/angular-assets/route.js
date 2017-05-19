@@ -8,7 +8,9 @@
     "formlyBootstrap",
     "ds.clock",
     "ngMaterial",
-    "ui.calendar"]);
+    "ui.calendar",
+    "gridster",
+    "ngStorage"]);
 
 app.config([
     '$stateProvider', '$urlRouterProvider',
@@ -96,6 +98,14 @@ app.config([
             .state('widget', {
                     url: '/widget',
                     templateUrl: '/javascripts/angular-assets/partialviews/widget.html'
+            })
+            .state('dashboard-admin', {
+                    url: '/dashboard-admin',
+                    templateUrl: '/javascripts/angular-assets/partialviews/dashboard/admin.html'
+            })
+            .state('dashboard-user', {
+                    url: '/dashboard-user',
+                    templateUrl: '/javascripts/angular-assets/partialviews/dashboard/user.html'
             })
             ;
     }

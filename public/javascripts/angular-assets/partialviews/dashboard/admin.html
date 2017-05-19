@@ -1,0 +1,43 @@
+<div ng-controller="dashboardadmincontroller">
+        <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">
+                User Profile               
+              </h3>
+              
+        <!--<div class="dropdown" style="float:right">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                <i class="fa fa-plus"></i>
+                Add Widget
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li ng-repeat="widget in widgetDefinitions">
+                    <a role="menuitem" ng-click="addNewWidget(widget)">{{widget.title}}</a>
+                </li>
+            </ul>
+        </div>              -->
+            </div>
+            
+             <div class="box-body">
+                 <div gridster="gridsterOpts">
+    <ul>
+        <li gridster-item="item" ng-repeat="item in widgets" style="background-color: darkgoldenrod;" template-loader="item">
+            <!--<ps-widget-body>
+            </ps-widget-body>-->
+        </li>
+    </ul>
+</div>
+             </div>
+             </div>
+</div> 
+<style>
+    .wwa-temperature-widget {
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    color: black;
+    background-color: darkgoldenrod;
+    position: relative;
+}
+</style>
